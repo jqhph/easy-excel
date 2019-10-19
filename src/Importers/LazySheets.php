@@ -42,7 +42,7 @@ class LazySheets implements Sheets
             }
 
             /* @var Sheet $sheet */
-            if (call_user_func($callback, $sheet) === false) {
+            if (false === call_user_func($callback, $sheet)) {
                 break;
             }
         }
@@ -83,8 +83,8 @@ class LazySheets implements Sheets
     {
         $array = [];
 
-        $this->each(function (Sheet $sheet, $key) use (&$array) {
-            $array[$key] = $sheet->toArray();
+        $this->each(function (Sheet $sheet) use (&$array) {
+            $array[$sheet->getName()] = $sheet->toArray();
         });
 
         return $array;
@@ -93,7 +93,7 @@ class LazySheets implements Sheets
     /**
      * @return SheetCollection
      */
-    public function toCollection(): SheetCollection
+    public function collect(): SheetCollection
     {
         return new SheetCollection($this->toArray());
     }
@@ -103,7 +103,7 @@ class LazySheets implements Sheets
      * @param Sheet $sheet
      * @return bool
      */
-    protected function is($indexOrName, Sheet $sheet)
+    protected function is($indexOrName, Sheet $sheet): bool
     {
         if ($indexOrName === $sheet->getName()) {
             return true;
@@ -120,7 +120,7 @@ class LazySheets implements Sheets
      * @param Sheet $sheet
      * @return bool
      */
-    protected function skip(Sheet $sheet)
+    protected function skip(Sheet $sheet): bool
     {
         foreach ($this->reject as $indexOrName) {
             if ($this->is($indexOrName, $sheet)) {

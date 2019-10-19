@@ -7,6 +7,8 @@ use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Generator;
 use Illuminate\Support\Arr;
+use Box\Spout\Writer\XLSX\Writer as XLSXWriter;
+use Box\Spout\Writer\ODS\Writer as ODSWriter;
 
 trait WriteSheet
 {
@@ -14,22 +16,20 @@ trait WriteSheet
 
     protected function writeSheets(WriterInterface $writer)
     {
-        $data = $this->prepareData();
+        $data = $this->makeSheetsArray();
 
         $keys    = array_keys($data);
         $lastKey = end($keys);
 
-        $hasSheets = ($writer instanceof \Box\Spout\Writer\XLSX\Writer || $writer instanceof \Box\Spout\Writer\ODS\Writer);
+        $hasSheets = ($writer instanceof XLSXWriter || $writer instanceof ODSWriter);
 
         foreach ($data as $index => $collection) {
-            if (is_array($collection)) {
-                $collection = new SheetCollection($collection);
-            }
-
-            if ($collection instanceof SheetCollection) {
-                $this->writeRowsFromCollection($writer, $index, $collection);
-            } elseif ($collection instanceof \Generator) {
+            if ($collection instanceof \Generator) {
                 $this->writeRowsFromGenerator($writer, $index, $collection);
+            } else {
+                $collection = $this->convertToArray($collection);
+
+                $this->writeRowsFromArray($writer, $index, $collection);
             }
 
             if (is_string($index)) {
@@ -40,18 +40,20 @@ trait WriteSheet
                 $writer->addNewSheetAndMakeItCurrent();
             }
         }
+
+        return $writer;
     }
 
-    protected function writeRowsFromCollection(WriterInterface $writer, $index, SheetCollection $collection)
+    protected function writeRowsFromArray(WriterInterface $writer, $index, array &$collection)
     {
         // Add header row.
         if (empty($this->writedHeaders[$index]) && $this->headers !== false) {
-            $this->writeHeaders($writer, $collection->first());
+            $this->writeHeaders($writer, current($collection));
 
             $this->writedHeaders[$index] = true;
         }
 
-        foreach ($collection->toArray() as $item) {
+        foreach ($collection as $item) {
             $this->writeRow($writer, $item);
         }
     }
@@ -65,7 +67,7 @@ trait WriteSheet
                 $items = [$items];
             }
 
-            foreach ($items as $item) {
+            foreach ($items as &$item) {
                 // Add header row.
                 if (empty($this->writedHeaders[$index]) && $this->headers !== false) {
                     $this->writeHeaders($writer, $item);
@@ -85,16 +87,15 @@ trait WriteSheet
      */
     protected function writeRow(WriterInterface $writer, array $item)
     {
-        $item = $this->filterRow($item);
+        $item = $this->filterAndSort($item);
 
-        // Prepare row (i.e remove non-string)
         $item = $this->transformRow($item);
 
-        $item = $this->convertToArray($item);
-
         if ($this->rowCallback) {
-            call_user_func($this->rowCallback, $item);
-        } else {
+            $item = call_user_func($this->rowCallback, $item);
+        }
+
+        if (is_array($item)) {
             $item = $this->makeDefaultRow($item);
         }
 
@@ -107,12 +108,12 @@ trait WriteSheet
         return WriterEntityFactory::createRowFromArray($item);
     }
 
-    protected function writeHeaders(WriterInterface $writer, $firstRow)
+    protected function writeHeaders(WriterInterface $writer, array $firstRow)
     {
         if ($this->headers) {
             $keys = $this->headers;
         } else {
-            $keys = array_keys($this->convertToArray($firstRow));
+            $keys = array_keys($firstRow);
         }
 
         if ($callback = $this->headerCallback) {
@@ -128,7 +129,7 @@ trait WriteSheet
      * @param array|SheetCollection $row
      * @return array
      */
-    public function filterRow($row)
+    public function filterAndSort($row)
     {
         if (! $this->headers) {
             return $row;
@@ -164,12 +165,12 @@ trait WriteSheet
     /**
      * @return \Generator[]|array
      */
-    protected function prepareData()
+    protected function makeSheetsArray(): array
     {
         $data = $this->data;
 
-        if ($data instanceof ChunkReading) {
-            return $data->makeGenerators();
+        if ($data instanceof GeneratorFactory) {
+            return $data->make();
         }
 
         if ($this->data instanceof \Closure) {
@@ -188,26 +189,22 @@ trait WriteSheet
     }
 
     /**
-     * @param SheetCollection $collection
-     */
-    protected function transform(SheetCollection $collection)
-    {
-        $collection->transform(function ($data) {
-            return $this->transformRow($data);
-        });
-    }
-
-    /**
      * @param $data
      * @return array
      */
-    protected function transformRow($data)
+    protected function transformRow(array $data)
     {
-        return (new SheetCollection($data))->map(function ($value) {
-            return is_int($value) || is_float($value) || is_null($value) ? (string)$value : $value;
-        })->filter(function ($value) {
-            return is_string($value);
-        })->toArray();
+        $strings = [];
+
+        foreach ($data as &$value) {
+            $value = is_int($value) || is_float($value) || is_null($value) ? (string)$value : $value;
+
+            if (is_string($value)) {
+                $strings[] = $value;
+            }
+        }
+
+        return $strings;
     }
 
 }

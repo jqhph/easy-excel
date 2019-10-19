@@ -1,13 +1,12 @@
 <?php
 
-namespace Dcat\EasyExcel;
+namespace Dcat\EasyExcel\Traits;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader as CSVReader;
 use Box\Spout\Writer\CSV\Writer as CSVWriter;
-use Dcat\EasyExcel\Contracts;
 
-abstract class AbstractExcel implements Contracts\Excel
+trait Excel
 {
     /**
      * @var string
@@ -166,5 +165,18 @@ abstract class AbstractExcel implements Contracts\Excel
         if ($this->optionCallback) {
             ($this->optionCallback)($readerOrWriter);
         }
+    }
+
+    /**
+     * @param string $fileName
+     * @return string
+     */
+    protected function prepareFileName(string $fileName)
+    {
+        if ($this->type && strpos($fileName, '.') === false) {
+            return $fileName.'.'.$this->type;
+        }
+
+        return $fileName;
     }
 }

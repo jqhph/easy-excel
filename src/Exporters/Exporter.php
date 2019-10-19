@@ -4,16 +4,23 @@ namespace Dcat\EasyExcel\Exporters;
 
 use Box\Spout\Writer\Common\Creator\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
-use Dcat\EasyExcel\AbstractExcel;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\Traits\Macroable;
+use Dcat\EasyExcel\Traits\Excel;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Filesystem;
 use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 
-class Exporter extends AbstractExcel implements Contracts\Exporter
+/**
+ * @method $this xlsx()
+ * @method $this csv()
+ * @method $this ods()
+ */
+class Exporter implements Contracts\Exporter
 {
-    use Macroable, WriteSheet;
+    use Macroable,
+        Excel,
+        WriteSheet;
 
     /**
      * @var Filesystem
@@ -62,7 +69,7 @@ class Exporter extends AbstractExcel implements Contracts\Exporter
      *    ];
      * });
      *
-     * @param array|\Closure|\Generator|ChunkReading $data
+     * @param array|\Closure|\Generator|GeneratorFactory $data
      * @return $this
      */
     public function data($data)
@@ -84,17 +91,17 @@ class Exporter extends AbstractExcel implements Contracts\Exporter
     }
 
     /**
-     * 分块导入
+     * 分批次生成数据
      *
      * e.g:
      *
-     * $this->chunk(function (int $times) {
+     * $this->generate(function (int $times) {
      *     $size = 100;
      *
      *     return User::query()->forPage($times, $size)->toArray();
      * });
      *
-     * $this->chunk([
+     * $this->generate([
      *     "sheet-name" => function (int $times) {
      *         $size = 100;
      *
@@ -105,9 +112,9 @@ class Exporter extends AbstractExcel implements Contracts\Exporter
      * @param callable|callable[] $callbacks
      * @return $this
      */
-    public function chunk($callbacks)
+    public function generate($callbacks)
     {
-        return $this->data(new ChunkReading($callbacks));
+        return $this->data(new GeneratorFactory($callbacks));
     }
 
     /**
@@ -121,11 +128,9 @@ class Exporter extends AbstractExcel implements Contracts\Exporter
         /* @var \Box\Spout\Writer\WriterInterface $writer */
         $writer = $this->makeWriter($fileName);
 
-        $writer->openToBrowser($fileName);
+        $writer->openToBrowser($this->prepareFileName($fileName));
 
-        $this->writeSheets($writer);
-
-        $writer->close();
+        $this->writeSheets($writer)->close();
     }
 
     /**
@@ -134,26 +139,19 @@ class Exporter extends AbstractExcel implements Contracts\Exporter
      * @param string $filePath
      * @param array $diskConfig
      * @return bool
+     *
+     * @throws \Box\Spout\Common\Exception\IOException
      */
     public function store(string $filePath, array $diskConfig = [])
     {
-        if (! $this->filesystem) {
-            /* @var \Box\Spout\Writer\WriterInterface $writer */
-            $writer = $this->makeWriter($filePath);
+        $filePath = $this->prepareFileName($filePath);
 
-            $writer->openToFile($filePath);
-
-            $this->writeSheets($writer);
-
-            $writer->close();
-
-            return true;
+        if (! $this->filesystem instanceof Filesystem) {
+            return $this->storeInLocal($filePath);
         }
 
-        $extension = pathinfo($filePath)['extension'] ?? null;
-
         if (empty($this->type)) {
-            $this->type($extension);
+            $this->type(pathinfo($filePath)['extension'] ?? null);
         }
 
         return $this->filesystem->put($filePath, $this->raw(), $diskConfig);
@@ -179,16 +177,12 @@ class Exporter extends AbstractExcel implements Contracts\Exporter
         return $this;
     }
 
-
     /**
-     * @param string|null $type
      * @return string
      * @throws \Box\Spout\Common\Exception\IOException
      */
-    public function raw(string $type = null)
+    public function raw()
     {
-        $type && $this->type($type);
-
         ob_start();
 
         /* @var \Box\Spout\Writer\WriterInterface $writer */
@@ -196,15 +190,28 @@ class Exporter extends AbstractExcel implements Contracts\Exporter
 
         $writer->openToBrowser('excel');
 
-        $this->writeSheets($writer);
-
-        $writer->close();
-
-        $content = ob_get_clean();
+        $this->writeSheets($writer)->close();
 
         header_remove();
 
-        return $content;
+        return ob_get_clean();
+    }
+
+    /**
+     * @param string $filePath
+     * @return bool
+     * @throws \Box\Spout\Common\Exception\IOException
+     */
+    protected function storeInLocal(string $filePath)
+    {
+        /* @var \Box\Spout\Writer\WriterInterface $writer */
+        $writer = $this->makeWriter($filePath);
+
+        $writer->openToFile($filePath);
+
+        $this->writeSheets($writer)->close();
+
+        return true;
     }
 
     /**

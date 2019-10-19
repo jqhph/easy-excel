@@ -5,7 +5,7 @@ namespace Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-interface Importer
+interface Importer extends Excel
 {
     /**
      * @param string|UploadedFile $filePath
@@ -24,14 +24,14 @@ interface Importer
      *
      * @return Sheet
      */
-    public function first();
+    public function first(): Sheet;
 
     /**
      * 获取当前打开的sheet
      *
      * @return Sheet
      */
-    public function working();
+    public function working(): Sheet;
 
     /**
      * 根据名称或序号获取sheet
@@ -39,7 +39,7 @@ interface Importer
      * @param int|string $indexOrName
      * @return Sheet
      */
-    public function index($indexOrName);
+    public function sheet($indexOrName): Sheet;
 
     /**
      * @return array
@@ -49,6 +49,6 @@ interface Importer
     /**
      * @return SheetCollection
      */
-    public function toCollection(): SheetCollection;
+    public function collect(): SheetCollection;
 
 }

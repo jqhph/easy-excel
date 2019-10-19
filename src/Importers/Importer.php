@@ -4,15 +4,20 @@ namespace Dcat\EasyExcel\Importers;
 
 use Box\Spout\Reader\Common\Creator\ReaderFactory;
 use Box\Spout\Reader\ReaderInterface;
-use Dcat\EasyExcel\AbstractExcel;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Dcat\EasyExcel\Support\Traits\Macroable;
+use Dcat\EasyExcel\Traits\Excel;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class Importer extends AbstractExcel implements Contracts\Importer
+/**
+ * @method $this xlsx()
+ * @method $this csv()
+ * @method $this ods()
+ */
+class Importer implements Contracts\Importer
 {
-    use Macroable;
+    use Macroable, Excel;
 
     /**
      * @var string|UploadedFile
@@ -30,6 +35,8 @@ class Importer extends AbstractExcel implements Contracts\Importer
      */
     public function import($filePath)
     {
+        $filePath = $this->prepareFileName($filePath);
+
         $reader = $this->makeReader($filePath);
 
         return new LazySheets($this->readSheets($reader));
@@ -46,9 +53,9 @@ class Importer extends AbstractExcel implements Contracts\Importer
     /**
      * @return SheetCollection
      */
-    public function toCollection(): SheetCollection
+    public function collect(): SheetCollection
     {
-        return $this->import($this->filePath)->toCollection();
+        return $this->import($this->filePath)->collect();
     }
 
     /**
@@ -67,7 +74,7 @@ class Importer extends AbstractExcel implements Contracts\Importer
      *
      * @return Contracts\Sheet
      */
-    public function first()
+    public function first(): Contracts\Sheet
     {
         $sheet = null;
 
@@ -85,7 +92,7 @@ class Importer extends AbstractExcel implements Contracts\Importer
      *
      * @return Contracts\Sheet
      */
-    public function working()
+    public function working(): Contracts\Sheet
     {
         $sheet = null;
 
@@ -107,7 +114,7 @@ class Importer extends AbstractExcel implements Contracts\Importer
      * @param int|string $indexOrName
      * @return Contracts\Sheet
      */
-    public function sheet($indexOrName)
+    public function sheet($indexOrName): Contracts\Sheet
     {
         return $this->import($this->filePath)->get($indexOrName) ?: $this->makeNullSheet();
     }

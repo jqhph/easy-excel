@@ -74,7 +74,7 @@ class NullSheet implements Contracts\Sheet
     /**
      * @return SheetCollection
      */
-    public function toCollection(): SheetCollection
+    public function collect(): SheetCollection
     {
         return new SheetCollection($this->toArray());
     }

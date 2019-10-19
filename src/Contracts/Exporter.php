@@ -2,16 +2,17 @@
 
 namespace Dcat\EasyExcel\Contracts;
 
+use Dcat\EasyExcel\Exporters\GeneratorFactory;
 use League\Flysystem\Filesystem;
 use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-interface Exporter
+interface Exporter extends Excel
 {
     /**
      * 设置导出数据
      *
-     * @param array|\Closure|\Generator $data
+     * @param array|\Closure|\Generator|GeneratorFactory $data
      * @return $this
      */
     public function data($data);
@@ -23,12 +24,12 @@ interface Exporter
     public function row(callable $callback);
 
     /**
-     * 分块导入
+     * 分批次生成数据
      *
      * @param callable|callable[] $callbacks
      * @return $this
      */
-    public function chunk($callbacks);
+    public function generate($callbacks);
 
     /**
      * 下载导出文件
@@ -55,10 +56,9 @@ interface Exporter
     public function disk($filesystem);
 
     /**
-     * @param string|null $type
      * @return string
      * @throws \Box\Spout\Common\Exception\IOException
      */
-    public function raw(string $type = null);
+    public function raw();
 
 }
