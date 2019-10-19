@@ -6,7 +6,7 @@ use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Generator;
-use Illuminate\Support\Arr;
+use Dcat\EasyExcel\Support\Arr;
 use Box\Spout\Writer\XLSX\Writer as XLSXWriter;
 use Box\Spout\Writer\ODS\Writer as ODSWriter;
 
@@ -16,8 +16,7 @@ trait WriteSheet
 
     protected function writeSheets(WriterInterface $writer)
     {
-        $data = $this->makeSheetsArray();
-
+        $data    = $this->makeSheetsArray();
         $keys    = array_keys($data);
         $lastKey = end($keys);
 
@@ -163,7 +162,7 @@ trait WriteSheet
     }
 
     /**
-     * @return \Generator[]|array
+     * @return Generator[]|array
      */
     protected function makeSheetsArray(): array
     {
@@ -181,11 +180,14 @@ trait WriteSheet
             $data = $data->toArray();
         }
 
-        if (is_array($data) && ! Arr::isAssoc($data)) {
-            return [new SheetCollection($data)];
+        if (
+            (is_array($data) && ! Arr::isAssoc($data))
+            || $data instanceof Generator
+        ) {
+            return [&$data];
         }
 
-        return [$data];
+        return (array) $data;
     }
 
     /**

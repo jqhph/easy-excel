@@ -2,7 +2,6 @@
 
 namespace Dcat\EasyExcel\Importers;
 
-use Illuminate\Support\Str;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\FilesystemInterface;
 
@@ -16,15 +15,15 @@ trait TempFile
      * @param FilesystemInterface $filesystem
      * @param string $filePath
      * @return string
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function moveFileToTemp(FilesystemInterface $filesystem, string $filePath)
     {
-        $this->tempFile = $newPath = $this->generateTempPath($filePath);
+        $this->tempFile = $this->generateTempPath($filePath);
 
-        file_put_contents($newPath, $filesystem->read($filePath));
+        file_put_contents($this->tempFile, $filesystem->read($filePath));
 
-        return $newPath;
+        return $this->tempFile;
     }
 
     protected function removeTempFile()
@@ -44,7 +43,7 @@ trait TempFile
 
         return $this->getTempFolder()
             .'/'
-            .uniqid(microtime(true).static::generateRandom())
+            .uniqid(microtime(true).static::generateRandomString())
             .($extension ? ".{$extension}" : '');
     }
 

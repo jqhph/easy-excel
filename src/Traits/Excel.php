@@ -228,7 +228,7 @@ trait Excel
      * @param  int  $length
      * @return string
      */
-    public static function generateRandom($length = 16)
+    public static function generateRandomString($length = 16)
     {
         $string = '';
 

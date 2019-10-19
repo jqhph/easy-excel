@@ -117,12 +117,18 @@ class Exporter implements Contracts\Exporter
      */
     public function download(string $fileName)
     {
-        /* @var \Box\Spout\Writer\WriterInterface $writer */
-        $writer = $this->makeWriter($fileName);
+        try {
+            /* @var \Box\Spout\Writer\WriterInterface $writer */
+            $writer = $this->makeWriter($fileName);
 
-        $writer->openToBrowser($this->prepareFileName($fileName));
+            $writer->openToBrowser($this->prepareFileName($fileName));
 
-        $this->writeSheets($writer)->close();
+            $this->writeSheets($writer)->close();
+        } catch (\Throwable $e) {
+            header_remove();
+
+            throw $e;
+        }
     }
 
     /**
@@ -156,18 +162,24 @@ class Exporter implements Contracts\Exporter
      */
     public function raw()
     {
-        ob_start();
+        try {
+            ob_start();
 
-        /* @var \Box\Spout\Writer\WriterInterface $writer */
-        $writer = $this->makeWriter();
+            /* @var \Box\Spout\Writer\WriterInterface $writer */
+            $writer = $this->makeWriter();
 
-        $writer->openToBrowser('excel');
+            $writer->openToBrowser('excel');
 
-        $this->writeSheets($writer)->close();
+            $this->writeSheets($writer)->close();
 
-        header_remove();
+            header_remove();
 
-        return ob_get_clean();
+            return ob_get_clean();
+        } catch (\Throwable $e) {
+            header_remove();
+
+            throw $e;
+        }
     }
 
     /**
