@@ -126,12 +126,9 @@ trait WriteSheet
         if (
             $this->headers === false
             || ! empty($this->writedHeaders[$index])
+            || ($this->writedHeaders && $writer instanceof CsvWriter)
         ) {
             return false;
-        }
-
-        if ($writer instanceof CsvWriter) {
-            $this->withoutHeaders();
         }
 
         $this->writedHeaders[$index] = true;

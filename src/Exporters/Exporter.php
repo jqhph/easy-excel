@@ -124,6 +124,7 @@ class Exporter implements Contracts\Exporter
             $writer->openToBrowser($this->prepareFileName($fileName));
 
             $this->writeSheets($writer)->close();
+
         } catch (\Throwable $e) {
             $this->removeHttpHeaders();
 
