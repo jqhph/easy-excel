@@ -2,12 +2,15 @@
 
 namespace Dcat\EasyExcel\Importers;
 
+use Box\Spout\Common\Exception\IOException;
+use Box\Spout\Common\Exception\UnsupportedTypeException;
 use Box\Spout\Reader\Common\Creator\ReaderFactory;
 use Box\Spout\Reader\ReaderInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
+use League\Flysystem\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -17,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class Importer implements Contracts\Importer
 {
-    use Macroable, Excel;
+    use Macroable, Excel, TempFile;
 
     /**
      * @var string|UploadedFile
@@ -42,14 +45,27 @@ class Importer implements Contracts\Importer
 
     /**
      * @return Contracts\Sheets
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function sheets()
     {
-        $filePath = $this->prepareFileName($this->filePath);
+        try {
+            $filePath = $this->prepareFileName($this->filePath);
 
-        $reader = $this->makeReader($filePath);
+            if (is_string($filePath) && ($filesystem = $this->filesystem())) {
+                $filePath = $this->moveFileToTemp($filesystem, $filePath);
+            }
 
-        return new LazySheets($this->readSheets($reader));
+            $reader = $this->makeReader($filePath);
+
+            return new LazySheets($this->readSheets($reader));
+        } catch (\Throwable $e) {
+            $this->releaseResources();
+
+            throw $e;
+        }
     }
 
     /**
@@ -57,6 +73,9 @@ class Importer implements Contracts\Importer
      *
      * @param int|string $indexOrName
      * @return Contracts\Sheet
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function sheet($indexOrName): Contracts\Sheet
     {
@@ -66,6 +85,9 @@ class Importer implements Contracts\Importer
 
     /**
      * @return array
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function toArray(): array
     {
@@ -74,6 +96,9 @@ class Importer implements Contracts\Importer
 
     /**
      * @return SheetCollection
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function collect(): SheetCollection
     {
@@ -83,6 +108,9 @@ class Importer implements Contracts\Importer
     /**
      * @param callable $callback
      * @return $this
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function each(callable $callback)
     {
@@ -95,6 +123,9 @@ class Importer implements Contracts\Importer
      * 获取第一个sheet
      *
      * @return Contracts\Sheet
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function first(): Contracts\Sheet
     {
@@ -113,6 +144,10 @@ class Importer implements Contracts\Importer
      * 获取当前打开的sheet
      *
      * @return Contracts\Sheet
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
+     * @throws UnsupportedTypeException
      */
     public function working(): Contracts\Sheet
     {
@@ -142,6 +177,8 @@ class Importer implements Contracts\Importer
         }
 
         $reader->close();
+
+        $this->releaseResources();
     }
 
     /**
@@ -179,6 +216,11 @@ class Importer implements Contracts\Importer
     protected function makeNullSheet()
     {
         return new NullSheet();
+    }
+
+    protected function releaseResources()
+    {
+        $this->removeTempFile();
     }
 
 }

@@ -7,9 +7,6 @@ use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
-use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Filesystem;
-use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 
 /**
  * @method $this xlsx()
@@ -21,11 +18,6 @@ class Exporter implements Contracts\Exporter
     use Macroable,
         Excel,
         WriteSheet;
-
-    /**
-     * @var Filesystem
-     */
-    protected $filesystem;
 
     /**
      * @var array|\Closure|\Generator
@@ -146,7 +138,7 @@ class Exporter implements Contracts\Exporter
     {
         $filePath = $this->prepareFileName($filePath);
 
-        if (! $this->filesystem instanceof Filesystem) {
+        if (! ($filesystem = $this->filesystem())) {
             return $this->storeInLocal($filePath);
         }
 
@@ -154,27 +146,8 @@ class Exporter implements Contracts\Exporter
             $this->type(pathinfo($filePath)['extension'] ?? null);
         }
 
-        return $this->filesystem->put($filePath, $this->raw(), $diskConfig);
+        return $filesystem->put($filePath, $this->raw(), $diskConfig);
 
-    }
-
-    /**
-     * @param Filesystem|LaravelFilesystem|string $filesystem
-     * @return $this
-     */
-    public function disk($filesystem)
-    {
-        if (is_string($filesystem)) {
-            $filesystem = Storage::disk($filesystem);
-        }
-
-        if ($filesystem instanceof LaravelFilesystem) {
-            $filesystem = $filesystem->getDriver();
-        }
-
-        $this->filesystem = $filesystem;
-
-        return $this;
     }
 
     /**

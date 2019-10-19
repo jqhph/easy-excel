@@ -3,8 +3,6 @@
 namespace Dcat\EasyExcel\Contracts;
 
 use Dcat\EasyExcel\Exporters\GeneratorFactory;
-use League\Flysystem\Filesystem;
-use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 interface Exporter extends Excel
@@ -48,12 +46,6 @@ interface Exporter extends Excel
      * @return bool
      */
     public function store(string $filePath, array $diskConfig = []);
-
-    /**
-     * @param Filesystem|LaravelFilesystem|string $filesystem
-     * @return $this
-     */
-    public function disk($filesystem);
 
     /**
      * @return string

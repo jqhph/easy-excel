@@ -5,6 +5,10 @@ namespace Dcat\EasyExcel\Traits;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader as CSVReader;
 use Box\Spout\Writer\CSV\Writer as CSVWriter;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
+use League\Flysystem\FilesystemInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait Excel
 {
@@ -27,6 +31,11 @@ trait Excel
      * @var \Closure
      */
     protected $headerCallback;
+
+    /**
+     * @var FilesystemInterface
+     */
+    protected $filesystem;
 
     /**
      * @var array
@@ -125,6 +134,35 @@ trait Excel
     }
 
     /**
+     * @param FilesystemInterface|LaravelFilesystem|string $filesystem
+     * @return $this
+     */
+    public function disk($filesystem)
+    {
+        if (is_string($filesystem)) {
+            $filesystem = Storage::disk($filesystem);
+        }
+
+        if ($filesystem instanceof LaravelFilesystem) {
+            $filesystem = $filesystem->getDriver();
+        }
+
+        $this->filesystem = $filesystem;
+
+        return $this;
+    }
+
+    /**
+     * @return FilesystemInterface|void
+     */
+    protected function filesystem()
+    {
+        if ($this->filesystem && $this->filesystem instanceof FilesystemInterface) {
+            return $this->filesystem;
+        }
+    }
+
+    /**
      * @param string $delimiter
      * @param string $enclosure
      * @param string $encoding
@@ -169,14 +207,39 @@ trait Excel
 
     /**
      * @param string $fileName
-     * @return string
+     * @return string|UploadedFile
      */
-    protected function prepareFileName(string $fileName)
+    protected function prepareFileName($fileName)
     {
+        if ($fileName instanceof UploadedFile) {
+            return $fileName;
+        }
+
         if ($this->type && strpos($fileName, '.') === false) {
             return $fileName.'.'.$this->type;
         }
 
         return $fileName;
+    }
+
+    /**
+     * Generate a more truly "random" alpha-numeric string.
+     *
+     * @param  int  $length
+     * @return string
+     */
+    public static function generateRandom($length = 16)
+    {
+        $string = '';
+
+        while (($len = strlen($string)) < $length) {
+            $size = $length - $len;
+
+            $bytes = random_bytes($size);
+
+            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
+        }
+
+        return $string;
     }
 }

@@ -20,7 +20,6 @@ class Factory
         'generate',
         'download',
         'store',
-        'disk',
         'raw',
     ];
 

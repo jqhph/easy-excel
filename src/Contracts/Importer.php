@@ -2,7 +2,10 @@
 
 namespace Dcat\EasyExcel\Contracts;
 
+use Box\Spout\Common\Exception\IOException;
+use Box\Spout\Common\Exception\UnsupportedTypeException;
 use Dcat\EasyExcel\Support\SheetCollection;
+use League\Flysystem\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface Importer extends Excel
@@ -15,6 +18,9 @@ interface Importer extends Excel
 
     /**
      * @return Sheets
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function sheets();
 
@@ -23,12 +29,18 @@ interface Importer extends Excel
      *
      * @param int|string $indexOrName
      * @return Sheet
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function sheet($indexOrName): Sheet;
 
     /**
      * @param callable $callback
      * @return $this
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function each(callable $callback);
 
@@ -36,6 +48,9 @@ interface Importer extends Excel
      * 获取第一个sheet
      *
      * @return Sheet
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function first(): Sheet;
 
@@ -43,16 +58,25 @@ interface Importer extends Excel
      * 获取当前打开的sheet
      *
      * @return Sheet
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function working(): Sheet;
 
     /**
      * @return array
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function toArray(): array;
 
     /**
      * @return SheetCollection
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws UnsupportedTypeException
      */
     public function collect(): SheetCollection;
 
