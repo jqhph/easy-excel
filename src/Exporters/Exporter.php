@@ -125,7 +125,7 @@ class Exporter implements Contracts\Exporter
 
             $this->writeSheets($writer)->close();
         } catch (\Throwable $e) {
-            header_remove();
+            $this->removeHttpHeaders();
 
             throw $e;
         }
@@ -172,11 +172,11 @@ class Exporter implements Contracts\Exporter
 
             $this->writeSheets($writer)->close();
 
-            header_remove();
+            $this->removeHttpHeaders();
 
             return ob_get_clean();
         } catch (\Throwable $e) {
-            header_remove();
+            $this->removeHttpHeaders();
 
             throw $e;
         }
@@ -215,6 +215,13 @@ class Exporter implements Contracts\Exporter
         $this->configure($writer);
 
         return $writer;
+    }
+
+    protected function removeHttpHeaders()
+    {
+        if (! headers_sent()) {
+            header_remove();
+        }
     }
 
 }

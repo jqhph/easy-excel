@@ -2,13 +2,13 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
+use Box\Spout\Common\Entity\Row;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\CSV\Writer as CsvWriter;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Generator;
 use Dcat\EasyExcel\Support\Arr;
-use Box\Spout\Writer\XLSX\Writer as XLSXWriter;
-use Box\Spout\Writer\ODS\Writer as ODSWriter;
 
 trait WriteSheet
 {
@@ -20,8 +20,6 @@ trait WriteSheet
         $keys    = array_keys($data);
         $lastKey = end($keys);
 
-        $hasSheets = ($writer instanceof XLSXWriter || $writer instanceof ODSWriter);
-
         foreach ($data as $index => $collection) {
             if ($collection instanceof \Generator) {
                 $this->writeRowsFromGenerator($writer, $index, $collection);
@@ -31,11 +29,11 @@ trait WriteSheet
                 $this->writeRowsFromArray($writer, $index, $collection);
             }
 
-            if (is_string($index)) {
+            if (is_string($index) && method_exists($writer, 'getCurrentSheet')) {
                 $writer->getCurrentSheet()->setName($index);
             }
 
-            if ($hasSheets && $lastKey !== $index) {
+            if ($lastKey !== $index && method_exists($writer, 'addNewSheetAndMakeItCurrent')) {
                 $writer->addNewSheetAndMakeItCurrent();
             }
         }
@@ -46,10 +44,8 @@ trait WriteSheet
     protected function writeRowsFromArray(WriterInterface $writer, $index, array &$collection)
     {
         // Add header row.
-        if (empty($this->writedHeaders[$index]) && $this->headers !== false) {
+        if ($this->canWriteHeaders($writer, $index)) {
             $this->writeHeaders($writer, current($collection));
-
-            $this->writedHeaders[$index] = true;
         }
 
         foreach ($collection as $item) {
@@ -68,10 +64,8 @@ trait WriteSheet
 
             foreach ($items as &$item) {
                 // Add header row.
-                if (empty($this->writedHeaders[$index]) && $this->headers !== false) {
+                if ($this->canWriteHeaders($writer, $index)) {
                     $this->writeHeaders($writer, $item);
-
-                    $this->writedHeaders[$index] = true;
                 }
 
                 $this->writeRow($writer, $item);
@@ -109,19 +103,40 @@ trait WriteSheet
 
     protected function writeHeaders(WriterInterface $writer, array $firstRow)
     {
-        if ($this->headers) {
-            $keys = $this->headers;
-        } else {
-            $keys = array_keys($firstRow);
-        }
+        $keys = $this->headers ?: array_keys($firstRow);
 
         if ($callback = $this->headerCallback) {
             $keys = $callback($keys);
-        } else {
+        }
+
+        if (! $keys instanceof Row) {
             $keys = $this->makeDefaultRow($keys);
         }
 
         $writer->addRow($keys);
+    }
+
+    /**
+     * @param WriterInterface $writer
+     * @param $index
+     * @return bool
+     */
+    protected function canWriteHeaders(WriterInterface $writer, $index): bool
+    {
+        if (
+            $this->headers === false
+            || ! empty($this->writedHeaders[$index])
+        ) {
+            return false;
+        }
+
+        if ($writer instanceof CsvWriter) {
+            $this->withoutHeaders();
+        }
+
+        $this->writedHeaders[$index] = true;
+
+        return true;
     }
 
     /**
