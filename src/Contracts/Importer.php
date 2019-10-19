@@ -9,9 +9,22 @@ interface Importer extends Excel
 {
     /**
      * @param string|UploadedFile $filePath
+     * @return $this
+     */
+    public function file($filePath);
+
+    /**
      * @return Sheets
      */
-    public function import($filePath);
+    public function sheets();
+
+    /**
+     * 根据名称或序号获取sheet
+     *
+     * @param int|string $indexOrName
+     * @return Sheet
+     */
+    public function sheet($indexOrName): Sheet;
 
     /**
      * @param callable $callback
@@ -32,14 +45,6 @@ interface Importer extends Excel
      * @return Sheet
      */
     public function working(): Sheet;
-
-    /**
-     * 根据名称或序号获取sheet
-     *
-     * @param int|string $indexOrName
-     * @return Sheet
-     */
-    public function sheet($indexOrName): Sheet;
 
     /**
      * @return array

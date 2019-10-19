@@ -26,16 +26,26 @@ class Importer implements Contracts\Importer
 
     public function __construct($filePath)
     {
-        $this->filePath = $filePath;
+        $this->file($filePath);
     }
 
     /**
      * @param string|UploadedFile $filePath
+     * @return $this
+     */
+    public function file($filePath)
+    {
+        $this->filePath = $filePath;
+
+        return $this;
+    }
+
+    /**
      * @return Contracts\Sheets
      */
-    public function import($filePath)
+    public function sheets()
     {
-        $filePath = $this->prepareFileName($filePath);
+        $filePath = $this->prepareFileName($this->filePath);
 
         $reader = $this->makeReader($filePath);
 
@@ -43,11 +53,23 @@ class Importer implements Contracts\Importer
     }
 
     /**
+     * 根据名称或序号获取sheet
+     *
+     * @param int|string $indexOrName
+     * @return Contracts\Sheet
+     */
+    public function sheet($indexOrName): Contracts\Sheet
+    {
+        return $this->sheets()->index($indexOrName) ?: $this->makeNullSheet();
+    }
+
+
+    /**
      * @return array
      */
     public function toArray(): array
     {
-        return $this->import($this->filePath)->toArray();
+        return $this->sheets()->toArray();
     }
 
     /**
@@ -55,7 +77,7 @@ class Importer implements Contracts\Importer
      */
     public function collect(): SheetCollection
     {
-        return $this->import($this->filePath)->collect();
+        return $this->sheets()->collect();
     }
 
     /**
@@ -64,7 +86,7 @@ class Importer implements Contracts\Importer
      */
     public function each(callable $callback)
     {
-        $this->import($this->filePath)->each($callback);
+        $this->sheets()->each($callback);
 
         return $this;
     }
@@ -78,7 +100,7 @@ class Importer implements Contracts\Importer
     {
         $sheet = null;
 
-        $this->import($this->filePath)->each(function (Sheet $value) use (&$sheet) {
+        $this->sheets()->each(function (Sheet $value) use (&$sheet) {
             $sheet = $value;
 
             return false;
@@ -96,7 +118,7 @@ class Importer implements Contracts\Importer
     {
         $sheet = null;
 
-        $this->import($this->filePath)->each(function (Sheet $value) use (&$sheet) {
+        $this->sheets()->each(function (Sheet $value) use (&$sheet) {
             if ($value->isWorking()) {
                 $sheet = $value;
 
@@ -106,17 +128,6 @@ class Importer implements Contracts\Importer
         });
 
         return $sheet ?: $this->makeNullSheet();
-    }
-
-    /**
-     * 根据名称或序号获取sheet
-     *
-     * @param int|string $indexOrName
-     * @return Contracts\Sheet
-     */
-    public function sheet($indexOrName): Contracts\Sheet
-    {
-        return $this->import($this->filePath)->get($indexOrName) ?: $this->makeNullSheet();
     }
 
     /**

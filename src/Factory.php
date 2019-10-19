@@ -28,11 +28,12 @@ class Factory
      * @var array
      */
     protected static $importerMethods = [
-        'import',
+        'file',
+        'sheets',
+        'sheet',
         'each',
         'first',
         'working',
-        'sheet',
         'toArray',
         'collect',
     ];

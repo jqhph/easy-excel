@@ -54,7 +54,7 @@ class LazySheets implements Sheets
      * @param int|string $indexOrName
      * @return Sheet|null
      */
-    public function get($indexOrName)
+    public function index($indexOrName)
     {
         foreach ($this->generator as $sheet) {
             if ($this->is($indexOrName, $sheet)) {

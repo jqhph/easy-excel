@@ -22,7 +22,7 @@ interface Sheets
      * @param int|string $indexOrName
      * @return Sheet|null
      */
-    public function get($indexOrName);
+    public function index($indexOrName);
 
     /**
      * @param int|string $indexOrName
