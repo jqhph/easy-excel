@@ -22,12 +22,12 @@ interface Exporter extends Excel
     public function row(callable $callback);
 
     /**
-     * 分批次生成数据
+     * 分批次导入数据
      *
      * @param callable|callable[] $callbacks
      * @return $this
      */
-    public function generate($callbacks);
+    public function lazy($callbacks);
 
     /**
      * 下载导出文件

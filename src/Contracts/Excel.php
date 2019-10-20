@@ -19,11 +19,10 @@ interface Excel
     public function option(\Closure $callback);
 
     /**
-     * @param array $headers
-     * @param \Closure|null $callback
+     * @param array|\Closure $headers
      * @return $this
      */
-    public function headers(array $headers, \Closure $callback = null);
+    public function headers($headers);
 
     /**
      * @return array|false

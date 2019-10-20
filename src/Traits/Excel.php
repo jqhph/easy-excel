@@ -2,9 +2,12 @@
 
 namespace Dcat\EasyExcel\Traits;
 
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader as CSVReader;
 use Box\Spout\Writer\CSV\Writer as CSVWriter;
+use Dcat\EasyExcel\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 use League\Flysystem\FilesystemInterface;
@@ -28,9 +31,9 @@ trait Excel
     protected $headers = [];
 
     /**
-     * @var \Closure
+     * @var Style|null
      */
-    protected $headerCallback;
+    protected $headerStyle;
 
     /**
      * @var FilesystemInterface
@@ -70,15 +73,29 @@ trait Excel
     }
 
     /**
-     * @param array $headers
-     * @param \Closure|null $callback
+     * @param array|\Closure $headers
      * @return $this
      */
-    public function headers(array $headers, \Closure $callback = null)
+    public function headers($headers)
     {
-        $this->headers = $headers;
+        if ($headers instanceof \Closure) {
+            $temp = $headers();
 
-        $this->headerCallback = $callback;
+            if (is_array($temp) && is_array(current($temp))) {
+                $headers = &$temp[0] ?? null;
+                $style   = $temp[1] ?? null;
+
+                if ($style instanceof Style) {
+                    $this->headerStyle = $style;
+                }
+            } else {
+                $headers = &$temp;
+            }
+        }
+
+        if (is_array($headers)) {
+            $this->headers = $headers;
+        }
 
         return $this;
     }

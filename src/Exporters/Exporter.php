@@ -87,13 +87,13 @@ class Exporter implements Contracts\Exporter
      *
      * e.g:
      *
-     * $this->generate(function (int $times) {
+     * $this->lazy(function (int $times) {
      *     $size = 100;
      *
      *     return User::query()->forPage($times, $size)->toArray();
      * });
      *
-     * $this->generate([
+     * $this->lazy([
      *     "sheet-name" => function (int $times) {
      *         $size = 100;
      *
@@ -104,7 +104,7 @@ class Exporter implements Contracts\Exporter
      * @param callable|callable[] $callbacks
      * @return $this
      */
-    public function generate($callbacks)
+    public function lazy($callbacks)
     {
         return $this->data(new GeneratorFactory($callbacks));
     }

@@ -3,6 +3,7 @@
 namespace Dcat\EasyExcel\Exporters;
 
 use Box\Spout\Common\Entity\Row;
+use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer as CsvWriter;
 use Box\Spout\Writer\WriterInterface;
@@ -10,6 +11,9 @@ use Dcat\EasyExcel\Support\SheetCollection;
 use Generator;
 use Dcat\EasyExcel\Support\Arr;
 
+/**
+ * @mixin \Dcat\EasyExcel\Contracts\Exporter
+ */
 trait WriteSheet
 {
     protected $writedHeaders = [];
@@ -96,24 +100,23 @@ trait WriteSheet
         $writer->addRow($item);
     }
 
-    protected function makeDefaultRow(array $item)
-    {
-        return WriterEntityFactory::createRowFromArray($item);
-    }
-
     protected function writeHeaders(WriterInterface $writer, array $firstRow)
     {
-        $keys = $this->headers ?: array_keys($firstRow);
+        $writer->addRow(
+            $this->makeDefaultRow(
+                $this->headers ?: array_keys($firstRow),
+                $this->headerStyle
+            )
+        );
+    }
 
-        if ($callback = $this->headerCallback) {
-            $keys = $callback($keys);
+    protected function makeDefaultRow(array $item, ?Style $style = null)
+    {
+        if ($style) {
+            return WriterEntityFactory::createRowFromArray($item, $style);
         }
 
-        if (! $keys instanceof Row) {
-            $keys = $this->makeDefaultRow($keys);
-        }
-
-        $writer->addRow($keys);
+        return WriterEntityFactory::createRowFromArray($item);
     }
 
     /**
