@@ -9,6 +9,7 @@ use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
  * @method $this xlsx()
  * @method $this csv()
  * @method $this ods()
+ * @method $this configureCsv(string $delimiter = ',', string $enclosure = '"', string $encoding = 'UTF-8', bool $bom = false)
  */
 interface Excel
 {

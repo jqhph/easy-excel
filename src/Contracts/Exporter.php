@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Contracts;
 
-use Dcat\EasyExcel\Exporters\GeneratorFactory;
+use Dcat\EasyExcel\Exporters\ChunkingQuery;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 interface Exporter extends Excel
@@ -10,7 +10,7 @@ interface Exporter extends Excel
     /**
      * 设置导出数据
      *
-     * @param array|\Closure|\Generator|GeneratorFactory $data
+     * @param array|\Closure|\Generator|ChunkingQuery $data
      * @return $this
      */
     public function data($data);
@@ -27,7 +27,7 @@ interface Exporter extends Excel
      * @param callable|callable[] $callbacks
      * @return $this
      */
-    public function lazy($callbacks);
+    public function chunk($callbacks);
 
     /**
      * 下载导出文件

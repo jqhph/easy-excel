@@ -183,8 +183,8 @@ trait WriteSheet
     {
         $data = $this->data;
 
-        if ($data instanceof GeneratorFactory) {
-            return $data->make();
+        if ($data instanceof ChunkingQuery) {
+            return $data->makeGenerators();
         }
 
         if ($this->data instanceof \Closure) {

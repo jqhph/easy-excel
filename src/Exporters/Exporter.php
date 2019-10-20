@@ -61,7 +61,7 @@ class Exporter implements Contracts\Exporter
      *    ];
      * });
      *
-     * @param array|\Closure|\Generator|GeneratorFactory $data
+     * @param array|\Closure|\Generator|ChunkingQuery $data
      * @return $this
      */
     public function data($data)
@@ -87,13 +87,13 @@ class Exporter implements Contracts\Exporter
      *
      * e.g:
      *
-     * $this->lazy(function (int $times) {
+     * $this->chunk(function (int $times) {
      *     $size = 100;
      *
      *     return User::query()->forPage($times, $size)->toArray();
      * });
      *
-     * $this->lazy([
+     * $this->chunk([
      *     "sheet-name" => function (int $times) {
      *         $size = 100;
      *
@@ -104,9 +104,9 @@ class Exporter implements Contracts\Exporter
      * @param callable|callable[] $callbacks
      * @return $this
      */
-    public function lazy($callbacks)
+    public function chunk($callbacks)
     {
-        return $this->data(new GeneratorFactory($callbacks));
+        return $this->data(new ChunkingQuery($callbacks));
     }
 
     /**

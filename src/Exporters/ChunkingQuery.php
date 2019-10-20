@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
-class GeneratorFactory
+class ChunkingQuery
 {
     /**
      * @var callable[]
@@ -22,7 +22,7 @@ class GeneratorFactory
     /**
      * @return \Generator[]
      */
-    public function make()
+    public function makeGenerators()
     {
         $generators = [];
 
