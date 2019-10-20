@@ -179,6 +179,8 @@ class Exporter implements Contracts\Exporter
         } catch (\Throwable $e) {
             $this->removeHttpHeaders();
 
+            ob_end_clean();
+
             throw $e;
         }
     }

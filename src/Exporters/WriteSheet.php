@@ -2,7 +2,6 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
-use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer as CsvWriter;
