@@ -11,7 +11,7 @@ class NullSheet implements Contracts\Sheet
     /**
      * @return bool
      */
-    public function isValid(): bool
+    public function valid(): bool
     {
         return false;
     }

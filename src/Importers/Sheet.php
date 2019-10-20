@@ -29,7 +29,7 @@ class Sheet implements Contracts\Sheet
     /**
      * @return bool
      */
-    public function isValid(): bool
+    public function valid(): bool
     {
         return $this->sheet ? true : false;
     }

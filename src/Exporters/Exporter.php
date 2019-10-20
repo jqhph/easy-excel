@@ -83,7 +83,7 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * 分批次生成数据
+     * 分批次导出数据
      *
      * e.g:
      *

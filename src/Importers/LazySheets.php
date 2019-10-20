@@ -84,7 +84,11 @@ class LazySheets implements Sheets
         $array = [];
 
         $this->each(function (Sheet $sheet) use (&$array) {
-            $array[$sheet->getName()] = $sheet->toArray();
+            if ($sheet->getName() === '') {
+                $array[$sheet->getIndex()] = $sheet->toArray();
+            } else {
+                $array[$sheet->getName()] = $sheet->toArray();
+            }
         });
 
         return $array;

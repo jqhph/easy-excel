@@ -10,7 +10,7 @@ interface Sheet
     /**
      * @return bool
      */
-    public function isValid(): bool;
+    public function valid(): bool;
 
     /**
      * sheet索引
