@@ -17,7 +17,7 @@ class Factory
     protected static $exporterMethods = [
         'data',
         'row',
-        'generate',
+        'chunk',
         'download',
         'store',
         'raw',
