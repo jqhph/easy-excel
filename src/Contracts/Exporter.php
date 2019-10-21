@@ -34,7 +34,7 @@ interface Exporter extends Excel
      *
      * @param string|null $fileName
      *
-     * @return BinaryFileResponse
+     * @return mixed
      */
     public function download(string $fileName);
 
