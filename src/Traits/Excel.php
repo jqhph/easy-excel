@@ -8,6 +8,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader as CSVReader;
 use Box\Spout\Writer\CSV\Writer as CSVWriter;
 use Dcat\EasyExcel\Support\Arr;
+use Dcat\EasyExcel\Support\SheetCollection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 use League\Flysystem\FilesystemInterface;
@@ -238,6 +239,24 @@ trait Excel
 
         return $fileName;
     }
+
+    /**
+     * @param mixed $value
+     * @return array
+     */
+    protected function convertToArray($value)
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if ($value instanceof SheetCollection || method_exists($value, 'toArray')) {
+            return $value->toArray();
+        }
+
+        return (array) $value;
+    }
+
 
     /**
      * Generate a more truly "random" alpha-numeric string.

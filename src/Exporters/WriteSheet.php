@@ -51,7 +51,7 @@ trait WriteSheet
             $this->writeHeaders($writer, current($collection));
         }
 
-        foreach ($collection as $item) {
+        foreach ($collection as &$item) {
             $this->writeRow($writer, $item);
         }
     }
@@ -83,9 +83,7 @@ trait WriteSheet
      */
     protected function writeRow(WriterInterface $writer, array $item)
     {
-        $item = $this->filterAndSort($item);
-
-        $item = $this->transformRow($item);
+        $item = $this->formatRow($item);
 
         if ($this->rowCallback) {
             $item = call_user_func($this->rowCallback, $item);
@@ -139,43 +137,6 @@ trait WriteSheet
     }
 
     /**
-     * @param array|SheetCollection $row
-     * @return array
-     */
-    public function filterAndSort($row)
-    {
-        if (! $this->headers) {
-            return $row;
-        }
-
-        $row = $this->convertToArray($row);
-
-        $newRow = [];
-        foreach ($this->headers as $key => $label) {
-            $newRow[$key] = $row[$key] ?? null;
-        }
-
-        return $newRow;
-    }
-
-    /**
-     * @param mixed $value
-     * @return array
-     */
-    protected function convertToArray($value)
-    {
-        if (is_array($value)) {
-            return $value;
-        }
-
-        if ($value instanceof SheetCollection || method_exists($value, 'toArray')) {
-            return $value->toArray();
-        }
-
-        return (array) $value;
-    }
-
-    /**
      * @return Generator[]|array
      */
     protected function makeSheetsArray(): array
@@ -205,15 +166,15 @@ trait WriteSheet
     }
 
     /**
-     * @param $data
+     * @param array $row
      * @return array
      */
-    protected function transformRow(array $data)
+    protected function formatRow(array &$row)
     {
         $strings = [];
 
-        foreach ($data as &$value) {
-            $value = is_int($value) || is_float($value) || is_null($value) ? (string)$value : $value;
+        foreach ($this->filterAndSortByHeaders($row) as &$value) {
+            $value = is_int($value) || is_float($value) || is_null($value) ? (string) $value : $value;
 
             if (is_string($value)) {
                 $strings[] = $value;
@@ -222,5 +183,24 @@ trait WriteSheet
 
         return $strings;
     }
+
+    /**
+     * @param array|SheetCollection $row
+     * @return array
+     */
+    public function filterAndSortByHeaders(array &$row)
+    {
+        if (! $this->headers) {
+            return $row;
+        }
+
+        $newRow = [];
+        foreach ($this->headers as $key => $label) {
+            $newRow[$key] = $row[$key] ?? null;
+        }
+
+        return $newRow;
+    }
+
 
 }
