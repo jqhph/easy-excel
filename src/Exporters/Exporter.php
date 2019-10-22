@@ -67,6 +67,10 @@ class Exporter implements Contracts\Exporter
      */
     public function data($data)
     {
+        if (is_scalar($data)) {
+            throw new \InvalidArgumentException('Not support scalar variable.');
+        }
+
         $this->data = $data;
 
         return $this;
