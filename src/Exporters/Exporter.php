@@ -2,11 +2,12 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
-use Box\Spout\Writer\Common\Creator\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
+use Dcat\EasyExcel\Spout\WriterFactory;
+use Box\Spout\Writer\Common\Creator\WriterFactory as SpoutWriterFactory;
 
 /**
  * @method $this xlsx()
@@ -163,26 +164,16 @@ class Exporter implements Contracts\Exporter
      */
     public function raw()
     {
-        try {
-            ob_start();
+        /* @var \Box\Spout\Writer\WriterInterface $writer */
+        $writer = $this->makeWriter(null, WriterFactory::class);
 
-            /* @var \Box\Spout\Writer\WriterInterface $writer */
-            $writer = $this->makeWriter();
+        ob_start();
 
-            $writer->openToBrowser('excel');
+        $writer->openToOutput();
 
-            $this->writeSheets($writer)->close();
+        $this->writeSheets($writer)->close();
 
-            $this->removeHttpHeaders();
-
-            return ob_get_clean();
-        } catch (\Throwable $e) {
-            $this->removeHttpHeaders();
-
-            ob_end_clean();
-
-            throw $e;
-        }
+        return ob_get_clean();
     }
 
     /**
@@ -204,15 +195,18 @@ class Exporter implements Contracts\Exporter
 
     /**
      * @param string $path
+     * @param string $factory
      * @return WriterInterface
      */
-    protected function makeWriter(?string $path = null)
+    protected function makeWriter(?string $path = null, string $factory = null)
     {
+        $factory = $factory ?: SpoutWriterFactory::class;
+
         /* @var WriterInterface $writer */
         if ($this->type) {
-            $writer = WriterFactory::createFromType($this->type);
+            $writer = $factory::createFromType($this->type);
         } else {
-            $writer = WriterFactory::createFromFile($path);
+            $writer = $factory::createFromFile($path);
         }
 
         $this->configure($writer);

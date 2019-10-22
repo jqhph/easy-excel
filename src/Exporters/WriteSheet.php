@@ -185,7 +185,7 @@ trait WriteSheet
     }
 
     /**
-     * @param array|SheetCollection $row
+     * @param array $row
      * @return array
      */
     public function filterAndSortByHeaders(array &$row)
