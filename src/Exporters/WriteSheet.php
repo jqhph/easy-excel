@@ -2,6 +2,7 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
+use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer as CsvWriter;
@@ -82,12 +83,13 @@ trait WriteSheet
             $item = call_user_func($this->rowCallback, $item);
         }
 
-        if (is_array($item)) {
+        if ($item && is_array($item)) {
             $item = $this->makeDefaultRow($item);
         }
 
-        // Write rows (one by one).
-        $writer->addRow($item);
+        if ($item instanceof Row) {
+            $writer->addRow($item);
+        }
     }
 
     protected function writeHeadings(WriterInterface $writer, array $firstRow)
