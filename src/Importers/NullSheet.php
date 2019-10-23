@@ -35,7 +35,15 @@ class NullSheet implements Contracts\Sheet
     /**
      * @return bool
      */
-    public function isWorking()
+    public function isActive()
+    {
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisible()
     {
         return false;
     }
