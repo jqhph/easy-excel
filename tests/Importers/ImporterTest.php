@@ -90,13 +90,13 @@ class ImporterTest extends TestCase
         // xlsx
         $file = __DIR__.'/../resources/test.xlsx';
 
-        $sheetArray = Excel::import($file)->working()->toArray();
+        $sheetArray = Excel::import($file)->active()->toArray();
         $this->validateSheetArray($sheetArray);
 
         // csv
         $file = __DIR__.'/../resources/test.csv';
 
-        $sheetArray = Excel::import($file)->working()->toArray();
+        $sheetArray = Excel::import($file)->active()->toArray();
         $this->validateSheetArray($sheetArray);
     }
 

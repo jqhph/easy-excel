@@ -102,10 +102,10 @@ class SheetTest extends TestCase
         $this->assertEquals($sheet->valid(), true);
 
         // isWorking
-        $this->assertEquals($sheet->isWorking(), false);
+        $this->assertEquals($sheet->isActive(), false);
 
         // isWorking
-        $this->assertEquals($this->factory()->working()->isWorking(), true);
+        $this->assertEquals($this->factory()->active()->isActive(), true);
 
         // getSheet
         $this->assertInstanceOf(SheetInterface::class, $sheet->getSheet());
