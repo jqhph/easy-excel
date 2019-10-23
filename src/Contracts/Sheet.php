@@ -27,7 +27,12 @@ interface Sheet
     /**
      * @return bool
      */
-    public function isWorking();
+    public function isActive();
+
+    /**
+     * @return bool
+     */
+    public function isVisible();
 
     /**
      * @return SheetInterface

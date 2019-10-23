@@ -62,7 +62,7 @@ interface Importer extends Excel
      * @throws IOException
      * @throws UnsupportedTypeException
      */
-    public function working(): Sheet;
+    public function active(): Sheet;
 
     /**
      * @return array

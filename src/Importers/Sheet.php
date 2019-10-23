@@ -53,9 +53,17 @@ class Sheet implements Contracts\Sheet
     /**
      * @return bool
      */
-    public function isWorking()
+    public function isActive()
     {
-        return $this->sheet->isActive() && $this->sheet->isVisible();
+        return $this->sheet->isActive();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisible()
+    {
+        return $this->sheet->isVisible();
     }
 
     /**

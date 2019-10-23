@@ -149,12 +149,12 @@ class Importer implements Contracts\Importer
      * @throws UnsupportedTypeException
      * @throws UnsupportedTypeException
      */
-    public function working(): Contracts\Sheet
+    public function active(): Contracts\Sheet
     {
         $sheet = null;
 
         $this->sheets()->each(function (Sheet $value) use (&$sheet) {
-            if ($value->isWorking()) {
+            if ($value->isActive()) {
                 $sheet = $value;
 
                 return false;
