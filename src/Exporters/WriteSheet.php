@@ -23,7 +23,7 @@ trait WriteSheet
         $keys    = array_keys($data);
         $lastKey = end($keys);
 
-        foreach ($data as $index => $collection) {
+        foreach ($data as $index => &$collection) {
             if ($collection instanceof \Generator) {
                 $this->writeRowsFromGenerator($writer, $index, $collection);
             } else {
@@ -44,15 +44,15 @@ trait WriteSheet
         return $writer;
     }
 
-    protected function writeRowsFromArray(WriterInterface $writer, $index, array &$collection)
+    protected function writeRowsFromArray(WriterInterface $writer, $index, array &$rows)
     {
         // Add header row.
         if ($this->canWriteHeaders($writer, $index)) {
-            $this->writeHeaders($writer, current($collection));
+            $this->writeHeaders($writer, current($rows));
         }
 
-        foreach ($collection as &$item) {
-            $this->writeRow($writer, $item);
+        foreach ($rows as &$row) {
+            $this->writeRow($writer, $row);
         }
     }
 
@@ -65,14 +65,7 @@ trait WriteSheet
                 $items = [$items];
             }
 
-            foreach ($items as &$item) {
-                // Add header row.
-                if ($this->canWriteHeaders($writer, $index)) {
-                    $this->writeHeaders($writer, $item);
-                }
-
-                $this->writeRow($writer, $item);
-            }
+            $this->writeRowsFromArray($writer, $index, $items);
         }
     }
 
@@ -81,7 +74,7 @@ trait WriteSheet
      * @param array $item
      * @param callable|null $callback
      */
-    protected function writeRow(WriterInterface $writer, array $item)
+    protected function writeRow(WriterInterface $writer, array &$item)
     {
         $item = $this->formatRow($item);
 
@@ -195,7 +188,7 @@ trait WriteSheet
         }
 
         $newRow = [];
-        foreach ($this->headers as $key => $label) {
+        foreach ($this->headers as $key => &$label) {
             $newRow[$key] = $row[$key] ?? null;
         }
 
