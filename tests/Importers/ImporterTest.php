@@ -31,7 +31,7 @@ class ImporterTest extends TestCase
     /**
      * @group importer
      */
-    public function testWithHeaders()
+    public function testWithHeadings()
     {
         $xlsx = __DIR__.'/../resources/test.xlsx';
         $csv  = __DIR__.'/../resources/test.csv';
@@ -42,7 +42,7 @@ class ImporterTest extends TestCase
 
         // xlsx
         $xlsxSheetArray = Excel::import($xlsx)
-            ->headers($headers)
+            ->headings($headers)
             ->first()
             ->toArray();
 
@@ -50,7 +50,7 @@ class ImporterTest extends TestCase
 
         // csv
         $csvSheetArray = Excel::import($csv)
-            ->headers($headers)
+            ->headings($headers)
             ->first()
             ->toArray();
 
@@ -60,14 +60,14 @@ class ImporterTest extends TestCase
     /**
      * @group importer
      */
-    public function testWithoutHeaders()
+    public function testWithoutHeadings()
     {
         $xlsx = __DIR__.'/../resources/test.xlsx';
         $csv  = __DIR__.'/../resources/test.csv';
 
         // xlsx
         $sheetArray = Excel::import($xlsx)
-            ->withoutHeaders()
+            ->headings(false)
             ->first()
             ->toArray();
 
@@ -75,7 +75,7 @@ class ImporterTest extends TestCase
 
         // csv
         $sheetArray = Excel::import($csv)
-            ->withoutHeaders()
+            ->headings(false)
             ->first()
             ->toArray();
 

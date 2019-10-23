@@ -82,20 +82,29 @@ class Sheet implements Contracts\Sheet
      */
     public function each(callable $callback)
     {
-        $headers         = [];
+        $headings         = [];
         $originalHeaders = [];
 
+        $headingLine = null;
+
         foreach ($this->sheet->getRowIterator() as $k => $row) {
-            $row = $row instanceof Row ? $row->toArray() : [];
+            $row = $row instanceof Row ? $row->toArray() : (is_array($row) ? $row : []);
 
-            if ($this->importer->getHeaders() !== false && $k == 1) {
-                $originalHeaders = $row;
-                $headers         = $this->formatHeaders($row);
+            if (! $this->withoutHeadings()) {
+                if (! $headingLine && $this->isHeadingRow($k, $row)) {
+                    $headingLine     = $k;
+                    $originalHeaders = $row;
+                    $headings         = $this->formatHeadings($row);
 
-                continue;
+                    continue;
+                }
+
+                if (! $headingLine) {
+                    continue;
+                }
             }
 
-            $row = $this->formatRow($row, $headers);
+            $row = $this->formatRow($row, $headings);
 
             call_user_func($callback, $row, $k, $originalHeaders);
         }
@@ -154,17 +163,46 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
+     * 判断是否是标题行
+     *
+     * @return bool
+     */
+    protected function isHeadingRow($line, array $row)
+    {
+        if (
+            is_numeric($this->importer->headingRow)
+            && $line == $this->importer->headingRow
+        ) {
+            return true;
+        }
+
+        if ($this->importer->headingRow instanceof \Closure) {
+            return ($this->importer->headingRow)($line, $row) ? true : false;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function withoutHeadings()
+    {
+        return $this->importer->getHeadings() === false;
+    }
+
+    /**
      * @param array $row
-     * @param array $headers
+     * @param array $headings
      * @return array
      */
-    protected function formatRow(array &$row, array $headers)
+    protected function formatRow(array &$row, array $headings)
     {
-        if ($this->importer->getHeaders() === false) {
+        if ($this->withoutHeadings()) {
             return $row;
         }
 
-        $countHeaders = count($headers);
+        $countHeaders = count($headings);
 
         $countRow = count($row);
 
@@ -176,17 +214,17 @@ class Sheet implements Contracts\Sheet
 
         }
 
-        return array_combine($headers, $row);
+        return array_combine($headings, $row);
     }
 
     /**
      * @param array $row
      * @return array|false|mixed
      */
-    protected function formatHeaders(&$row)
+    protected function formatHeadings(array &$row)
     {
-        if ($headers = $this->importer->getHeaders()) {
-            return Arr::isAssoc($headers) ? array_keys($headers) : $headers;
+        if ($headings = $this->importer->getHeadings()) {
+            return Arr::isAssoc($headings) ? array_keys($headings) : $headings;
         }
 
         return $this->toStrings($row);

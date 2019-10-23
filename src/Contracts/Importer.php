@@ -17,6 +17,12 @@ interface Importer extends Excel
     public function file($filePath);
 
     /**
+     * @param int|\Closure $lineNumberOrCallback
+     * @return mixed
+     */
+    public function headingRow($lineNumberOrCallback);
+
+    /**
      * @return Sheets
      * @throws FileNotFoundException
      * @throws IOException

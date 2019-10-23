@@ -27,6 +27,11 @@ class Importer implements Contracts\Importer
      */
     protected $filePath;
 
+    /**
+     * @var int|\Closure
+     */
+    public $headingRow = 1;
+
     public function __construct($filePath)
     {
         $this->file($filePath);
@@ -39,6 +44,17 @@ class Importer implements Contracts\Importer
     public function file($filePath)
     {
         $this->filePath = $filePath;
+
+        return $this;
+    }
+
+    /**
+     * @param int|\Closure $lineNumberOrCallback
+     * @return mixed
+     */
+    public function headingRow($lineNumberOrCallback)
+    {
+        $this->headingRow = $lineNumberOrCallback;
 
         return $this;
     }

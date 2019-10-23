@@ -29,12 +29,12 @@ trait Excel
     /**
      * @var array|false
      */
-    protected $headers = [];
+    protected $headings = [];
 
     /**
      * @var Style|null
      */
-    protected $headerStyle;
+    protected $headingStyle;
 
     /**
      * @var FilesystemInterface
@@ -74,28 +74,30 @@ trait Excel
     }
 
     /**
-     * @param array|\Closure $headers
+     * @param array|\Closure|false $headings
      * @return $this
      */
-    public function headers($headers)
+    public function headings($headings)
     {
-        if ($headers instanceof \Closure) {
-            $temp = $headers();
+        if ($headings instanceof \Closure) {
+            $temp = $headings();
 
             if (is_array($temp) && is_array(current($temp))) {
-                $headers = &$temp[0] ?? null;
+                $headings = &$temp[0] ?? null;
                 $style   = $temp[1] ?? null;
 
                 if ($style instanceof Style) {
-                    $this->headerStyle = $style;
+                    $this->headingStyle = $style;
                 }
             } else {
-                $headers = &$temp;
+                $headings = &$temp;
             }
         }
 
-        if (is_array($headers)) {
-            $this->headers = $headers;
+        if (is_array($headings)) {
+            $this->headings = $headings;
+        } elseif ($headings === false) {
+            $this->headings = false;
         }
 
         return $this;
@@ -104,19 +106,9 @@ trait Excel
     /**
      * @return array|false
      */
-    public function getHeaders()
+    public function getHeadings()
     {
-        return $this->headers;
-    }
-
-    /**
-     * @return $this
-     */
-    public function withoutHeaders()
-    {
-        $this->headers = false;
-
-        return $this;
+        return $this->headings;
     }
 
     /**

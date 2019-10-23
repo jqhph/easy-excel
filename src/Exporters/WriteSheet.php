@@ -15,7 +15,7 @@ use Dcat\EasyExcel\Support\Arr;
  */
 trait WriteSheet
 {
-    protected $writedHeaders = [];
+    protected $writedHeadings = [];
 
     protected function writeSheets(WriterInterface $writer)
     {
@@ -46,9 +46,9 @@ trait WriteSheet
 
     protected function writeRowsFromArray(WriterInterface $writer, $index, array &$rows)
     {
-        // Add header row.
-        if ($this->canWriteHeaders($writer, $index)) {
-            $this->writeHeaders($writer, current($rows));
+        // Add heading row.
+        if ($this->canWriteHeadings($writer, $index)) {
+            $this->writeHeadings($writer, current($rows));
         }
 
         foreach ($rows as &$row) {
@@ -90,12 +90,12 @@ trait WriteSheet
         $writer->addRow($item);
     }
 
-    protected function writeHeaders(WriterInterface $writer, array $firstRow)
+    protected function writeHeadings(WriterInterface $writer, array $firstRow)
     {
         $writer->addRow(
             $this->makeDefaultRow(
-                $this->headers ?: array_keys($firstRow),
-                $this->headerStyle
+                $this->headings ?: array_keys($firstRow),
+                $this->headingStyle
             )
         );
     }
@@ -114,17 +114,17 @@ trait WriteSheet
      * @param $index
      * @return bool
      */
-    protected function canWriteHeaders(WriterInterface $writer, $index): bool
+    protected function canWriteHeadings(WriterInterface $writer, $index): bool
     {
         if (
-            $this->headers === false
-            || ! empty($this->writedHeaders[$index])
-            || ($this->writedHeaders && $writer instanceof CsvWriter)
+            $this->headings === false
+            || ! empty($this->writedHeadings[$index])
+            || ($this->writedHeadings && $writer instanceof CsvWriter)
         ) {
             return false;
         }
 
-        $this->writedHeaders[$index] = true;
+        $this->writedHeadings[$index] = true;
 
         return true;
     }
@@ -183,12 +183,12 @@ trait WriteSheet
      */
     public function filterAndSortByHeaders(array &$row)
     {
-        if (! $this->headers) {
+        if (! $this->headings) {
             return $row;
         }
 
         $newRow = [];
-        foreach ($this->headers as $key => &$label) {
+        foreach ($this->headings as $key => &$label) {
             $newRow[$key] = $row[$key] ?? null;
         }
 

@@ -20,20 +20,15 @@ interface Excel
     public function option(\Closure $callback);
 
     /**
-     * @param array|\Closure $headers
+     * @param array|\Closure|false $headings
      * @return $this
      */
-    public function headers($headers);
+    public function headings($headings);
 
     /**
      * @return array|false
      */
-    public function getHeaders();
-
-    /**
-     * @return $this
-     */
-    public function withoutHeaders();
+    public function getHeadings();
 
     /**
      * @param string $type
