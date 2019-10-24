@@ -53,7 +53,7 @@ trait WriteSheet
         }
 
         foreach ($rows as &$row) {
-            $this->writeRow($writer, $row);
+            $this->writeRow($writer, $row, $index);
         }
     }
 
@@ -73,14 +73,14 @@ trait WriteSheet
     /**
      * @param $writer
      * @param array $item
-     * @param callable|null $callback
+     * @param string|int $index
      */
-    protected function writeRow(WriterInterface $writer, array &$item)
+    protected function writeRow(WriterInterface $writer, array &$item, $index)
     {
         $item = $this->formatRow($item);
 
         if ($this->rowCallback) {
-            $item = call_user_func($this->rowCallback, $item);
+            $item = call_user_func($this->rowCallback, $item, $index);
         }
 
         if ($item && is_array($item)) {
