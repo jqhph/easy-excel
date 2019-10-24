@@ -16,9 +16,7 @@ use Box\Spout\Writer\Common\Creator\WriterFactory as SpoutWriterFactory;
  */
 class Exporter implements Contracts\Exporter
 {
-    use Macroable,
-        Excel,
-        WriteSheet;
+    use Macroable, Excel, WriteSheet;
 
     /**
      * @var array|\Closure|\Generator

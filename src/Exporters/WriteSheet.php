@@ -16,8 +16,17 @@ use Dcat\EasyExcel\Support\Arr;
  */
 trait WriteSheet
 {
+    /**
+     * @var array
+     */
     protected $writedHeadings = [];
 
+    /**
+     * @param WriterInterface $writer
+     * @return WriterInterface
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
+     */
     protected function writeSheets(WriterInterface $writer)
     {
         $data    = $this->makeSheetsArray();
@@ -45,6 +54,13 @@ trait WriteSheet
         return $writer;
     }
 
+    /**
+     * @param WriterInterface $writer
+     * @param int|string $index
+     * @param array $rows
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
+     */
     protected function writeRowsFromArray(WriterInterface $writer, $index, array &$rows)
     {
         // Add heading row.
@@ -57,6 +73,11 @@ trait WriteSheet
         }
     }
 
+    /**
+     * @param WriterInterface $writer
+     * @param $index
+     * @param Generator $generator
+     */
     protected function writeRowsFromGenerator(WriterInterface $writer, $index, Generator $generator)
     {
         foreach ($generator as $key => $items) {
@@ -71,7 +92,7 @@ trait WriteSheet
     }
 
     /**
-     * @param $writer
+     * @param WriterInterface $writer
      * @param array $item
      * @param string|int $index
      */
@@ -92,6 +113,12 @@ trait WriteSheet
         }
     }
 
+    /**
+     * @param WriterInterface $writer
+     * @param array $firstRow
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
+     */
     protected function writeHeadings(WriterInterface $writer, array $firstRow)
     {
         $writer->addRow(
@@ -102,6 +129,11 @@ trait WriteSheet
         );
     }
 
+    /**
+     * @param array $item
+     * @param Style|null $style
+     * @return Row
+     */
     protected function makeDefaultRow(array $item, ?Style $style = null)
     {
         if ($style) {
@@ -113,7 +145,7 @@ trait WriteSheet
 
     /**
      * @param WriterInterface $writer
-     * @param $index
+     * @param int|string $index
      * @return bool
      */
     protected function canWriteHeadings(WriterInterface $writer, $index): bool

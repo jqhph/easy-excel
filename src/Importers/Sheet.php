@@ -5,7 +5,7 @@ namespace Dcat\EasyExcel\Importers;
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Reader\SheetInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
-use Illuminate\Support\Arr;
+use Dcat\EasyExcel\Support\Arr;
 use Dcat\EasyExcel\Contracts;
 
 class Sheet implements Contracts\Sheet
