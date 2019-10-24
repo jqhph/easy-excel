@@ -165,6 +165,22 @@ class ImporterTest extends TestCase
         $this->assertTrue(true);
     }
 
+    /**
+     * @group importer
+     * @see  \Tests\Importers::testToArray
+     */
+    public function testHeadingRow()
+    {
+        $xlsx = __DIR__.'/../resources/heading.xlsx';
+
+        $sheetArray = Excel::import($xlsx)
+            ->headingRow(2)
+            ->sheet('Sheet1')
+            ->toArray();
+
+        $this->validateSheetArray($sheetArray);
+    }
+
     protected function assertSheet($file, $key)
     {
         $sheetsArray = Excel::import($file)->toArray();
