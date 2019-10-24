@@ -2,6 +2,7 @@
 
 namespace Dcat\EasyExcel\Support\Traits;
 
+use Dcat\EasyExcel\Support\Helper;
 use Exception;
 use Traversable;
 use CachingIterator;
@@ -115,7 +116,7 @@ trait EnumeratesValues
     {
         if (func_num_args() === 2) {
             return $this->contains(function ($item) use ($key, $value) {
-                return data_get($item, $key) === $value;
+                return Helper::dataGet($item, $key) === $value;
             });
         }
 
@@ -485,7 +486,7 @@ trait EnumeratesValues
         $values = $this->getArrayableItems($values);
 
         return $this->filter(function ($item) use ($key, $values, $strict) {
-            return in_array(data_get($item, $key), $values, $strict);
+            return in_array(Helper::dataGet($item, $key), $values, $strict);
         });
     }
 
@@ -523,7 +524,7 @@ trait EnumeratesValues
     public function whereNotBetween($key, $values)
     {
         return $this->filter(function ($item) use ($key, $values) {
-            return data_get($item, $key) < reset($values) || data_get($item, $key) > end($values);
+            return Helper::dataGet($item, $key) < reset($values) || Helper::dataGet($item, $key) > end($values);
         });
     }
 
@@ -540,7 +541,7 @@ trait EnumeratesValues
         $values = $this->getArrayableItems($values);
 
         return $this->reject(function ($item) use ($key, $values, $strict) {
-            return in_array(data_get($item, $key), $values, $strict);
+            return in_array(Helper::dataGet($item, $key), $values, $strict);
         });
     }
 
@@ -646,7 +647,7 @@ trait EnumeratesValues
     /**
      * Collect the values into a collection.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collect()
     {
@@ -812,7 +813,7 @@ trait EnumeratesValues
         }
 
         return function ($item) use ($key, $operator, $value) {
-            $retrieved = data_get($item, $key);
+            $retrieved = Helper::dataGet($item, $key);
 
             $strings = array_filter([$retrieved, $value], function ($value) {
                 return is_string($value) || (is_object($value) && method_exists($value, '__toString'));
@@ -862,7 +863,7 @@ trait EnumeratesValues
         }
 
         return function ($item) use ($value) {
-            return data_get($item, $value);
+            return Helper::dataGet($item, $value);
         };
     }
 }
