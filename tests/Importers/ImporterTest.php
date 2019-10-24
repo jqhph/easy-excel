@@ -158,7 +158,6 @@ class ImporterTest extends TestCase
 
     /**
      * @group importer
-     * @see  \Tests\Importers::testToArray
      */
     public function testToArray()
     {
@@ -167,7 +166,6 @@ class ImporterTest extends TestCase
 
     /**
      * @group importer
-     * @see  \Tests\Importers::testToArray
      */
     public function testHeadingRow()
     {
@@ -179,6 +177,40 @@ class ImporterTest extends TestCase
             ->toArray();
 
         $this->validateSheetArray($sheetArray);
+    }
+
+    /**
+     * @group importer
+     */
+    public function testFilter()
+    {
+        $xlsx = __DIR__.'/../resources/test.xlsx';
+        $csv  = __DIR__.'/../resources/test.csv';
+
+        $sheetArray = Excel::import($xlsx)
+            ->sheet('Sheet1')
+            ->filter(function ($row) {
+                return $row['id'] > 10;
+            })
+            ->toArray();
+
+        $this->assertEquals(count($sheetArray), 40);
+
+        $users = include __DIR__.'/../resources/users.php';
+
+        $this->assertEquals(array_values($sheetArray), array_values(array_slice($users, 10, 40)));
+
+
+        // csv
+        $sheetArray = Excel::import($csv)
+            ->sheet(0)
+            ->filter(function ($row) {
+                return $row['id'] > 10;
+            })
+            ->toArray();
+
+        $this->assertEquals(count($sheetArray), 40);
+        $this->assertEquals(array_values($sheetArray), array_values(array_slice($users, 10, 40)));
     }
 
     protected function assertSheet($file, $key)

@@ -40,6 +40,12 @@ interface Sheet
     public function getSheet();
 
     /**
+     * @param callable $callback
+     * @return $this
+     */
+    public function filter(callable $callback);
+
+    /**
      * 逐行读取
      *
      * e.g:

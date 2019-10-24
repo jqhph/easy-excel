@@ -12,6 +12,7 @@ use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
 use League\Flysystem\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Dcat\EasyExcel\Contracts\Sheet as SheetInterface;
 
 /**
  * @method $this xlsx()
@@ -147,7 +148,7 @@ class Importer implements Contracts\Importer
     {
         $sheet = null;
 
-        $this->sheets()->each(function (Sheet $value) use (&$sheet) {
+        $this->sheets()->each(function (SheetInterface $value) use (&$sheet) {
             $sheet = $value;
 
             return false;
@@ -169,7 +170,7 @@ class Importer implements Contracts\Importer
     {
         $sheet = null;
 
-        $this->sheets()->each(function (Sheet $value) use (&$sheet) {
+        $this->sheets()->each(function (SheetInterface $value) use (&$sheet) {
             if ($value->isActive()) {
                 $sheet = $value;
 

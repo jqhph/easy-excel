@@ -20,6 +20,11 @@ class Sheet implements Contracts\Sheet
      */
     protected $sheet;
 
+    /**
+     * @var callable
+     */
+    protected $filterCallback;
+
     public function __construct(Importer $importer, SheetInterface $sheet)
     {
         $this->importer = $importer;
@@ -75,6 +80,17 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
+     * @param callable $callback
+     * @return \Dcat\EasyExcel\Contracts\Sheet
+     */
+    public function filter(callable $callback)
+    {
+        $this->filterCallback = $callback;
+
+        return $this;
+    }
+
+    /**
      * 逐行读取
      *
      * @param callable|null $callback
@@ -86,12 +102,12 @@ class Sheet implements Contracts\Sheet
         $originalHeaders = [];
         $headingLine     = null;
 
-        foreach ($this->sheet->getRowIterator() as $k => $row) {
+        foreach ($this->sheet->getRowIterator() as $line => $row) {
             $row = $row instanceof Row ? $row->toArray() : (is_array($row) ? $row : []);
 
             if (! $this->withoutHeadings()) {
-                if ($headingLine === null && $this->isHeadingRow($k, $row)) {
-                    $headingLine     = $k;
+                if ($headingLine === null && $this->isHeadingRow($line, $row)) {
+                    $headingLine     = $line;
                     $originalHeaders = $row;
                     $headings        = $this->formatHeadings($row);
 
@@ -105,8 +121,26 @@ class Sheet implements Contracts\Sheet
 
             $row = $this->formatRow($row, $headings);
 
-            call_user_func($callback, $row, $k, $originalHeaders);
+            if ($this->exclude($line, $row)) {
+                continue;
+            }
+
+            call_user_func($callback, $row, $line, $originalHeaders);
         }
+    }
+
+    /**
+     * @param int $line
+     * @param array $row
+     * @return bool
+     */
+    protected function exclude($line, array $row)
+    {
+        if (! $this->filterCallback) {
+            return false;
+        }
+
+        return call_user_func($this->filterCallback, $row, $line) ? false : true;
     }
 
     /**
@@ -120,8 +154,8 @@ class Sheet implements Contracts\Sheet
     {
         $chunkData = [];
 
-        $this->each(function (array $row) use ($size, &$chunkData, &$callback) {
-            $chunkData[] = $row;
+        $this->each(function (array $row, $k) use ($size, &$chunkData, &$callback) {
+            $chunkData[$k] = $row;
 
             if (count($chunkData) >= $size) {
                 call_user_func($callback, new SheetCollection($chunkData));
