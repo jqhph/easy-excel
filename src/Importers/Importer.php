@@ -15,9 +15,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Dcat\EasyExcel\Contracts\Sheet as SheetInterface;
 
 /**
- * @method $this xlsx()
- * @method $this csv()
- * @method $this ods()
+ * Class Importer
+ * @package Dcat\EasyExcel\Importers
+ *
+ * @author jqh <841324345@qq.com>
  */
 class Importer implements Contracts\Importer
 {

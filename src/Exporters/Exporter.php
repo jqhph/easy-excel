@@ -10,9 +10,10 @@ use Dcat\EasyExcel\Spout\WriterFactory;
 use Box\Spout\Writer\Common\Creator\WriterFactory as SpoutWriterFactory;
 
 /**
- * @method $this xlsx()
- * @method $this csv()
- * @method $this ods()
+ * Class Importer
+ * @package Dcat\EasyExcel\Importers
+ *
+ * @author jqh <841324345@qq.com>
  */
 class Exporter implements Contracts\Exporter
 {
