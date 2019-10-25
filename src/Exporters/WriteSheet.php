@@ -202,11 +202,11 @@ trait WriteSheet
     {
         $strings = [];
 
-        foreach ($this->filterAndSortByHeaders($row) as &$value) {
+        foreach ($this->filterAndSortByHeaders($row) as $k => &$value) {
             $value = is_int($value) || is_float($value) || is_null($value) ? (string) $value : $value;
 
             if (is_string($value)) {
-                $strings[] = $value;
+                $strings[$k] = $value;
             }
         }
 
