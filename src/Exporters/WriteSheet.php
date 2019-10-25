@@ -178,7 +178,9 @@ trait WriteSheet
             $data = $data($this);
         }
 
-        if ($data instanceof SheetCollection) {
+        if (
+            is_object($data) && method_exists($data, 'toArray')
+        ) {
             $data = $data->toArray();
         }
 
