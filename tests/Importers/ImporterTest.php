@@ -177,6 +177,19 @@ class ImporterTest extends TestCase
             ->toArray();
 
         $this->validateSheetArray($sheetArray);
+
+
+        // 闭包测试
+        $sheetArray = Excel::import($xlsx)
+            ->headingRow(function (int $line, array $row) {
+                $first = $row[0];
+
+                return $line == 2;
+            })
+            ->sheet('Sheet1')
+            ->toArray();
+
+        $this->validateSheetArray($sheetArray);
     }
 
     /**
