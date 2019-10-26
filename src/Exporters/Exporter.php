@@ -2,6 +2,7 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
+use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\Traits\Macroable;
@@ -61,7 +62,7 @@ class Exporter implements Contracts\Exporter
      *    ];
      * });
      *
-     * @param array|\Closure|\Generator|ChunkingQuery $data
+     * @param array|\Closure|\Generator|Contracts\Exporters\ChunkQuery $data
      * @return $this
      */
     public function data($data)
@@ -82,6 +83,17 @@ class Exporter implements Contracts\Exporter
     public function row(callable $callback)
     {
         $this->rowCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * @param Style $style
+     * @return $this
+     */
+    public function headingStyle($style)
+    {
+        $this->headingStyle = $style;
 
         return $this;
     }
@@ -110,7 +122,7 @@ class Exporter implements Contracts\Exporter
      */
     public function chunk($callbacks)
     {
-        return $this->data(new ChunkingQuery($callbacks));
+        return $this->data(new ChunkQuery($callbacks));
     }
 
     /**

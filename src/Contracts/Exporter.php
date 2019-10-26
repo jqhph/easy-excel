@@ -2,15 +2,14 @@
 
 namespace Dcat\EasyExcel\Contracts;
 
-use Dcat\EasyExcel\Exporters\ChunkingQuery;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Box\Spout\Common\Entity\Style\Style;
 
 interface Exporter extends Excel
 {
     /**
      * 设置导出数据
      *
-     * @param array|\Closure|\Generator|ChunkingQuery $data
+     * @param array|\Closure|\Generator|Exporters\ChunkQuery $data
      * @return $this
      */
     public function data($data);
@@ -20,6 +19,12 @@ interface Exporter extends Excel
      * @return $this
      */
     public function row(callable $callback);
+
+    /**
+     * @param Style $style
+     * @return $this
+     */
+    public function headingStyle($style);
 
     /**
      * 分批次导入数据

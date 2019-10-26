@@ -2,7 +2,9 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
-class ChunkingQuery
+use Dcat\EasyExcel\Contracts\Exporters;
+
+class ChunkQuery implements Exporters\ChunkQuery
 {
     /**
      * @var callable[]

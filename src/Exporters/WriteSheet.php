@@ -7,12 +7,14 @@ use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer as CsvWriter;
 use Box\Spout\Writer\WriterInterface;
+use Dcat\EasyExcel\Excel;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Generator;
 use Dcat\EasyExcel\Support\Arr;
+use Dcat\EasyExcel\Contracts;
 
 /**
- * @mixin \Dcat\EasyExcel\Contracts\Exporter
+ * @mixin Contracts\Exporter
  */
 trait WriteSheet
 {
@@ -29,21 +31,24 @@ trait WriteSheet
      */
     protected function writeSheets(WriterInterface $writer)
     {
-        $data    = $this->makeSheetsArray();
-        $keys    = array_keys($data);
+        $sheets  = $this->makeSheetsArray($this->data);
+        $keys    = array_keys($sheets);
         $lastKey = end($keys);
 
-        foreach ($data as $index => &$collection) {
-            if ($collection instanceof \Generator) {
-                $this->writeRowsFromGenerator($writer, $index, $collection);
-            } else {
-                $collection = $this->convertToArray($collection);
+        foreach ($sheets as $index => $sheet) {
+            $data = $sheet->getData();
+            $name = $sheet->getName();
 
-                $this->writeRowsFromArray($writer, $index, $collection);
+            if ($data instanceof \Generator) {
+                $this->writeRowsFromGenerator($writer, $index, $data, $sheet);
+            } else {
+                $data = $this->convertToArray($data);
+
+                $this->writeRowsFromArray($writer, $index, $data, $sheet);
             }
 
-            if (is_string($index) && method_exists($writer, 'getCurrentSheet')) {
-                $writer->getCurrentSheet()->setName($index);
+            if (is_string($name) && method_exists($writer, 'getCurrentSheet')) {
+                $writer->getCurrentSheet()->setName($name);
             }
 
             if ($lastKey !== $index && method_exists($writer, 'addNewSheetAndMakeItCurrent')) {
@@ -58,27 +63,31 @@ trait WriteSheet
      * @param WriterInterface $writer
      * @param int|string $index
      * @param array $rows
+     * @param Contracts\Exporters\Sheet $sheet
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
-    protected function writeRowsFromArray(WriterInterface $writer, $index, array &$rows)
+    protected function writeRowsFromArray(WriterInterface $writer, $index, array &$rows, Contracts\Exporters\Sheet $sheet)
     {
         // Add heading row.
         if ($this->canWriteHeadings($writer, $index)) {
-            $this->writeHeadings($writer, current($rows));
+            $this->writeHeadings($writer, $sheet, current($rows));
         }
 
         foreach ($rows as &$row) {
-            $this->writeRow($writer, $row, $index);
+            $this->writeRow($writer, $row, $sheet);
         }
     }
 
     /**
      * @param WriterInterface $writer
-     * @param $index
+     * @param int $index
      * @param Generator $generator
+     * @param Contracts\Exporters\Sheet $sheet
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
-    protected function writeRowsFromGenerator(WriterInterface $writer, $index, Generator $generator)
+    protected function writeRowsFromGenerator(WriterInterface $writer, $index, Generator $generator, Contracts\Exporters\Sheet $sheet)
     {
         foreach ($generator as $key => $items) {
             $items = $this->convertToArray($items);
@@ -87,21 +96,23 @@ trait WriteSheet
                 $items = [$items];
             }
 
-            $this->writeRowsFromArray($writer, $index, $items);
+            $this->writeRowsFromArray($writer, $index, $items, $sheet);
         }
     }
 
     /**
      * @param WriterInterface $writer
      * @param array $item
-     * @param string|int $index
+     * @param Contracts\Exporters\Sheet $sheet
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
-    protected function writeRow(WriterInterface $writer, array &$item, $index)
+    protected function writeRow(WriterInterface $writer, array &$item, Contracts\Exporters\Sheet $sheet)
     {
-        $item = $this->formatRow($item);
+        $item = $this->formatRow($item, $sheet);
 
-        if ($this->rowCallback) {
-            $item = call_user_func($this->rowCallback, $item, $index);
+        if ($item && $this->rowCallback && is_array($item)) {
+            $item = call_user_func($this->rowCallback, $item, $sheet->getName());
         }
 
         if ($item && is_array($item)) {
@@ -115,16 +126,20 @@ trait WriteSheet
 
     /**
      * @param WriterInterface $writer
+     * @param Contracts\Exporters\Sheet $sheet
      * @param array $firstRow
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
-    protected function writeHeadings(WriterInterface $writer, array $firstRow)
+    protected function writeHeadings(WriterInterface $writer, Contracts\Exporters\Sheet $sheet, array $firstRow)
     {
+        $headings     = $sheet->getHeadings() ?: $this->headings;
+        $headingStyle = $sheet->getHeadingStyle() ?: $this->headingStyle;
+
         $writer->addRow(
             $this->makeDefaultRow(
-                $this->headings ?: array_keys($firstRow),
-                $this->headingStyle
+                $headings ?: array_keys($firstRow),
+                $headingStyle
             )
         );
     }
@@ -164,18 +179,27 @@ trait WriteSheet
     }
 
     /**
-     * @return Generator[]|array
+     * @param Contracts\Exporters\ChunkQuery|\Closure|Contracts\Exporters\Sheet[]|array|Generator|Generator[] $data
+     * @return Contracts\Exporters\Sheet[]
      */
-    protected function makeSheetsArray(): array
+    protected function makeSheetsArray($data): array
     {
-        $data = $this->data;
-
-        if ($data instanceof ChunkingQuery) {
-            return $data->makeGenerators();
+        if ($data instanceof \Closure) {
+            $data = $data($this);
         }
 
-        if ($this->data instanceof \Closure) {
-            $data = $data($this);
+        if ($data instanceof Contracts\Exporters\ChunkQuery) {
+            $sheets = [];
+
+            foreach ($data->makeGenerators() as $k => $generator) {
+                $sheets[] = Excel::createSheet($generator, $k);
+            }
+
+            return $sheets;
+        }
+
+        if ($data instanceof Contracts\Exporters\Sheet) {
+            return [$data];
         }
 
         if (
@@ -184,25 +208,50 @@ trait WriteSheet
             $data = $data->toArray();
         }
 
+        $isArray = is_array($data);
+
         if (
-            (is_array($data) && ! Arr::isAssoc($data))
+            ($isArray && ! Arr::isAssoc($data) && ! is_object(current($data)))
             || $data instanceof Generator
         ) {
-            return [&$data];
+            return [Excel::createSheet($data)];
         }
 
-        return (array) $data;
+        if ($isArray && is_array(current($data)) && ! Arr::isAssoc(current($data))) {
+            foreach ($data as $k => &$value) {
+                $value = Excel::createSheet($value, $k);
+            }
+
+            return $data;
+        }
+
+        if ($isArray) {
+            $sheets = [];
+
+            foreach ($data as $k => &$value) {
+                if ($value instanceof Contracts\Exporters\Sheet) {
+                    $sheets[] = $value;
+                } elseif ($value instanceof Generator) {
+                    $sheets[] = Excel::createSheet($value, $k);
+                }
+            }
+
+            return $sheets;
+        }
+
+        return [];
     }
 
     /**
      * @param array $row
+     * @param Contracts\Exporters\Sheet $sheet
      * @return array
      */
-    protected function formatRow(array &$row)
+    protected function formatRow(array &$row, Contracts\Exporters\Sheet $sheet)
     {
         $strings = [];
 
-        foreach ($this->filterAndSortByHeaders($row) as $k => &$value) {
+        foreach ($this->filterAndSortByHeaders($row, $sheet) as $k => &$value) {
             $value = is_int($value) || is_float($value) || is_null($value) ? (string) $value : $value;
 
             if (is_string($value)) {
@@ -210,21 +259,28 @@ trait WriteSheet
             }
         }
 
-        return $strings;
+        return $sheet->formatRow($strings);
     }
 
     /**
      * @param array $row
+     * @param Contracts\Exporters\Sheet $sheet
      * @return array
      */
-    public function filterAndSortByHeaders(array &$row)
+    public function filterAndSortByHeaders(array &$row, Contracts\Exporters\Sheet $sheet)
     {
-        if (! $this->headings) {
+        if ($this->headings === false && ! $sheet->getHeadings()) {
+            return $row;
+        }
+
+        $headings = $sheet->getHeadings() ?: $this->headings;
+
+        if (! $headings) {
             return $row;
         }
 
         $newRow = [];
-        foreach ($this->headings as $key => &$label) {
+        foreach ($headings as $key => &$label) {
             $newRow[$key] = $row[$key] ?? null;
         }
 

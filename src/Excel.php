@@ -4,6 +4,7 @@ namespace Dcat\EasyExcel;
 
 use Box\Spout\Common\Type;
 use Dcat\EasyExcel\Exporters\Exporter;
+use Dcat\EasyExcel\Exporters\Sheet;
 use Dcat\EasyExcel\Importers\Importer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Dcat\EasyExcel\Contracts;
@@ -34,6 +35,17 @@ class Excel
     public static function export($data = null): Contracts\Exporter
     {
         return new Exporter($data);
+    }
+
+    /**
+     * @param array|\Closure|\Generator $data
+     * @param null $sheetName
+     * @param null $headings
+     * @return Contracts\Exporters\Sheet
+     */
+    public static function createSheet($data = null, $sheetName = null, array $headings = []): Contracts\Exporters\Sheet
+    {
+        return new Sheet($data, $sheetName, $headings);
     }
 
     /**

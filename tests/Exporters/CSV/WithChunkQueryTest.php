@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Exporters\XLSX;
+namespace Tests\Exporters\CSV;
 
 use Dcat\EasyExcel\Excel;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Tests\Exporters\Exporter;
 use Tests\TestCase;
 
-class WithChunkingQueryTest extends TestCase
+class WithChunkQueryTest extends TestCase
 {
     use Exporter;
 
@@ -18,7 +18,7 @@ class WithChunkingQueryTest extends TestCase
     {
         $users = include __DIR__ . '/../../resources/users.php';
 
-        $storePath = $this->generateTempFilePath('xlsx');
+        $storePath = $this->generateTempFilePath('csv');
 
         $collection = (new SheetCollection($users));
 
@@ -32,7 +32,7 @@ class WithChunkingQueryTest extends TestCase
             ->store($storePath);
 
         // 读取
-        $this->assertSingleSheet($storePath, 'Sheet1', $users);
+        $this->assertSingleSheet($storePath, 0, $users);
 
 
         /*
@@ -43,11 +43,11 @@ class WithChunkingQueryTest extends TestCase
         $users1 = new SheetCollection(array_slice($users, 0, 30));
         $users2 = new SheetCollection(array_values(array_slice($users, 30, 30)));
 
-        $storePath = $this->generateTempFilePath('xlsx');
+        $storePath = $this->generateTempFilePath('csv');
 
         $chunkSize = 10;
 
-        Excel::xlsx()->chunk([
+        Excel::csv()->chunk([
             'sheet1' => function (int $times) use ($users1, $chunkSize) {
                 return $users1->forPage($times, $chunkSize);
             },
@@ -57,19 +57,19 @@ class WithChunkingQueryTest extends TestCase
         ])->store($storePath);
 
         // 读取
-        $this->assertSheets($storePath, $users1->toArray(), $users2->toArray());
+        $this->assertSingleSheet($storePath, 0, $users);
     }
 
     public function testRaw()
     {
         $users = include __DIR__ . '/../../resources/users.php';
 
-        $storePath = $this->generateTempFilePath('xlsx');
+        $storePath = $this->generateTempFilePath('csv');
 
         $collection = (new SheetCollection($users));
 
         // 保存
-        $contents = Excel::xlsx()
+        $contents = Excel::csv()
             ->chunk(function (int $times) use ($collection) {
                 $chunkSize = 10;
 
@@ -82,7 +82,7 @@ class WithChunkingQueryTest extends TestCase
         file_put_contents($storePath, $contents);
 
         // 读取
-        $this->assertSingleSheet($storePath, 'Sheet1', $users);
+        $this->assertSingleSheet($storePath, 0, $users);
 
 
         /*
@@ -93,11 +93,11 @@ class WithChunkingQueryTest extends TestCase
         $users1 = new SheetCollection(array_slice($users, 0, 30));
         $users2 = new SheetCollection(array_values(array_slice($users, 30, 30)));
 
-        $storePath = $this->generateTempFilePath('xlsx');
+        $storePath = $this->generateTempFilePath('csv');
 
         $chunkSize = 10;
 
-        $contents = Excel::xlsx()->chunk([
+        $contents = Excel::csv()->chunk([
             'sheet1' => function (int $times) use ($users1, $chunkSize) {
                 return $users1->forPage($times, $chunkSize);
             },
@@ -112,7 +112,7 @@ class WithChunkingQueryTest extends TestCase
 
 
         // 读取
-        $this->assertSheets($storePath, $users1->toArray(), $users2->toArray());
+        $this->assertSingleSheet($storePath, 0, $users);
     }
 
 }
