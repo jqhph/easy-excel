@@ -16,6 +16,16 @@
 
              <link rel="stylesheet" href="../../assets/gitalk/gitalk.css">
     
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src="https://hm.baidu.com/hm.js?86772cdd7983cf277a39d59e4238b721";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
 </head>
 <body class="docs language-default">
     
@@ -372,10 +382,11 @@ $exporter = Excel::export(function () {
          ...
     ]);
 });</code></pre>
-<h3>导出数据到多个sheet表格</h3>
+<h3>导出数据到多个表格</h3>
 <blockquote>
 <p>{tip} 此功能只支持导出 <code  >xlsx</code> 和 <code  >ods</code> 类型文件，如果是 <code  >csv</code> 只能导出到一个sheet表格。</p>
 </blockquote>
+<h4>简单方式</h4>
 <p>数组</p>
 <pre><code   class="language-php">use Dcat\EasyExcel\Excel;
 
@@ -440,6 +451,34 @@ $sheets = function () {
 };
 
 Excel::export($sheets)-&gt;store(&#039;users.xlsx&#039;)</code></pre>
+<h4>Sheet对象</h4>
+<blockquote>
+<p>{tip} 使用 <code  >Sheet</code> 对象设置导入的值，可以控制每个表格都拥有不同的标题、标题样式以及行样式。</p>
+</blockquote>
+<p>简单示例：</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+$sheet = Excel::createSheet(User::query()-&gt;forPage(1, 50)-&gt;get(), &#039;sheet名称1&#039;);
+
+// 单个sheet
+Excel::export($sheet)-&gt;download(&#039;users.xlsx&#039;);
+
+// 多个sheet
+$sheet1 = Excel::createSheet(User::query()-&gt;forPage(1, 50)-&gt;get(), &#039;sheet名称1&#039;);
+$sheet2 = Excel::createSheet(User::query()-&gt;forPage(2, 50)-&gt;get(), &#039;sheet名称2&#039;);
+
+Excel::export([$sheet1, $sheet2])-&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<p>同样<code  >Sheet</code>对象也支持传入生成器和分批读取数据导入等功能。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+$sheet = Excel::createSheet()-&gt;name(&#039;sheet名称1&#039;)-&gt;chunk(function (int $times) {
+    return User::query()-&gt;forPage($times, 1000)-&gt;get();
+});
+
+// 单个sheet
+Excel::export($sheet)-&gt;download(&#039;users.xlsx&#039;);</code></pre>
 <h2>设置标题</h2>
 <p><code  >Exporter::headings</code> 方法可以直接设置要导出的文件的标题，并且可以根据标题控制列的排序。</p>
 <pre><code   class="language-php">use Dcat\EasyExcel\Excel;
@@ -463,7 +502,7 @@ Excel::export($array)-&gt;headings($headings)-&gt;download(&#039;users.xlsx&#039
 <img style="box-shadow:0 1px 6px 1px rgba(0, 0, 0, 0.12)" width="100%" src="../../assets/img/heading.png" />
 <p></a></p>
 <h3>禁用标题行</h3>
-<p>如果不想导出的文件中带有标题行，可以通过以下方式禁用标题行</p>
+<p>如果不想导出的文件中带有标题行，可以通过以下方式禁用标题行。</p>
 <pre><code   class="language-php">use Dcat\EasyExcel\Excel;
 
 $array = [
@@ -473,6 +512,29 @@ $array = [
 
 // 传入 false 即可
 Excel::export($array)-&gt;headings(false)-&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<p>如果注入的 <code  >Sheet</code> 对象中设置了标题，则通过 <code  >Exporter::headings</code> 方法禁用标题功能会无效。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array1 = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;], 
+];
+$array2 = [
+    [&#039;id&#039; =&gt; 2, &#039;name&#039; =&gt; &#039;Eichmann&#039;, &#039;email&#039; =&gt; &#039;josefa@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;],
+];
+
+$headings = [&#039;id&#039; =&gt; &#039;ID&#039;, &#039;name&#039; =&gt; &#039;名称&#039;, &#039;email&#039; =&gt; &#039;邮箱&#039;];
+
+$sheet1 = Excel::createSheet($array1);
+$sheet2 = Excel::createSheet($array2)-&gt;headings($headings);
+
+Excel::export([$sheet1, $sheet2])-&gt;headings(false)-&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<p>效果
+<a href="../../assets/img/sheet-heading-1.png" target="_blank"></p>
+<img style="box-shadow:0 1px 6px 1px rgba(0, 0, 0, 0.12)" width="100%" src="../../assets/img/sheet-heading-1.png" />
+<p></a>
+<a href="../../assets/img/sheet-heading-2.png" target="_blank"></p>
+<img style="box-shadow:0 1px 6px 1px rgba(0, 0, 0, 0.12)" width="100%" src="../../assets/img/sheet-heading-2.png" />
+<p></a></p>
 <h3>标题样式</h3>
 <blockquote>
 <p>{tip} 关于Excel表格的样式定义可以参考文档 <a href="https://opensource.box.com/spout/docs/#styling" target="_blank">box/spout</a>。</p>
@@ -509,6 +571,44 @@ Excel::export($array)
 <a href="../../assets/img/heading-style.png" target="_blank"></p>
 <img style="box-shadow:0 1px 6px 1px rgba(0, 0, 0, 0.12)" width="100%" src="../../assets/img/heading-style.png" />
 <p></a></p>
+<h3>给每个表格设置不同的标题</h3>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+// 创建多个sheet，并设置不同的标题
+$user1  = User::query()-&gt;forPage(1, 50)-&gt;get();
+$sheet1 = Excel::createSheet($user1, &#039;sheet名称1&#039;)-&gt;headings([...]);
+
+$user2  = User::query()-&gt;forPage(2, 50)-&gt;get();
+$sheet2 = Excel::createSheet($user2, &#039;sheet名称2&#039;)-&gt;headings([...]);
+
+Excel::export([$sheet1, $sheet2])-&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<h3>给每个表格的标题设置不同的样式</h3>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Common\Entity\Style\Color;
+
+$array1 = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;], 
+];
+$array2 = [
+    [&#039;id&#039; =&gt; 2, &#039;name&#039; =&gt; &#039;Eichmann&#039;, &#039;email&#039; =&gt; &#039;josefa@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;],
+];
+
+$sheet1 = Excel::createSheet($array1)-&gt;headingStyle(
+    (new StyleBuilder)
+        -&gt;setFontColor(Color::BLUE)
+        -&gt;setFontSize(14)
+        -&gt;build()
+);
+$sheet2 = Excel::createSheet($array2)-&gt;headingStyle(
+     (new StyleBuilder)
+         -&gt;setFontColor(Color::RED)
+         -&gt;setFontSize(16)
+         -&gt;build()
+ );
+
+Excel::export([$sheet1, $sheet2])-&gt;download(&#039;users.xlsx&#039;);</code></pre>
 <h2>设置内容样式</h2>
 <blockquote>
 <p>{tip} 关于Excel表格的样式定义可以参考文档 <a href="https://opensource.box.com/spout/docs/#styling" target="_blank">box/spout</a>。</p>
@@ -567,6 +667,37 @@ Excel::export($array)
         $writer-&gt;setDefaultRowStyle($style);
     })
     -&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<h3>给每个表格行内容设置不同的样式</h3>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Common\Entity\Style\Color;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+
+$array1 = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;], 
+];
+$array2 = [
+    [&#039;id&#039; =&gt; 2, &#039;name&#039; =&gt; &#039;Eichmann&#039;, &#039;email&#039; =&gt; &#039;josefa@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;],
+];
+
+$sheet1 = Excel::createSheet($array1)-&gt;row(function (array $row) {
+    $style = (new StyleBuilder)
+         -&gt;setFontColor(Color::BLUE)
+         -&gt;setFontSize(14)
+         -&gt;build();
+
+    return WriterEntityFactory::createRowFromArray($row, $style);     
+});
+$sheet2 = Excel::createSheet($array2)-&gt;row(function (array $row) {
+    $style = (new StyleBuilder)
+         -&gt;setFontColor(Color::RED)
+         -&gt;setFontSize(16)
+         -&gt;build();
+
+    return WriterEntityFactory::createRowFromArray($row, $style);          
+});
+
+Excel::export([$sheet1, $sheet2])-&gt;download(&#039;users.xlsx&#039;);</code></pre>
 
 		<div id="comment-container" style="margin-top: 90px"></div>
 	</article>
