@@ -1,0 +1,654 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>导出 - Easy Excel</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="使用简单易用的语义化接口快速读写Excel文件">
+    <meta name="keywords" content="Easy Excel, xlsx, csv, ods, box spout">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="canonical" href="../../docs-master-export.html" />
+    
+     <link rel="stylesheet" href="../../assets/css/laravel.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,800,800i,900,900i">
+     <link rel="stylesheet" href="../../assets/font-awesome/css/font-awesome.min.css">
+
+             <link rel="stylesheet" href="../../assets/gitalk/gitalk.css">
+    
+</head>
+<body class="docs language-default">
+    
+        
+        
+        
+    
+    <span class="overlay"></span>
+
+    <nav class="main">
+        <a href="../../index.html" class="brand nav-block">
+            <span>Easy Excel</span>
+        </a>
+
+        <ul class="main-nav">
+            <li class=""><a href="../../docs.html">文档</a></li>
+<li class=""><a href="https://github.com/jqhph/easy-excel" target="_blank">Github</a></li>
+
+
+
+    
+    
+
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+        
+
+    
+
+        </ul>
+
+        <div class="search nav-block invisible">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#A1A1A1" d="M5.8 11.7c-1.6 0-3-.6-4.1-1.7S0 7.4 0 5.8s.6-3 1.7-4.1C2.8.6 4.3 0 5.8 0s3 .6 4.1 1.7c2.3 2.3 2.3 6 0 8.3-1 1.1-2.5 1.7-4.1 1.7zM5.8 1c-1.3 0-2.5.5-3.4 1.4C1.5 3.3 1 4.5 1 5.8s.5 2.5 1.4 3.4c.9.9 2.1 1.4 3.4 1.4s2.5-.5 3.4-1.4c1.9-1.9 1.9-5 0-6.9C8.4 1.5 7.1 1 5.8 1z"/><path fill="#A1A1A1" d="M15.5 16c-.1 0-.3 0-.3-.1L9.3 10c-.2-.2-.2-.5 0-.7s.5-.2.7 0l5.9 5.9c.2.2.2.5 0 .7-.1.1-.3.1-.4.1z"/></svg>
+            <input placeholder="search" type="text" id="search-input" aria-label="search"/>
+        </div>
+
+                    <div class="switcher">
+	<div class="dropdown">
+		<button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+			Master
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation">
+					<a role="menuitem" tabindex="-1" href="../../docs-master-export.html">Master</a>
+				</li>
+					</ul>
+	</div>
+</div>
+        
+        <div class="responsive-sidebar-nav">
+            <a href="#" class="toggle-slide menu-link btn">&#9776;</a>
+        </div>
+    </nav>
+
+    <nav id="slide-menu" class="slide-menu" role="navigation">
+
+	<div class="brand">
+		<a href="../../index.html">
+			Easy Excel
+		</a>
+	</div>
+
+	<ul class="slide-main-nav">
+		<li><a href="../../index.html">Home</a></li>
+
+		<li class=""><a href="../../docs.html">文档</a></li>
+<li class=""><a href="https://github.com/jqhph/easy-excel" target="_blank">Github</a></li>
+
+
+
+    
+    
+
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+        
+
+    
+
+	</ul>
+
+	<div class="slide-docs-nav">
+		<h2>Documentation</h2>
+
+		<ul class="slide-docs-version">
+			<li>
+				<h2>Version</h2>
+
+				<ul>
+					<li>
+													<div class="switcher">
+	<div class="dropdown">
+		<button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+			Master
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation">
+					<a role="menuitem" tabindex="-1" href="../../docs-master-export.html">Master</a>
+				</li>
+					</ul>
+	</div>
+</div>
+											</li>
+				</ul>
+			</li>
+		</ul>
+
+		<ul>
+<li>
+<h2><a href="../../docs/master/installation.html">安装</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/export.html">导出</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/import.html">导入</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/qa.html">常见问题</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/compare.html">框架对比</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/update.html">更新日志</a></h2>
+</li>
+</ul>
+	</div>
+
+</nav>
+
+<div class="docs-wrapper container" style="min-height:65vh">
+
+	<section class="sidebar">
+		
+		<small><a href="#" id="doc-expand" style="font-size: 11px; color: #B8B8B8;">EXPAND ALL</a></small>
+		<ul>
+<li>
+<h2><a href="../../docs/master/installation.html">安装</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/export.html">导出</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/import.html">导入</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/qa.html">常见问题</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/compare.html">框架对比</a></h2>
+</li>
+<li>
+<h2><a href="../../docs/master/update.html">更新日志</a></h2>
+</li>
+</ul>
+	</section>
+
+	<article>
+		<h1>导出</h1>
+<h2>下载</h2>
+<p><code  >Exporter::download</code>方法可以通过浏览器下载导出的文件，该方法会根据文件名后缀自动判断导出的文件类型。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+    ...
+];
+
+// 导出xlsx类型文件
+Excel::export($array)-&gt;download(&#039;users.xlsx&#039;);
+Excel::xlsx($array)-&gt;download(&#039;users.xlsx&#039;);
+
+// 导出csv类型文件
+Excel::export($array)-&gt;download(&#039;users.csv&#039;);
+Excel::csv($array)-&gt;download(&#039;users.csv&#039;);
+
+// 导出ods类型文件
+Excel::export($array)-&gt;download(&#039;users.ods&#039;);
+Excel::ods($array)-&gt;download(&#039;users.ods&#039;);</code></pre>
+<h2>保存文件</h2>
+<p><code  >Exporter::store</code>方法可以保存导出的文件到服务器，该方法会根据文件名后缀自动判断导出的文件类型。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+    ...
+];
+
+// 导出xlsx类型文件
+Excel::export($array)-&gt;store(&#039;users.xlsx&#039;);
+Excel::xlsx($array)-&gt;store(&#039;users.xlsx&#039;);
+
+// 导出csv类型文件
+Excel::export($array)-&gt;store(&#039;users.csv&#039;);
+Excel::csv($array)-&gt;store(&#039;users.csv&#039;);
+
+// 导出ods类型文件
+Excel::export($array)-&gt;store(&#039;users.ods&#039;);
+Excel::ods($array)-&gt;store(&#039;users.ods&#039;);</code></pre>
+<h3>Filesystem</h3>
+<p><code  >Easy Excel</code> 对 <code  >league/flysystem</code> 提供了支持，通过 <code  >Filesystem</code> 可以轻松的把文件保存到任意服务器，比如阿里云OSS。</p>
+<p>这里只为演示用法，如需保存到第三方云存储服务器，则找到相应的<code  >adapter</code>实现包即可。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
+
+$array = [...];
+
+$adapter = new Local(__DIR__);
+
+$filesystem = new Filesystem($adapter);
+
+Excel::export($array)-&gt;disk($filesystem)-&gt;store(&#039;users.xlsx&#039;);
+</code></pre>
+<h3>在Laravel中使用Filesystem</h3>
+<p><code  >Easy Excel</code> 对 <code  >Laravel</code> 的 <code  >Filesystem</code> 也提供了支持：</p>
+<p>打开 <code  >config/filesystems.php</code> 中找到如下配置：</p>
+<pre><code   class="language-php">return [
+    ...
+
+    &#039;disks&#039; =&gt; [
+
+        &#039;local&#039; =&gt; [
+            &#039;driver&#039; =&gt; &#039;local&#039;,
+            &#039;root&#039; =&gt; storage_path(&#039;app&#039;),
+        ],
+
+        ...
+
+    ],
+];</code></pre>
+<p>使用：</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array = [...];
+
+// local 对应配置参数 config(&#039;filesystems.disks.local&#039;)
+Excel::export($array)-&gt;disk(&#039;local&#039;)-&gt;store(&#039;users.xlsx&#039;);
+
+// 也可以
+Excel::export($array)-&gt;disk(Storage::disk(&#039;local&#039;))-&gt;store(&#039;users.xlsx&#039;);</code></pre>
+<h2>获取文件内容</h2>
+<p><code  >Exporter::raw</code>方法可以获取导出的文件的内容。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+    ...
+];
+
+// 导出xlsx类型文件
+$xlsxContents = Excel::export($array)-&gt;xlsx()-&gt;raw();
+$xlsxContents = Excel::xlsx($array)-&gt;raw();
+
+// 导出csv类型文件
+$csvContents = Excel::export($array)-&gt;csv()-&gt;raw();
+$csvContents = Excel::csv($array)-&gt;raw();
+
+// 导出ods类型文件
+$odsContents = Excel::export($array)-&gt;ods()-&gt;raw();
+$odsContents = Excel::ods($array)-&gt;raw();</code></pre>
+<h2>设置导出数据</h2>
+<p><code  >Easy Excel</code> 提供了多种实用的设置导出数据的接口。</p>
+<h3>数组</h3>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+    ...
+];
+
+$exporter = Excel::export($array);</code></pre>
+<p>如果传入的参数是带有 <code  >toArray</code> 方法的对象也是可以的</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use Dcat\EasyExcel\Support\SheetCollection;
+
+$collection = new SheetCollection([
+     [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+     ...
+ ]);
+
+$exporter = Excel::export($collection);</code></pre>
+<h3>分块获取</h3>
+<p><code  >Easy Excel</code> 支持分块获取并导出数据，当导出的数据比较多时这个功能非常实用。</p>
+<blockquote>
+<p>{tip} 此功能的实现原理是使用while循环获取匿名函数返回的值，如果匿名函数返回的结果不为空则循环会一直进行下去，所以需要注意不能让匿名函数的返回值一直不为空。</p>
+</blockquote>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+$exporter = Excel::export($generatorFactory())
+    -&gt;chunk(function (int $times) { // $times 表示循环次数，从1开始，可以当做查询页数实用
+        // 每次获取1000条数据导入
+        $chunkSize = 1000;
+
+        // 只查询前10页数据
+        if ($times &gt; 10) {
+            return;
+        }
+
+        // 当数据库查不到值时会停止执行闭包内的逻辑
+        return User::query()-&gt;forPage($times, $chunkSize)-&gt;get();
+    })
+    -&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<h3>生成器</h3>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+// 这里纯粹是为了演示功能，这段代码没有实际意义
+$generatorFactory = function () {
+    $array = [
+        [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+        ...
+    ];
+
+    foreach ($array as $value) {
+        yield $value;
+    }
+};
+
+$exporter = Excel::export($generatorFactory());
+</code></pre>
+<p>在<code  >Laravel</code>中可以使用 <code  >Eloquent::cursor</code></p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+$exporter = Excel::export(User::query()-&gt;cursor()-&gt;getIterator());</code></pre>
+<h3>匿名函数</h3>
+<p>在匿名函数中可以返回数组、对象（<code  >toArray</code>）和生成器。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use Dcat\EasyExcel\Support\SheetCollection;
+
+$exporter = Excel::export(function () {
+    return new SheetCollection([
+         [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+         ...
+    ]);
+});</code></pre>
+<h3>导出数据到多个sheet表格</h3>
+<blockquote>
+<p>{tip} 此功能只支持导出 <code  >xlsx</code> 和 <code  >ods</code> 类型文件，如果是 <code  >csv</code> 只能导出到一个sheet表格。</p>
+</blockquote>
+<p>数组</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$sheetArray1 = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+    ...
+];
+$sheetArray2 = [...];
+
+$sheets = [
+    &#039;sheet名称1&#039; =&gt; $sheetArray1, 
+    &#039;sheet名称2&#039; =&gt; $sheetArray2, 
+    ...
+];
+
+Excel::export($sheets)-&gt;store(&#039;users.xlsx&#039;);</code></pre>
+<p>分块</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+$sheets = [
+    &#039;sheet名称1&#039; =&gt; function (int $times) {
+        if ($times &gt; 10) {
+            return;
+        }
+
+        // 查询前10页数据
+        return User::query()-&gt;forPage($times, 1000)-&gt;get();
+    }, 
+    &#039;sheet名称2&#039; =&gt; function (int $times) {
+        $times += 10;
+
+        // 查询10页之后的数据
+        return User::query()-&gt;forPage($times, 1000)-&gt;get();
+    }, 
+    ...
+];
+
+Excel::export()-&gt;chunk($sheets)-&gt;store(&#039;users.xlsx&#039;);</code></pre>
+<p>生成器</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+$sheets = [
+    &#039;sheet名称1&#039; =&gt; User::query()-&gt;forPage(1, 1000)-&gt;cursor()-&gt;getIterator(), 
+    &#039;sheet名称2&#039; =&gt; User::query()-&gt;forPage(2, 1000)-&gt;cursor()-&gt;getIterator(), 
+    ...
+];
+
+Excel::export($sheets)-&gt;store(&#039;users.xlsx&#039;);</code></pre>
+<p>匿名函数</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+use App\User;
+
+// 匿名函数可以返回纯数组、对象或生成器
+$sheets = function () {
+    return [
+        &#039;sheet名称1&#039; =&gt; User::query()-&gt;forPage(1, 1000)-&gt;cursor()-&gt;getIterator(), 
+        &#039;sheet名称2&#039; =&gt; User::query()-&gt;forPage(2, 1000)-&gt;cursor()-&gt;getIterator(), 
+        ...
+    ];
+};
+
+Excel::export($sheets)-&gt;store(&#039;users.xlsx&#039;)</code></pre>
+<h2>设置标题</h2>
+<p><code  >Exporter::headings</code> 方法可以直接设置要导出的文件的标题，并且可以根据标题控制列的排序。</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+    ...
+];
+
+// 设置标题，丢弃created_at字段，并更改列的先后顺序，
+$headings = [
+    &#039;id&#039;    =&gt; &#039;ID&#039;,
+    &#039;email&#039; =&gt; &#039;邮箱&#039;,
+    &#039;name&#039;  =&gt; &#039;名称&#039;,
+];
+
+// 最后导出的列只有 id、email、name 
+Excel::export($array)-&gt;headings($headings)-&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<p>效果
+<a href="../../assets/img/heading.png" target="_blank"></p>
+<img style="box-shadow:0 1px 6px 1px rgba(0, 0, 0, 0.12)" width="100%" src="../../assets/img/heading.png" />
+<p></a></p>
+<h3>禁用标题行</h3>
+<p>如果不想导出的文件中带有标题行，可以通过以下方式禁用标题行</p>
+<pre><code   class="language-php">use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+    ...
+];
+
+// 传入 false 即可
+Excel::export($array)-&gt;headings(false)-&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<h3>标题样式</h3>
+<blockquote>
+<p>{tip} 关于Excel表格的样式定义可以参考文档 <a href="https://opensource.box.com/spout/docs/#styling" target="_blank">box/spout</a>。</p>
+</blockquote>
+<pre><code   class="language-php">use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Common\Entity\Style\Color;
+use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;...&#039;], 
+];
+
+Excel::export($array)
+    -&gt;headings(function () {
+        $headings = [
+            &#039;id&#039;    =&gt; &#039;ID&#039;,
+            &#039;email&#039; =&gt; &#039;邮箱&#039;,
+            &#039;name&#039;  =&gt; &#039;名称&#039;,
+        ];
+
+        // 定义样式
+        $style = (new StyleBuilder())
+           -&gt;setFontBold()
+           -&gt;setFontSize(15)
+           -&gt;setFontColor(Color::BLUE)
+           -&gt;setShouldWrapText()
+           -&gt;setBackgroundColor(Color::YELLOW)
+           -&gt;build();
+
+        return [$headings, $style];
+    })
+    -&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<p>效果
+<a href="../../assets/img/heading-style.png" target="_blank"></p>
+<img style="box-shadow:0 1px 6px 1px rgba(0, 0, 0, 0.12)" width="100%" src="../../assets/img/heading-style.png" />
+<p></a></p>
+<h2>设置内容样式</h2>
+<blockquote>
+<p>{tip} 关于Excel表格的样式定义可以参考文档 <a href="https://opensource.box.com/spout/docs/#styling" target="_blank">box/spout</a>。</p>
+</blockquote>
+<h3>设置行样式</h3>
+<pre><code   class="language-php">use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Common\Entity\Style\Color;
+use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;],
+    [&#039;id&#039; =&gt; 2, &#039;name&#039; =&gt; &#039;Eichmann&#039;, &#039;email&#039; =&gt; &#039;josefa@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;],
+];
+
+Excel::export($array)
+    -&gt;row(function (array $row) {
+        // 直接返回原数组，什么也不改变
+        if ($row[&#039;id&#039;] &gt; 1) {
+            return $row;
+        }
+
+        // 设置样式
+        $style = (new StyleBuilder())
+            -&gt;setFontSize(13)
+            -&gt;setFontColor(Color::LIGHT_BLUE)
+            -&gt;setShouldWrapText()
+            -&gt;build();
+
+        return WriterEntityFactory::createRowFromArray($row, $style);
+    })
+    -&gt;download(&#039;users.xlsx&#039;);</code></pre>
+<p>效果
+<a href="../../assets/img/row-style.png" target="_blank"></p>
+<img style="box-shadow:0 1px 6px 1px rgba(0, 0, 0, 0.12)" width="100%" src="../../assets/img/row-style.png" />
+<p></a></p>
+<h3>设置默认样式</h3>
+<pre><code   class="language-php">use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Common\Entity\Style\Color;
+use Dcat\EasyExcel\Excel;
+
+$array = [
+    [&#039;id&#039; =&gt; 1, &#039;name&#039; =&gt; &#039;Brakus&#039;, &#039;email&#039; =&gt; &#039;treutel@eg.com&#039;, &#039;created_at&#039; =&gt; &#039;2019-10-19 00:37:22&#039;],
+    ...
+];
+
+Excel::export($array)
+    -&gt;option(function ($writer) {
+        // 设置样式
+        $style = (new StyleBuilder())
+            -&gt;setFontSize(13)
+            -&gt;setFontColor(Color::LIGHT_BLUE)
+            -&gt;setShouldWrapText()
+            -&gt;build();
+
+        $writer-&gt;setDefaultRowStyle($style);
+    })
+    -&gt;download(&#039;users.xlsx&#039;);</code></pre>
+
+		<div id="comment-container" style="margin-top: 90px"></div>
+	</article>
+
+</div>
+
+    <footer class="main">
+        <ul>
+            <li class=""><a href="../../docs.html">文档</a></li>
+<li class=""><a href="https://github.com/jqhph/easy-excel" target="_blank">Github</a></li>
+
+
+
+    
+    
+
+        
+        
+
+        
+
+        
+        
+        
+        
+        
+        
+
+    
+
+        </ul>
+        <p>Built by <b>jqh</b>. Copyright &copy; 2019</p>
+        <p class="less-significant">
+            <a href="http://jackmcdade.com">
+                Designed by<br>
+                <svg xmlns="http://www.w3.org/2000/svg" width="128.2" height="28" viewBox="0 0 128.2 28"><g fill="#c3c3c3"><path d="M14.2.4v1.4l-1.4-.3.3 4.5c.1 1.5 0 3-.1 4.5 0 .4-.1.8-.1 1.2-.1.4-.1.8-.3 1.2-.1.4-.3.7-.5 1.1-.2.3-.5.6-.9.9-.4.2-.9.4-1.5.6-.6.2-1.1.3-1.6.3-.6 0-1.2-.1-1.6-.3-.5-.2-.9-.6-1.1-1-.3-.5-.5-1-.6-1.6-.1-.6-.1-1.3 0-2.1 0-.2.1-.5.2-.7-.1-.2 0-.4.1-.6l.3-.6 1.1.4c.2 0 .5.1.8.2.3.1.5.1.6.2 0 .2 0 .4-.1.5-.1.2-.1.3-.2.4-.1.1-.2.3-.2.4-.1.2-.1.3-.1.5L6 10.8c-.1.3-.2.7-.2 1.1 0 .4.1.8.2 1.2.2.4.4.7.6 1 .3.3.6.4 1 .3.6 0 1.1-.3 1.4-.6.3-.4.5-.9.7-1.7.1-.7.2-1.6.2-2.8V5.4c0-.6-.1-1.3-.1-2-.1-.6-.2-1.3-.3-2H5.7c-.7 0-1.5 0-2.2.2-.3.1-.6.2-1 .4-.3.1-.6.4-.9.6-.2.3-.4.6-.5 1-.1.3-.1.7 0 1 .1.5.3.8.4.9v-.1c0-.4.1-.8.4-1 .3-.2.6-.3.9-.3.3 0 .6.1.9.3.3.2.4.6.4 1s-.1.8-.4 1c-.3.2-.6.3-1 .3-.8 0-1.4-.2-1.8-.7-.4-.4-.7-.9-.8-1.5C0 4 0 3.4.2 2.7c.2-.6.5-1.1 1-1.5.4-.3.8-.5 1.2-.7.4-.1.9-.2 1.4-.3.5-.1.9-.1 1.4-.1h2.9c.6 0 1.1 0 1.6.1.5 0 1 .1 1.5.1s1 .1 1.5.1c.4.1.9.1 1.5 0zM25.2 14.3c0 .2.1.4.1.6 0 .2.1.4.1.7-1-.1-2-.2-3-.1-1.1.1-2.1.2-3 .4 0-.2-.1-.4-.1-.5 0-.2-.1-.4-.1-.5.2 0 .5-.1.7-.1.2 0 .4-.1.6-.1-.1-1.5-.3-3.1-.5-4.6-.5.1-.9.1-1.4.2-.5.1-.9.1-1.4.2-.2.7-.3 1.3-.5 2s-.3 1.3-.5 2h.6c.1 0 .3 0 .4.1v.9c0 .1 0 .2-.1.3H14v-1.2h1c.2-.5.3-1 .4-1.5.1-.5.3-1 .4-1.5.2-.6.3-1.2.5-1.7.2-.6.3-1.2.5-1.7.2-1.1.4-2.1.6-3.2.2-1.1.3-2.1.4-3.2h-1.4c0-.2.1-.4.1-.6 0-.2 0-.4.1-.6h5.8l.2 1.2h-1c.3 2.1.7 4.3 1 6.5.3 2.2.7 4.4 1 6.5h1.6zM17.5 9c.4-.1.7-.1 1.1-.2.4-.1.8-.1 1.2-.2-.2-1-.3-2-.5-2.9-.2-1-.4-1.9-.6-2.9-.2 1-.4 2.1-.5 3.1-.3 1-.5 2.1-.7 3.1zM36.7 10.4h-.6c0 .6 0 1.2-.2 1.9-.2.6-.5 1.2-1 1.6-.5.5-1 .9-1.6 1.1-.6.3-1.3.4-2 .5-.6.1-1.1.1-1.8 0-.6-.1-1.1-.4-1.6-.7-.2-.2-.5-.4-.8-.7-.3-.3-.5-.5-.6-.8-.3-.5-.5-1-.6-1.5-.2-.5-.3-.9-.4-1.4-.1-.5-.2-1-.2-1.5s0-1 .1-1.6c.2-1 .4-2 .8-2.9.4-.9.8-1.7 1.4-2.3.5-.7 1.2-1.2 1.9-1.6.7-.3 1.4-.5 2.2-.5.3 0 .5 0 .8.1.3.1.5.2.7.4.3.3.7.7 1 1.2.3.5.6 1.2.7 1.9h.6v.6l-2.5.4c-.3.1-.5.1-.6 0-.1 0-.2-.1-.2-.2-.1-.1-.1-.2 0-.3h.4c.2-.2.3-.3.3-.6v-.7c0-.5-.2-.9-.5-1.3l-.4-.4c-.2-.1-.4-.1-.6 0-.2 0-.4.2-.6.4-.2.2-.4.5-.5.9-.3.2-.4.6-.5.9-.1.3-.2.5-.2.7-.6 2.6-.7 5.3-.2 8 .1.3.2.7.3 1s.3.6.5.9c.2.3.5.5.8.7.3.2.6.2 1 .1.6-.1 1-.4 1.4-1 .3-.5.6-1.1.7-1.8.1-.3.1-.6.1-.9v-.5c-.2 0-.4 0-.6-.1-.1-.1-.2-.2-.2-.3 0-.1 0-.2.1-.3h3.4c0 .1 0 .2-.1.3-.1.1-.1.2-.1.3z"/><path d="M48 14.2c.1.2.3.3.5.4.2.1.5.1.7 0 .1.1.1.2.1.4s-.1.3-.2.4c-.1.1-.2.2-.4.2h-1.4c-.3 0-.7 0-1-.1-.3-.1-.7-.2-1-.4-.3-.2-.5-.4-.7-.7-.2-.3-.3-.6-.3-1V9.9v-.4c0-.2-.1-.3-.2-.5s-.3-.3-.4-.4c-.2-.1-.4-.1-.7-.1-.1 0-.2 0-.5.1-.2.3-.3.5-.5.8-.2.3-.3.5-.5.7 0 .8 0 1.5-.1 2.2 0 .7-.1 1.5-.1 2.1h1.4v1.1c-.5 0-.9.1-1.3 0-.4 0-.8 0-1.2-.1-.4 0-.8-.1-1.2-.1H37.3c-.1 0-.2 0-.3-.1-.1 0-.1-.1-.1-.2s-.1-.3-.1-.4v-.4c0-.1.1-.2.1-.2.2.1.4.2.6.1s.4-.2.5-.4c0-.1.1-.3.1-.7 0-.4 0-.9.1-1.6 0-.6.1-1.3.1-2.1s0-1.6.1-2.4c0-.8 0-1.5.1-2.3 0-.7.1-1.3.1-1.8v-.7c0-.2-.1-.4-.2-.6-.1-.2-.3-.3-.5-.4-.2-.1-.4 0-.6.1 0-.2-.1-.5-.1-.7 0-.2 0-.4-.1-.7 1 0 2 .1 3 .1.9 0 1.9.1 3 .1v.3c0 .1 0 .3.1.4v.4c0 .1 0 .2-.1.2-.1.1-.2.1-.3.1-.1 0-.2 0-.4-.1-.1-.1-.3-.1-.4-.2-.1-.1-.3-.1-.3-.1-.1.9-.1 1.9-.1 2.9s-.1 2-.1 3.1c.7-1.2 1.4-2.5 2-3.8.2-.3.3-.6.4-.9.1-.3.3-.6.5-.9.2-.3.4-.5.7-.7.3.3.6.2.9.1.3-.1.7-.1 1 0 .3.1.6.2.9.5.2.3.4.6.4 1s.1.8 0 1.1v.5c0 .2-.1.3-.2.4-.1.2-.2.3-.4.4-.2.1-.4.1-.5.2-.1 0-.3.1-.4.1h-.4c-.2-.3-.4-.4-.4-.6-.1-.2-.1-.4 0-.5.1-.2.2-.3.3-.3.1 0 .2-.1.4-.1.2-.1.3-.2.3-.3.1-.2.1-.3.1-.5 0-.3-.1-.5-.1-.7-.1-.2-.2-.3-.3-.3-.2 0-.3 0-.5.1s-.3.2-.5.4-.3.4-.4.6c-.1.2-.3.5-.4.7-.1.3-.3.6-.4.8-.2.2-.3.5-.4.8-.4.9-.8 1.7-1.2 2.5.3 0 .6-.1 1 0h1c.3 0 .7.1 1 .2.3.1.6.3.8.6.3.3.4.6.5 1 .1.4.1.8.2 1.1l.2 2.1c0 .2.1.5.1.7 0 .4.1.7.3.9zM71.7 13.9c.2.2.4.4.7.5.3.1.5 0 .8-.1 0 .2.1.3.1.6.1.2.1.4.1.6h-1.1s-.8 0-1.3.1h-2.3v-.2c0-.1.1-.2.2-.3.1-.1.2-.2.4-.3.2-.1.3-.1.6-.1.1 0 .1-.2.1-.7v-1.6c0-.6 0-1.2-.1-1.9s0-1.1 0-1.5V6.4c0-.7.1-1.5.1-2.2-.6 1.3-1.1 2.7-1.6 4.1-.5 1.5-1 3-1.5 4.4 0 0 .1.1.1.2-.2 0-.4 0-.7.1-.3.1-.5.1-.7.1-.5-1.9-1.1-3.7-1.6-5.5-.5-1.8-1.1-3.6-1.6-5.5-.1 1-.1 2-.1 3 0 1.1-.1 2.1-.1 3.2s0 2.1-.1 3.2c0 1-.1 2-.1 3h1.4v1.1c-.5 0-.9.1-1.3 0-.4 0-.8 0-1.2-.1-.4 0-.8-.1-1.2-.1H58c-.1 0-.2 0-.3-.1-.1 0-.1-.1-.1-.2s-.1-.3-.1-.4v-.4c0-.1.1-.2.1-.2.2.1.4.2.6.1s.4-.2.5-.4c0-.1.1-.3.1-.7 0-.4 0-.9.1-1.6 0-.6.1-1.3.1-2.1V7.2c0-.8 0-1.5.1-2.3 0-.7.1-1.3.1-1.8v-.7c0-.2-.1-.4-.2-.6-.1-.2-.3-.3-.5-.4-.2-.1-.4 0-.6.1 0-.2-.1-.5-.1-.7 0-.2 0-.4-.1-.7 1 0 2 .1 3 .1.9 0 1.9.1 3 .1 0 .3-.1.5-.4.7.3 1.3.6 2.6 1 3.9l1.2 3.9c.2-.6.4-1.3.6-1.9l.6-1.8c.3-.5.5-1.1.8-1.7.2-.6.4-1.3.6-2-.1 0-.3 0-.4-.1-.1 0-.2 0-.4-.1-.1 0-.1-.1-.1-.3 0-.1.1-.2.1-.3.1-.1.2-.1.3-.1h4.5c.1 0 .3.1.4.2.1.1.2.2.2.4s0 .3-.2.3c-.1-.1-.2-.1-.3-.1-.1 0-.2.1-.3.1-.2.4-.3.8-.4 1.3-.1.5-.1.9-.1 1.4-.2 2.8-.2 5.6 0 8.4 0 .3 0 .5.1.7-.1.3 0 .5.2.7zM81.7 12h-.4c0 .4 0 .9-.2 1.3-.1.4-.4.8-.7 1.1-.3.3-.7.6-1.1.8-.4.2-.9.3-1.3.4-.4.1-.8 0-1.2 0-.4-.1-.8-.2-1.1-.5-.2-.1-.3-.3-.5-.5s-.3-.4-.4-.6c-.2-.4-.3-.7-.4-1-.1-.3-.2-.6-.3-1-.1-.3-.1-.6-.1-1 0-.3 0-.7.1-1.1.1-.7.3-1.4.5-2 .3-.6.6-1.1.9-1.6s.8-.8 1.3-1.1c.5-.3 1-.4 1.5-.4.2 0 .4 0 .6.1.2.1.3.1.5.3.2.2.4.4.6.8.2.4.4.8.5 1.3h.4v.4l-1.7.3c-.2.1-.3.1-.4 0-.1 0-.1-.1-.2-.2v-.2h.4c.1-.1.2-.2.2-.4v-.5c0-.3-.1-.6-.3-.9l-.3-.3c-.1-.1-.2-.1-.4 0-.1 0-.3.1-.4.3-.1.2-.3.4-.4.6l-.3.6c-.1.2-.1.4-.1.5-.4 1.8-.5 3.6-.1 5.5.1.2.1.4.2.7l.3.6c.1.2.3.3.6.5.2.1.4.1.7.1.4-.1.7-.3 1-.7.2-.4.4-.8.5-1.2 0-.2.1-.4.1-.6v-.3h-.4c-.1 0-.1-.1-.1-.2s0-.2.1-.2h2.4v.2c-.5-.1-.5 0-.6.1z"/><path d="M83.5 14.2c.2-4.3.3-8.5.2-12.8h-1.8V.9.4c.7 0 1.3 0 2-.1.7 0 1.3 0 2-.1.8-.2 1.6-.2 2.4-.1.8.1 1.6.3 2.4.5.7.3 1.4.7 1.9 1.2s.9 1.1 1.1 1.8c.3 1.3.4 2.5.3 3.8 0 1.2-.2 2.4-.3 3.6 0 .4-.1.8-.2 1.2-.1.4-.3.8-.5 1.1-.3.5-.8 1-1.3 1.3-.5.3-1.1.5-1.7.6-.5.1-.9.2-1.4.1-.5 0-.9 0-1.4-.1h-4.9c-.2-.4-.1-.8.2-1.1.2-.2.3-.2.5-.3.2.3.4.3.5.4zm5.9-12.3c-.4-.3-.8-.5-1.3-.6-.5-.1-1-.1-1.5-.1-.3 4.5-.2 9.1.4 13.6.2 0 .4 0 .5-.1.2 0 .4-.1.6-.1.3-.1.6-.2.9-.4.3-.2.6-.4.8-.7.2-.3.4-.6.5-1s.2-.7.2-1.1c.4-2.1.4-4.2.2-6.3-.1-.6-.2-1.2-.4-1.9 0-.4-.4-.9-.9-1.3zM102.4 9.7c-.6-.1-1.3-.1-2 0s-1.4.4-2 .8l-.2-1.4.9-.1c0-.4-.1-.7-.1-1 0-.2-.1-.5-.1-.9-.3 0-.6.1-.9.1-.3 0-.6.1-1 .1-.2.7-.3 1.3-.4 1.8-.1.5-.2 1.1-.4 1.6l.2-.1.7.6c-.4.2-.8.6-1.2 1.1-.4.5-.7 1-.9 1.5l-.9-.5c0-.1.1-.2.2-.4s.2-.3.2-.4c.1-.2.2-.5.3-1 .1-.4.2-.9.4-1.3.1-.5.2-.9.3-1.3.1-.4.2-.7.2-.9l.3-1.2.3-1.2c.2-.7.3-1.4.4-2.1.1-.7.2-1.4.3-2.2h-.6l.1-.8 4-.1.1.8h-.2-.2c.1.7.2 1.4.3 2l.3 1.8.3 1.8c.1.6.2 1.3.4 2h.6l.3.9zm-3.6-3.6c-.1-.7-.2-1.3-.3-2-.1-.6-.3-1.3-.4-2-.1.6-.2 1.3-.4 2.1-.1.7-.3 1.5-.5 2.2l1.6-.3z"/><path d="M124.9 20.1c0-.3.1-.6.3-.8.2-.2.4-.3.7-.4.3-.1.5 0 .8.1.3.1.5.3.6.5.3.4.6.9.7 1.4.2.5.2 1 .2 1.5s-.1 1-.3 1.5c-.2.5-.4 1-.7 1.4-.6.9-1.4 1.6-2.4 2-1 .5-2 .7-3 .7-1.5 0-2.8-.3-3.9-1s-2.1-1.4-3-2.4c-.9-1-1.8-2.1-2.5-3.2-.8-1.2-1.5-2.3-2.3-3.5-1.1 1.2-2.4 2.2-3.9 3-1.5.8-3 1.1-4.5 1-1.1 0-2.1-.1-3-.5-.9-.3-1.6-.8-2.2-1.4-.6-.6-.9-1.3-1.1-2.2-.2-.8-.1-1.7.2-2.7.3-.9.7-1.6 1.3-2.2.6-.6 1.2-1.1 2-1.5.7-.4 1.5-.6 2.4-.7.8-.1 1.7 0 2.6.2v-5-4.6h-1.8V.8.3l3.7-.1c.8-.2 1.6-.2 2.4-.1.8.1 1.6.3 2.4.5.7.3 1.4.7 1.9 1.2s.9 1.1 1.1 1.8c.3 1.2.4 2.4.3 3.6-.1 1.2-.2 2.5-.4 3.7-.1 1-.4 2-.8 3-.5 1-1 2-1.7 2.9.3.4.6.8.8 1.2.3.4.5.8.8 1.2.5.8 1.1 1.6 1.7 2.5.6.8 1.3 1.6 2 2.4.7.7 1.5 1.3 2.4 1.8s1.8.7 2.9.8c1.1 0 2.1-.2 3-.7.9-.5 1.6-1.2 2.1-2.2.2-.4.3-.8.4-1.3.1-.5 0-.9-.1-1.3-.2.1-.4.2-.6.2-.2 0-.4 0-.6-.1-.2-.1-.4-.2-.5-.4s-.4-.5-.4-.8zm-22 .9c1.5-.4 2.8-1 3.7-1.8.9-.8 1.7-1.7 2.3-2.8-.2-.2-.3-.5-.6-.7-.6-.7-1.2-1.4-1.9-1.9 0 .6.1 1.2.1 1.8 0 .6.1 1.1.2 1.6v.1h-4.3c-.1-.2-.1-.4 0-.7 0-.2.1-.3.3-.5.3-.3.7-.4 1.1-.2l.1-3.5c-.5-.2-1-.3-1.5-.3s-1.1 0-1.6.1c-.6.1-1.1.3-1.6.6s-.9.7-1.3 1.1c-.4.4-.7.9-.9 1.5-.2.5-.3 1.1-.3 1.6 0 .7.2 1.3.6 1.8.4.5.9.9 1.4 1.4.2.2.5.3.8.5.3.1.7.2 1.1.3.4.1.8.1 1.2.1.3 0 .7 0 1.1-.1zm6.4-19.1c-.4-.3-.8-.5-1.2-.6-.5-.1-.9-.1-1.4-.1-.1 1.7-.2 3.4-.3 5.3-.1 1.9-.1 3.7 0 5.6.6.4 1.2.8 1.7 1.4.5.5 1 1.1 1.5 1.6.2-.6.4-1.2.6-1.9.2-.6.3-1.2.3-1.7.2-1.1.2-2.1.3-3.1 0-1 0-2.1-.1-3.1-.1-.6-.2-1.2-.4-1.9-.2-.6-.5-1.1-1-1.5z"/><path d="M116.5 1.2h-1.8V.4c.5 0 .9 0 1.2-.1s.7 0 1.1 0h1.1s.8 0 1.3-.1c.9 0 1.8 0 2.8-.1.9 0 1.8 0 2.8-.1v3.6h-1.3c-.1 0-.1-.1 0-.1.1-.2.1-.4.1-.6s0-.4-.1-.6l-.3-.6c-.1-.2-.2-.3-.4-.4-.2-.1-.4-.2-.6-.2h-.7c-.3 0-.5.1-.8.1-.3.1-.5.2-.6.4-.1.2-.1.3-.1.3v.3c0 .7-.1 1.3-.1 2 0 .6-.1 1.3-.1 1.9v1c.6-.2 1.2-.3 1.9-.4.6-.1 1.2-.3 1.9-.4 0 .1.1.2.1.3V7c0 .2-.1.3-.1.4-.1.1-.1.2-.1.3-.1.1-.2.1-.4.2-.1 0-.3.1-.4.1-.5.1-.9.2-1.4.3-.5.1-.9.1-1.4.2 0 1-.1 2-.2 2.9-.1 1-.1 1.9-.2 2.9.8.2 1.5.3 2 .1.6-.2 1.2-.5 1.9-1 .2-.1.2-.3.2-.5v-.7c0-.2.1-.5.2-.6.1-.2.3-.3.7-.4.4 0 .6.1.7.4.1.3.2.7.2 1.1 0 .5 0 .9-.1 1.4-.1.5-.1.9 0 1.2h-1.4c-.4 0-.8 0-1.2.1-.4 0-.8 0-1.2.1h-1.3c-.9 0-1.7 0-2.5.1-.7.1-1.6.1-2.4.1-.2-.2-.2-.4-.2-.7 0-.2.1-.5.3-.6.2-.2.3-.3.6-.3.2-.1.5 0 .7.1.1-2.1.2-4.3.1-6.5-.7-2.2-.7-4.3-.5-6.5z"/></g></svg>
+            </a>
+        </p>
+    </footer>
+
+    <div class="fixed-bottom-btn"><a class="waves-effect waves-light" id="go-top"><i class="fa fa-chevron-up"></i></a></div>
+
+    <script>
+    var DMS = {
+        version: 'master',
+
+        getDocUrl: function (doc) {
+            var temp = 'docs/master/{doc}.html';
+
+            if (location.pathname.indexOf(temp.replace('{doc}.html', '')) !== -1) {
+                return doc+'.html';
+            }
+
+            return temp.replace('{doc}', doc);
+        },
+
+        config: {
+            comment: {"enable":true,"clientID":"19ce86605d804660b3b6","clientSecret":"e64e4208f513c396f948699cfddc461d2f6e4b27","repo":"easy-excel-comments","owner":"jqhwx","admin":["jqhwx"],"language":"zh-CN","perPage":15,"pagerDirection":"first"}
+        },
+    };
+
+    DMS.config.comment.id = 'master/export';
+
+    (function () {
+        function indices() {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src="../../assets/indices/master.js";
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        }
+
+        setTimeout(indices, 1);
+    })();
+
+</script>
+
+             <script src="../../assets/gitalk/gitalk.min.js"></script>
+         <script src="../../assets/js/laravel.js"></script>
+     <script src="../../assets/js/viewport-units-buggyfill.js"></script>
+    <script>window.viewportUnitsBuggyfill.init();</script>
+
+</body>
+</html>
