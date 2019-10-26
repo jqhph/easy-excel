@@ -1,6 +1,6 @@
 {
   "name": "dcat/easy-excel",
-  "description": "简单易用的Excel工具",
+  "description": "使用简单实用的语义化接口快速读写Excel文件",
   "type": "library",
   "keywords": [
     "box spout",
@@ -14,18 +14,18 @@
     "spreadsheet",
     "stream"
   ],
-  "license": "Apache-2.0",
+  "license": "MIT",
   "homepage": "https://github.com/jqhph/easy-excel",
   "authors": [
     {
-      "name": "jqhph",
+      "name": "jqh",
       "email": "841324345@qq.com"
     }
   ],
   "require": {
     "php": ">=7.1.0",
-    "box/spout": ">=3.0",
-    "league/flysystem": ">=1.0"
+    "box/spout": "~3.10",
+    "league/flysystem": "~1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~7|~8.0",
