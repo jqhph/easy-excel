@@ -25,15 +25,17 @@ interface Sheet
     public function getData();
 
     /**
-     * @param array $headings
+     * 传false则禁用标题
+     *
+     * @param array|false $headings
      * @return $this
      */
-    public function headings(array $headings);
+    public function headings($headings);
 
     /**
-     * @return array
+     * @return array|false
      */
-    public function getHeadings(): array;
+    public function getHeadings();
 
     /**
      * @param Style $style

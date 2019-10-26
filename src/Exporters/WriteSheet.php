@@ -70,7 +70,7 @@ trait WriteSheet
     protected function writeRowsFromArray(WriterInterface $writer, $index, array &$rows, Contracts\Exporters\Sheet $sheet)
     {
         // Add heading row.
-        if ($this->canWriteHeadings($writer, $index)) {
+        if ($this->canWriteHeadings($writer, $index, $sheet)) {
             $this->writeHeadings($writer, $sheet, current($rows));
         }
 
@@ -161,12 +161,16 @@ trait WriteSheet
     /**
      * @param WriterInterface $writer
      * @param int|string $index
+     * @param Contracts\Exporters\Sheet $sheet
      * @return bool
      */
-    protected function canWriteHeadings(WriterInterface $writer, $index): bool
+    protected function canWriteHeadings(WriterInterface $writer, $index, Contracts\Exporters\Sheet $sheet): bool
     {
+        $sheetHeadings = $sheet->getHeadings();
+
         if (
-            $this->headings === false
+            ($sheetHeadings === false)
+            || ($this->headings === false && ! $sheetHeadings)
             || ! empty($this->writedHeadings[$index])
             || ($this->writedHeadings && $writer instanceof CsvWriter)
         ) {
@@ -249,17 +253,17 @@ trait WriteSheet
      */
     protected function formatRow(array &$row, Contracts\Exporters\Sheet $sheet)
     {
-        $strings = [];
+        $values = [];
 
         foreach ($this->filterAndSortByHeaders($row, $sheet) as $k => &$value) {
             $value = is_int($value) || is_float($value) || is_null($value) ? (string) $value : $value;
 
             if (is_string($value)) {
-                $strings[$k] = $value;
+                $values[$k] = $value;
             }
         }
 
-        return $sheet->formatRow($strings);
+        return $sheet->formatRow($values);
     }
 
     /**

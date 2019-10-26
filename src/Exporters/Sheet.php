@@ -9,7 +9,9 @@ use Dcat\EasyExcel\Contracts;
 class Sheet implements Contracts\Exporters\Sheet
 {
     /**
-     * @var array
+     * 等于false则禁用标题
+     *
+     * @var array|false
      */
     protected $headings = [];
 
@@ -71,20 +73,26 @@ class Sheet implements Contracts\Exporters\Sheet
     }
 
     /**
-     * @param array $headings
+     *  传false则禁用标题
+     *
+     * @param array|false $headings
      * @return $this
      */
-    public function headings(array $headings)
+    public function headings($headings)
     {
-        $this->headings = $headings;
+        if (is_array($headings)) {
+            $this->headings = $headings;
+        } elseif ($headings === false) {
+            $this->headings = false;
+        }
 
         return $this;
     }
 
     /**
-     * @return array
+     * @return array|false
      */
-    public function getHeadings(): array
+    public function getHeadings()
     {
         return $this->headings;
     }
