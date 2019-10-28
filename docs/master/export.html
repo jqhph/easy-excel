@@ -335,7 +335,7 @@ $exporter = Excel::export($collection);</code></pre>
 <pre><code   class="language-php">use Dcat\EasyExcel\Excel;
 use App\User;
 
-$exporter = Excel::export($generatorFactory())
+Excel::export()
     -&gt;chunk(function (int $times) { // $times 表示循环次数，从1开始，可以当做查询页数实用
         // 每次获取1000条数据导入
         $chunkSize = 1000;
