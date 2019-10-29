@@ -36,7 +36,6 @@ composer require dcat/easy-excel
 
 #### 导出
 
-> 更多导出功能请参考[文档](https://jqhph.github.io/easy-excel/docs/master/export.html)。
 
 下载
 ```php
@@ -90,11 +89,10 @@ $csvContents = Excel::csv($array)->raw();
 
 $odsContents = Excel::ods($array)->raw();
 ```
-
+更多导出功能请参考[文档](https://jqhph.github.io/easy-excel/docs/master/export.html)。
 
 #### 导入
 
-> 更多导入功能请参考[文档](https://jqhph.github.io/easy-excel/docs/master/import.html)。
 
 读取所有表格数据
 ```php
@@ -166,6 +164,8 @@ Excel::import('/tmp/users.xlsx')
         $collection = $collection->keyBy('id');
     });
 ```
+
+更多导入功能请参考[文档](https://jqhph.github.io/easy-excel/docs/master/import.html)。
 
 
 ## License
