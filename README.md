@@ -32,9 +32,11 @@
 composer require dcat/easy-excel
 ```
 
-## 快速开始
+### 快速开始
 
-### 导出
+#### 导出
+
+> 更多导出功能请参考[文档](https://jqhph.github.io/easy-excel/docs/master/export.html)。
 
 下载
 ```php
@@ -89,7 +91,10 @@ $csvContents = Excel::csv($array)->raw();
 $odsContents = Excel::ods($array)->raw();
 ```
 
-### 导入
+
+#### 导入
+
+> 更多导入功能请参考[文档](https://jqhph.github.io/easy-excel/docs/master/import.html)。
 
 读取所有表格数据
 ```php
