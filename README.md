@@ -119,7 +119,7 @@ use Dcat\EasyExcel\Contracts\Sheet as SheetInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
 
 // 导入xlsx
-Excel::import('/tmp/users.xlsx')->each(function () {
+Excel::import('/tmp/users.xlsx')->each(function (SheetInterface $sheet) {
     // 获取表格名称，如果是csv文件，则此方法返回空字符串
     $sheetName = $sheet->getName();
 
