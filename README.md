@@ -48,13 +48,13 @@ $array = [
 
 $headings = ['id' => 'ID', 'name' => '名称', 'email' => '邮箱'];
 
-// 导出xlsx类型文件
+// xlsx
 Excel::export($array)->headings($headings)->download('users.xlsx');
 
-// 导出csv类型文件
+// csv
 Excel::export($array)->headings($headings)->download('users.csv');
 
-// 导出ods类型文件
+// ods
 Excel::export($array)->headings($headings)->download('users.ods');
 ```
 
@@ -66,8 +66,9 @@ use League\Flysystem\Filesystem;
 
 $array = [...];
 
-// 直接保存到当前服务器
-Excel::export($array)->disk($filesystem)->store('/tmp/users.xlsx');
+// 保存到当前服务器
+Excel::export($array)->store('/tmp/users.xlsx');
+
 
 // 使用 filesystem
 $adapter = new Local(__DIR__);
@@ -105,12 +106,14 @@ $headings = ['id', 'name', 'email'];
 // 导入xlsx
 $allSheets = Excel::import('/tmp/users.xlsx')->headings($headings)->toArray();
 
+
 // 使用filesystem
 $adapter = new Local(__DIR__);
 
 $filesystem = new Filesystem($adapter);
 
 $allSheets = Excel::import('users.xlsx')->disk($filesystem)->headings($headings)->toArray();
+
 
 print_r($allSheets); // ['Sheet1' => [['id' => 1, 'name' => 'Brakus', 'email' => 'treutel@eg.com', 'created_at' => '...']]]
 ```
@@ -150,12 +153,15 @@ use Dcat\EasyExcel\Support\SheetCollection;
 // 获取第一个表格内容
 $firstSheet = Excel::import('/tmp/users.xlsx')->first()->toArray();
 
+
 // 获取最后一次保存前打开的表格内容
 $activeSheet = Excel::import('/tmp/users.xlsx')->active()->toArray();
+
 
 // 获取指定名称或序号的表格内容
 $sheet = Excel::import('/tmp/users.xlsx')->sheet('Sheet1')->toArray();
 $sheet = Excel::import('/tmp/users.xlsx')->sheet(0)->toArray();
+
 
 // 分块处理表格内容
 Excel::import('/tmp/users.xlsx')
