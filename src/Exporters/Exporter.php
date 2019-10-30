@@ -246,11 +246,19 @@ class Exporter implements Contracts\Exporter
         return $this->writer = $writer;
     }
 
+    /**
+     * @return void
+     */
     protected function releaseResources()
     {
-        $this->writer->close();
+        if ($this->writer) {
+            $this->writer->close();
+        }
     }
 
+    /**
+     * @return void
+     */
     protected function removeHttpHeaders()
     {
         if (! headers_sent()) {

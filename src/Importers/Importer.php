@@ -239,9 +239,14 @@ class Importer implements Contracts\Importer
         return new NullSheet();
     }
 
+    /**
+     * @return void
+     */
     protected function releaseResources()
     {
-        $this->reader->close();
+        if ($this->reader) {
+            $this->reader->close();
+        }
 
         $this->removeTempFile();
     }
