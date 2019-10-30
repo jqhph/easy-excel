@@ -8,7 +8,6 @@ use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer as CsvWriter;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Excel;
-use Dcat\EasyExcel\Support\SheetCollection;
 use Generator;
 use Dcat\EasyExcel\Support\Arr;
 use Dcat\EasyExcel\Contracts;

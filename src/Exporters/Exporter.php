@@ -3,6 +3,7 @@
 namespace Dcat\EasyExcel\Exporters;
 
 use Box\Spout\Common\Entity\Style\Style;
+use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\Traits\Macroable;
@@ -19,6 +20,11 @@ use Box\Spout\Writer\Common\Creator\WriterFactory as SpoutWriterFactory;
 class Exporter implements Contracts\Exporter
 {
     use Macroable, Excel, WriteSheet;
+
+    /**
+     * @var WriterInterface
+     */
+    protected $writer;
 
     /**
      * @var array|\Closure|\Generator
@@ -144,6 +150,8 @@ class Exporter implements Contracts\Exporter
         } catch (\Throwable $e) {
             $this->removeHttpHeaders();
 
+            $this->releaseResources();
+
             throw $e;
         }
     }
@@ -159,17 +167,20 @@ class Exporter implements Contracts\Exporter
      */
     public function store(string $filePath, array $diskConfig = [])
     {
-        $filePath = $this->prepareFileName($filePath);
+        try {
+            $filePath = $this->prepareFileName($filePath);
+            if (!($filesystem = $this->filesystem())) {
+                return $this->storeInLocal($filePath);
+            }
+            if (empty($this->type)) {
+                $this->type(pathinfo($filePath)['extension'] ?? null);
+            }
+            return $filesystem->put($filePath, $this->raw(), $diskConfig);
+        } catch (\Throwable $e) {
+            $this->releaseResources();
 
-        if (! ($filesystem = $this->filesystem())) {
-            return $this->storeInLocal($filePath);
+            throw $e;
         }
-
-        if (empty($this->type)) {
-            $this->type(pathinfo($filePath)['extension'] ?? null);
-        }
-
-        return $filesystem->put($filePath, $this->raw(), $diskConfig);
 
     }
 
@@ -179,16 +190,22 @@ class Exporter implements Contracts\Exporter
      */
     public function raw()
     {
-        /* @var \Box\Spout\Writer\WriterInterface $writer */
-        $writer = $this->makeWriter(null, WriterFactory::class);
+        try {
+            /* @var \Box\Spout\Writer\WriterInterface $writer */
+            $writer = $this->makeWriter(null, WriterFactory::class);
 
-        ob_start();
+            ob_start();
 
-        $writer->openToOutput();
+            $writer->openToOutput();
 
-        $this->writeSheets($writer)->close();
+            $this->writeSheets($writer)->close();
 
-        return ob_get_clean();
+            return ob_get_clean();
+        } catch (\Throwable $e) {
+            $this->releaseResources();
+
+            throw $e;
+        }
     }
 
     /**
@@ -226,7 +243,12 @@ class Exporter implements Contracts\Exporter
 
         $this->configure($writer);
 
-        return $writer;
+        return $this->writer = $writer;
+    }
+
+    protected function releaseResources()
+    {
+        $this->writer->close();
     }
 
     protected function removeHttpHeaders()

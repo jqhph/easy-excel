@@ -25,6 +25,11 @@ class Importer implements Contracts\Importer
     use Macroable, Excel, TempFile;
 
     /**
+     * @var ReaderInterface
+     */
+    protected $reader;
+
+    /**
      * @var string|UploadedFile
      */
     protected $filePath;
@@ -194,8 +199,6 @@ class Importer implements Contracts\Importer
             yield new Sheet($this, $sheet);
         }
 
-        $reader->close();
-
         $this->releaseResources();
     }
 
@@ -225,7 +228,7 @@ class Importer implements Contracts\Importer
 
         $this->configure($reader);
 
-        return $reader;
+        return $this->reader = $reader;
     }
 
     /**
@@ -238,6 +241,8 @@ class Importer implements Contracts\Importer
 
     protected function releaseResources()
     {
+        $this->reader->close();
+
         $this->removeTempFile();
     }
 
