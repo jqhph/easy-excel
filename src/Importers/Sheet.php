@@ -4,9 +4,9 @@ namespace Dcat\EasyExcel\Importers;
 
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Reader\SheetInterface;
-use Dcat\EasyExcel\Support\SheetCollection;
-use Dcat\EasyExcel\Support\Arr;
 use Dcat\EasyExcel\Contracts;
+use Dcat\EasyExcel\Support\Arr;
+use Dcat\EasyExcel\Support\SheetCollection;
 
 class Sheet implements Contracts\Sheet
 {
@@ -28,7 +28,7 @@ class Sheet implements Contracts\Sheet
     public function __construct(Importer $importer, SheetInterface $sheet)
     {
         $this->importer = $importer;
-        $this->sheet    = $sheet;
+        $this->sheet = $sheet;
     }
 
     /**
@@ -91,25 +91,25 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * 逐行读取
+     * 逐行读取.
      *
      * @param callable|null $callback
      * @return $this
      */
     public function each(callable $callback)
     {
-        $headings        = [];
+        $headings = [];
         $originalHeaders = [];
-        $headingLine     = null;
+        $headingLine = null;
 
         foreach ($this->sheet->getRowIterator() as $line => $row) {
             $row = $row instanceof Row ? $row->toArray() : (is_array($row) ? $row : []);
 
             if (! $this->withoutHeadings()) {
                 if ($headingLine === null && $this->isHeadingRow($line, $row)) {
-                    $headingLine     = $line;
+                    $headingLine = $line;
                     $originalHeaders = $row;
-                    $headings        = $this->formatHeadings($row);
+                    $headings = $this->formatHeadings($row);
 
                     continue;
                 }
@@ -144,7 +144,7 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * 分块读取
+     * 分块读取.
      *
      * @param int $size
      * @param callable $callback
@@ -196,7 +196,7 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * 判断是否是标题行
+     * 判断是否是标题行.
      *
      * @return bool
      */
@@ -241,10 +241,8 @@ class Sheet implements Contracts\Sheet
 
         if ($countHeaders > $countRow) {
             $row = array_merge($row, array_fill(0, $countHeaders - $countRow, null));
-
         } elseif ($countHeaders < $countRow) {
             $row = array_slice($row, 0, $countHeaders);
-
         }
 
         return array_combine($headings, $row);
@@ -273,11 +271,10 @@ class Sheet implements Contracts\Sheet
             if ($value instanceof \Datetime) {
                 $value = $value->format('Y-m-d H:i:s');
             } elseif ($value) {
-                $value = (string)$value;
+                $value = (string) $value;
             }
         }
 
         return $values;
     }
-
 }

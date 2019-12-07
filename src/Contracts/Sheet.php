@@ -13,7 +13,7 @@ interface Sheet
     public function valid(): bool;
 
     /**
-     * sheet索引
+     * sheet索引.
      *
      * @return int
      */
@@ -46,7 +46,7 @@ interface Sheet
     public function filter(callable $callback);
 
     /**
-     * 逐行读取
+     * 逐行读取.
      *
      * e.g:
      *
@@ -60,7 +60,7 @@ interface Sheet
     public function each(callable $callback);
 
     /**
-     * 分块读取
+     * 分块读取.
      *
      * e.g:
      *
@@ -83,5 +83,4 @@ interface Sheet
      * @return SheetCollection
      */
     public function collect(): SheetCollection;
-
 }

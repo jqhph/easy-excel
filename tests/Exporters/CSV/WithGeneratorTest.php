@@ -3,7 +3,6 @@
 namespace Tests\Exporters\CSV;
 
 use Dcat\EasyExcel\Excel;
-use Dcat\EasyExcel\Support\SheetCollection;
 use Tests\Exporters\Exporter;
 use Tests\TestCase;
 
@@ -16,7 +15,7 @@ class WithGeneratorTest extends TestCase
      */
     public function testStore()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('csv');
 
@@ -25,7 +24,6 @@ class WithGeneratorTest extends TestCase
 
         // 读取
         $this->assertSingleSheet($storePath, 0, $users);
-
 
         /*
          |---------------------------------------------------------------
@@ -48,7 +46,7 @@ class WithGeneratorTest extends TestCase
 
     public function testRaw()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('csv');
 
@@ -61,7 +59,6 @@ class WithGeneratorTest extends TestCase
 
         // 读取
         $this->assertSingleSheet($storePath, 0, $users);
-
 
         /*
          |---------------------------------------------------------------
@@ -83,7 +80,6 @@ class WithGeneratorTest extends TestCase
         $this->assertIsString($contents);
 
         file_put_contents($storePath, $contents);
-
 
         // 读取
         $this->assertSingleSheet($storePath, 0, $users);

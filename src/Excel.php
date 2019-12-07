@@ -7,16 +7,15 @@ use Dcat\EasyExcel\Exporters\Exporter;
 use Dcat\EasyExcel\Exporters\Sheet;
 use Dcat\EasyExcel\Importers\Importer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Dcat\EasyExcel\Contracts;
 
 class Excel
 {
     const XLSX = Type::XLSX;
-    const CSV  = Type::CSV;
-    const ODS  = Type::ODS;
+    const CSV = Type::CSV;
+    const ODS = Type::ODS;
 
     /**
-     * 导入
+     * 导入.
      *
      * @param string|UploadedFile $filePath
      * @return Contracts\Importer
@@ -27,7 +26,7 @@ class Excel
     }
 
     /**
-     * 导出
+     * 导出.
      *
      * @param array|\Closure|\Generator $data
      * @return Contracts\Exporter

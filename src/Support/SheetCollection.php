@@ -2,11 +2,11 @@
 
 namespace Dcat\EasyExcel\Support;
 
+use ArrayAccess;
+use ArrayIterator;
 use Dcat\EasyExcel\Support\Traits\EnumeratesValues;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use stdClass;
-use ArrayAccess;
-use ArrayIterator;
 
 class SheetCollection implements ArrayAccess, Enumerable
 {

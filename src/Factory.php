@@ -88,18 +88,15 @@ class Factory
     {
         if (in_array($method, static::$exporterMethods)) {
             return $this->resolveExporter()->{$method}(...$arguments);
-
         } elseif (in_array($method, static::$importerMethods)) {
             return $this->resolveImporter()->{$method}(...$arguments);
-
         }
 
         $this->callers[] = [
             'method'    => $method,
-            'arguments' => &$arguments
+            'arguments' => &$arguments,
         ];
 
         return $this;
     }
-
 }

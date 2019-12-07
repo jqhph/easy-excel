@@ -2,8 +2,8 @@
 
 namespace Dcat\EasyExcel\Importers;
 
-use Dcat\EasyExcel\Contracts\Sheets;
 use Dcat\EasyExcel\Contracts\Sheet;
+use Dcat\EasyExcel\Contracts\Sheets;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Generator;
 
@@ -25,7 +25,7 @@ class LazySheets implements Sheets
     }
 
     /**
-     * e.g:
+     * e.g:.
      *
      * $this->each(function (Sheet $sheet) {
      *
@@ -61,8 +61,6 @@ class LazySheets implements Sheets
                 return $sheet;
             }
         }
-
-        return null;
     }
 
     /**
@@ -134,5 +132,4 @@ class LazySheets implements Sheets
 
         return false;
     }
-
 }

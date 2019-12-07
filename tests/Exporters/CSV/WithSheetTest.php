@@ -19,7 +19,7 @@ class WithSheetTest extends TestCase
      */
     public function test()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('csv');
 
@@ -67,7 +67,7 @@ class WithSheetTest extends TestCase
 
     public function testWithChunkQuery()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $users1 = new SheetCollection(array_slice($users, 0, 30));
         $users2 = new SheetCollection(array_values(array_slice($users, 30, 30)));
@@ -88,5 +88,4 @@ class WithSheetTest extends TestCase
         // 读取
         $this->assertSingleSheet($storePath, 0, $users);
     }
-
 }

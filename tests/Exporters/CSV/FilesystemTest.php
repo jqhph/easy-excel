@@ -33,7 +33,6 @@ class FilesystemTest extends TestCase
         $this->assertTrue(isset($sheetsArray[0]));
 
         $this->assertEquals(array_values($sheetsArray[0]), $users);
-
     }
 
     public function tearDown(): void

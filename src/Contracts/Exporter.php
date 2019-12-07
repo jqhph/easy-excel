@@ -7,7 +7,7 @@ use Box\Spout\Common\Entity\Style\Style;
 interface Exporter extends Excel
 {
     /**
-     * 设置导出数据
+     * 设置导出数据.
      *
      * @param array|\Closure|\Generator|Exporters\ChunkQuery $data
      * @return $this
@@ -27,7 +27,7 @@ interface Exporter extends Excel
     public function headingStyle($style);
 
     /**
-     * 分批次导入数据
+     * 分批次导入数据.
      *
      * @param callable|callable[] $callbacks
      * @return $this
@@ -35,7 +35,7 @@ interface Exporter extends Excel
     public function chunk($callbacks);
 
     /**
-     * 下载导出文件
+     * 下载导出文件.
      *
      * @param string|null $fileName
      *
@@ -44,7 +44,7 @@ interface Exporter extends Excel
     public function download(string $fileName);
 
     /**
-     * 存储导出文件
+     * 存储导出文件.
      *
      * @param string $filePath
      * @param array $diskConfig
@@ -57,5 +57,4 @@ interface Exporter extends Excel
      * @throws \Box\Spout\Common\Exception\IOException
      */
     public function raw();
-
 }

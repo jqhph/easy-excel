@@ -3,8 +3,8 @@
 namespace Dcat\EasyExcel\Importers;
 
 use Box\Spout\Reader\SheetInterface;
-use Dcat\EasyExcel\Support\SheetCollection;
 use Dcat\EasyExcel\Contracts;
+use Dcat\EasyExcel\Support\SheetCollection;
 
 class NullSheet implements Contracts\Sheet
 {
@@ -21,7 +21,6 @@ class NullSheet implements Contracts\Sheet
      */
     public function getIndex()
     {
-        return null;
     }
 
     /**
@@ -29,7 +28,6 @@ class NullSheet implements Contracts\Sheet
      */
     public function getName()
     {
-        return null;
     }
 
     /**
@@ -65,7 +63,7 @@ class NullSheet implements Contracts\Sheet
     }
 
     /**
-     * 逐行读取
+     * 逐行读取.
      *
      * @param callable|null $callback
      * @return $this
@@ -95,5 +93,4 @@ class NullSheet implements Contracts\Sheet
     {
         return new SheetCollection($this->toArray());
     }
-
 }

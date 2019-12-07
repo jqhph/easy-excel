@@ -36,7 +36,7 @@ class HeadingTest extends TestCase
      */
     public function test()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('xlsx');
 
@@ -47,7 +47,6 @@ class HeadingTest extends TestCase
         $sheet = Excel::import($storePath)->first()->toArray();
 
         $this->assertSheetHeadings($sheet, $this->headings);
-
 
         /*
          |---------------------------------------------------------------
@@ -60,7 +59,6 @@ class HeadingTest extends TestCase
         $this->assertIsArray($firstRow);
         $this->assertEquals(count($firstRow), count($this->headings));
         $this->assertEquals(array_keys($firstRow), range(0, count($this->headings) - 1));
-
 
         /*
          |---------------------------------------------------------------
@@ -87,7 +85,7 @@ class HeadingTest extends TestCase
      */
     public function testMultipleSheets()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $sheet1 = Excel::createSheet(array_slice($users, 0, 30))->headings($this->headings);
         $sheet2 = Excel::createSheet(array_slice($users, 30, 30))->headings($this->headings2);
@@ -105,7 +103,6 @@ class HeadingTest extends TestCase
 
         $this->assertSheetHeadings($sheetsArray['Sheet1'], $this->headings);
         $this->assertSheetHeadings($sheetsArray['Sheet2'], $this->headings2);
-
 
         /*
         |---------------------------------------------------------------
@@ -144,6 +141,4 @@ class HeadingTest extends TestCase
         $this->assertEquals(count($firstRowInSheet), count($headings));
         $this->assertEquals(array_keys($firstRowInSheet), array_values($headings));
     }
-
-
 }

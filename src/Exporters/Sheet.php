@@ -9,7 +9,7 @@ use Dcat\EasyExcel\Contracts;
 class Sheet implements Contracts\Exporters\Sheet
 {
     /**
-     * 等于false则禁用标题
+     * 等于false则禁用标题.
      *
      * @var array|false
      */
@@ -73,7 +73,7 @@ class Sheet implements Contracts\Exporters\Sheet
     }
 
     /**
-     *  传false则禁用标题
+     *  传false则禁用标题.
      *
      * @param array|false $headings
      * @return $this

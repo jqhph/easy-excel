@@ -79,7 +79,7 @@ class SheetsTest extends TestCase
     }
 
     /**
-     * 验证内容是否正确
+     * 验证内容是否正确.
      *
      * @param array $sheetsArray
      */

@@ -16,7 +16,7 @@ class WithChunkQueryTest extends TestCase
      */
     public function testStore()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('csv');
 
@@ -33,7 +33,6 @@ class WithChunkQueryTest extends TestCase
 
         // 读取
         $this->assertSingleSheet($storePath, 0, $users);
-
 
         /*
          |---------------------------------------------------------------
@@ -62,7 +61,7 @@ class WithChunkQueryTest extends TestCase
 
     public function testRaw()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('csv');
 
@@ -83,7 +82,6 @@ class WithChunkQueryTest extends TestCase
 
         // 读取
         $this->assertSingleSheet($storePath, 0, $users);
-
 
         /*
          |---------------------------------------------------------------
@@ -110,9 +108,7 @@ class WithChunkQueryTest extends TestCase
 
         file_put_contents($storePath, $contents);
 
-
         // 读取
         $this->assertSingleSheet($storePath, 0, $users);
     }
-
 }

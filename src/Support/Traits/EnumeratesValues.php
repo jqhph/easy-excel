@@ -2,15 +2,15 @@
 
 namespace Dcat\EasyExcel\Support\Traits;
 
-use Dcat\EasyExcel\Support\Helper;
-use Exception;
-use Traversable;
 use CachingIterator;
-use JsonSerializable;
 use Dcat\EasyExcel\Support\Arr;
-use Dcat\EasyExcel\Support\SheetCollection as Collection;
 use Dcat\EasyExcel\Support\Enumerable;
+use Dcat\EasyExcel\Support\Helper;
 use Dcat\EasyExcel\Support\HigherOrderCollectionProxy;
+use Dcat\EasyExcel\Support\SheetCollection as Collection;
+use Exception;
+use JsonSerializable;
+use Traversable;
 
 /**
  * @property-read HigherOrderCollectionProxy $average

@@ -1,7 +1,7 @@
 <?php
-return array (
-    0 =>
-        array (
+
+return [
+    0 => [
             'id' => 1,
             'name' => 'Perry Fay',
             'email' => 'treutel.vince@example.com',
@@ -10,9 +10,8 @@ return array (
             'remember_token' => 'T9dU7247Ex',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    1 =>
-        array (
+        ],
+    1 => [
             'id' => 2,
             'name' => 'Dr. Howell Skiles Jr.',
             'email' => 'kovacek.lizeth@example.org',
@@ -21,9 +20,8 @@ return array (
             'remember_token' => 'edFdT9TPpi',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    2 =>
-        array (
+        ],
+    2 => [
             'id' => 3,
             'name' => 'Naomi Brakus',
             'email' => 'cleora99@example.org',
@@ -32,9 +30,8 @@ return array (
             'remember_token' => 'hekPGLldd1',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    3 =>
-        array (
+        ],
+    3 => [
             'id' => 4,
             'name' => 'Erin Eichmann',
             'email' => 'macejkovic.josefa@example.net',
@@ -43,9 +40,8 @@ return array (
             'remember_token' => 'XTX7DyApM4',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    4 =>
-        array (
+        ],
+    4 => [
             'id' => 5,
             'name' => 'Melody Cummerata MD',
             'email' => 'delaney14@example.com',
@@ -54,9 +50,8 @@ return array (
             'remember_token' => 'W682D25TUo',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    5 =>
-        array (
+        ],
+    5 => [
             'id' => 6,
             'name' => 'Mr. Paris Kerluke I',
             'email' => 'hickle.kendrick@example.net',
@@ -65,9 +60,8 @@ return array (
             'remember_token' => 'xEKtkHWug2',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    6 =>
-        array (
+        ],
+    6 => [
             'id' => 7,
             'name' => 'Sofia Schaefer',
             'email' => 'camylle07@example.org',
@@ -76,9 +70,8 @@ return array (
             'remember_token' => 'iTqET3LFyE',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    7 =>
-        array (
+        ],
+    7 => [
             'id' => 8,
             'name' => 'Jessie Gulgowski',
             'email' => 'mgottlieb@example.org',
@@ -87,9 +80,8 @@ return array (
             'remember_token' => 'K3lsEFKJMq',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    8 =>
-        array (
+        ],
+    8 => [
             'id' => 9,
             'name' => 'Lulu Legros',
             'email' => 'daryl73@example.net',
@@ -98,9 +90,8 @@ return array (
             'remember_token' => 'FelDm22Qr3',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    9 =>
-        array (
+        ],
+    9 => [
             'id' => 10,
             'name' => 'Tyrel Huel',
             'email' => 'rkautzer@example.org',
@@ -109,9 +100,8 @@ return array (
             'remember_token' => '6QGjBfkpbg',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    10 =>
-        array (
+        ],
+    10 => [
             'id' => 11,
             'name' => 'Prof. Quentin Kerluke',
             'email' => 'wyman94@example.org',
@@ -120,9 +110,8 @@ return array (
             'remember_token' => '28nUYvHfSc',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    11 =>
-        array (
+        ],
+    11 => [
             'id' => 12,
             'name' => 'Wava Blick',
             'email' => 'dhintz@example.org',
@@ -131,9 +120,8 @@ return array (
             'remember_token' => 'QkimOX60El',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    12 =>
-        array (
+        ],
+    12 => [
             'id' => 13,
             'name' => 'Carlee Wehner',
             'email' => 'laisha.corwin@example.org',
@@ -142,9 +130,8 @@ return array (
             'remember_token' => 'q8jmBYEN3r',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    13 =>
-        array (
+        ],
+    13 => [
             'id' => 14,
             'name' => 'Cecil Ritchie',
             'email' => 'bessie.torp@example.org',
@@ -153,9 +140,8 @@ return array (
             'remember_token' => 'O2X8fmL3dy',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    14 =>
-        array (
+        ],
+    14 => [
             'id' => 15,
             'name' => 'Rebecca Wiegand',
             'email' => 'jevon.aufderhar@example.com',
@@ -164,9 +150,8 @@ return array (
             'remember_token' => '66GHS4rY9R',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    15 =>
-        array (
+        ],
+    15 => [
             'id' => 16,
             'name' => 'Mrs. Tyra Muller MD',
             'email' => 'hoppe.jacynthe@example.com',
@@ -175,9 +160,8 @@ return array (
             'remember_token' => 'WRbsDt3r2g',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    16 =>
-        array (
+        ],
+    16 => [
             'id' => 17,
             'name' => 'Petra Dickinson',
             'email' => 'eriberto68@example.org',
@@ -186,9 +170,8 @@ return array (
             'remember_token' => 'ihIB9d49EW',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    17 =>
-        array (
+        ],
+    17 => [
             'id' => 18,
             'name' => 'Prof. Dino Hill I',
             'email' => 'modesta76@example.net',
@@ -197,9 +180,8 @@ return array (
             'remember_token' => 'LhMqpBmHlD',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    18 =>
-        array (
+        ],
+    18 => [
             'id' => 19,
             'name' => 'Cornell Labadie',
             'email' => 'isai.wunsch@example.com',
@@ -208,9 +190,8 @@ return array (
             'remember_token' => 'tdPXe6seal',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    19 =>
-        array (
+        ],
+    19 => [
             'id' => 20,
             'name' => 'Ray Hane',
             'email' => 'hjacobs@example.org',
@@ -219,9 +200,8 @@ return array (
             'remember_token' => 'g5ZGwxlFzq',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    20 =>
-        array (
+        ],
+    20 => [
             'id' => 21,
             'name' => 'Ms. Sadie Kassulke',
             'email' => 'hayley.jacobson@example.org',
@@ -230,9 +210,8 @@ return array (
             'remember_token' => '7Z4iUOb6Li',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    21 =>
-        array (
+        ],
+    21 => [
             'id' => 22,
             'name' => 'Christa Grant',
             'email' => 'hellen.huels@example.com',
@@ -241,9 +220,8 @@ return array (
             'remember_token' => 'puUonmn0OG',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    22 =>
-        array (
+        ],
+    22 => [
             'id' => 23,
             'name' => 'Osvaldo Doyle',
             'email' => 'rwilkinson@example.org',
@@ -252,9 +230,8 @@ return array (
             'remember_token' => 'p3kdugkyK2',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    23 =>
-        array (
+        ],
+    23 => [
             'id' => 24,
             'name' => 'Miss Ella Jacobi MD',
             'email' => 'paolo.rohan@example.com',
@@ -263,9 +240,8 @@ return array (
             'remember_token' => 'CkhbJAjmIw',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    24 =>
-        array (
+        ],
+    24 => [
             'id' => 25,
             'name' => 'Ashlynn Lynch III',
             'email' => 'nwalter@example.org',
@@ -274,9 +250,8 @@ return array (
             'remember_token' => 'XjkogXBAtU',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    25 =>
-        array (
+        ],
+    25 => [
             'id' => 26,
             'name' => 'Vance Hodkiewicz',
             'email' => 'annetta.nicolas@example.com',
@@ -285,9 +260,8 @@ return array (
             'remember_token' => 'BFeNirzIEd',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    26 =>
-        array (
+        ],
+    26 => [
             'id' => 27,
             'name' => 'Amalia Hettinger V',
             'email' => 'donna.cremin@example.org',
@@ -296,9 +270,8 @@ return array (
             'remember_token' => 'oBIokzZaxq',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    27 =>
-        array (
+        ],
+    27 => [
             'id' => 28,
             'name' => 'Therese Jaskolski',
             'email' => 'jazmin.renner@example.org',
@@ -307,9 +280,8 @@ return array (
             'remember_token' => 'xTC9jKKQMO',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    28 =>
-        array (
+        ],
+    28 => [
             'id' => 29,
             'name' => 'Gabe Hickle',
             'email' => 'dewitt97@example.com',
@@ -318,9 +290,8 @@ return array (
             'remember_token' => 'XnQHYgP9Fm',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    29 =>
-        array (
+        ],
+    29 => [
             'id' => 30,
             'name' => 'Nya Klocko',
             'email' => 'vbosco@example.net',
@@ -329,9 +300,8 @@ return array (
             'remember_token' => 'Ha9FAxdviW',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    30 =>
-        array (
+        ],
+    30 => [
             'id' => 31,
             'name' => 'Amalia Berge',
             'email' => 'cicero81@example.net',
@@ -340,9 +310,8 @@ return array (
             'remember_token' => 'Mu0D4DkR3a',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    31 =>
-        array (
+        ],
+    31 => [
             'id' => 32,
             'name' => 'Dr. Electa Lueilwitz',
             'email' => 'kherzog@example.net',
@@ -351,9 +320,8 @@ return array (
             'remember_token' => 'r0O13kTGEA',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    32 =>
-        array (
+        ],
+    32 => [
             'id' => 33,
             'name' => 'Jeromy Pfeffer I',
             'email' => 'yfahey@example.net',
@@ -362,9 +330,8 @@ return array (
             'remember_token' => 'BWrwtfto25',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    33 =>
-        array (
+        ],
+    33 => [
             'id' => 34,
             'name' => 'Reynold Heathcote',
             'email' => 'oceane.mueller@example.org',
@@ -373,9 +340,8 @@ return array (
             'remember_token' => 'BnASDVIR6b',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    34 =>
-        array (
+        ],
+    34 => [
             'id' => 35,
             'name' => 'Prof. Jules King',
             'email' => 'dickinson.dorcas@example.com',
@@ -384,9 +350,8 @@ return array (
             'remember_token' => 'tX6KK1h8H9',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    35 =>
-        array (
+        ],
+    35 => [
             'id' => 36,
             'name' => 'Mr. Juvenal McCullough',
             'email' => 'wcartwright@example.net',
@@ -395,9 +360,8 @@ return array (
             'remember_token' => 'UomRVu0sDy',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    36 =>
-        array (
+        ],
+    36 => [
             'id' => 37,
             'name' => 'Dr. Beryl Ritchie MD',
             'email' => 'kuvalis.ezekiel@example.org',
@@ -406,9 +370,8 @@ return array (
             'remember_token' => 'xAuVP8KEIF',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    37 =>
-        array (
+        ],
+    37 => [
             'id' => 38,
             'name' => 'Dr. Bethany Kreiger',
             'email' => 'bkoepp@example.org',
@@ -417,9 +380,8 @@ return array (
             'remember_token' => 'ZwNeC8Rl57',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    38 =>
-        array (
+        ],
+    38 => [
             'id' => 39,
             'name' => 'Jeremy Mann',
             'email' => 'beier.ceasar@example.org',
@@ -428,9 +390,8 @@ return array (
             'remember_token' => '04QHrxZXeW',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    39 =>
-        array (
+        ],
+    39 => [
             'id' => 40,
             'name' => 'Griffin Conroy',
             'email' => 'marshall.smith@example.com',
@@ -439,9 +400,8 @@ return array (
             'remember_token' => 'PVLcf7VyO9',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    40 =>
-        array (
+        ],
+    40 => [
             'id' => 41,
             'name' => 'Mrs. Esta Champlin',
             'email' => 'stuart.christiansen@example.org',
@@ -450,9 +410,8 @@ return array (
             'remember_token' => 'ihMB0fhNse',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    41 =>
-        array (
+        ],
+    41 => [
             'id' => 42,
             'name' => 'Rosemarie Hackett V',
             'email' => 'ruth05@example.net',
@@ -461,9 +420,8 @@ return array (
             'remember_token' => 'Fo5cpFzZfi',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    42 =>
-        array (
+        ],
+    42 => [
             'id' => 43,
             'name' => 'Albert Mosciski',
             'email' => 'pouros.cory@example.com',
@@ -472,9 +430,8 @@ return array (
             'remember_token' => 'SnXlYD136N',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    43 =>
-        array (
+        ],
+    43 => [
             'id' => 44,
             'name' => 'Prof. Peggie Olson',
             'email' => 'trantow.burley@example.net',
@@ -483,9 +440,8 @@ return array (
             'remember_token' => 'N8vkEiIv37',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    44 =>
-        array (
+        ],
+    44 => [
             'id' => 45,
             'name' => 'Scottie Crona',
             'email' => 'jacquelyn64@example.com',
@@ -494,9 +450,8 @@ return array (
             'remember_token' => '3g92eaMXba',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    45 =>
-        array (
+        ],
+    45 => [
             'id' => 46,
             'name' => 'Mrs. Maurine Denesik MD',
             'email' => 'gleason.jermey@example.net',
@@ -505,9 +460,8 @@ return array (
             'remember_token' => 'Dx9UbYng2C',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    46 =>
-        array (
+        ],
+    46 => [
             'id' => 47,
             'name' => 'Mr. Gussie Schaden MD',
             'email' => 'wtoy@example.org',
@@ -516,9 +470,8 @@ return array (
             'remember_token' => 'uMvtyOyXVA',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    47 =>
-        array (
+        ],
+    47 => [
             'id' => 48,
             'name' => 'Vella Leuschke',
             'email' => 'ena.bednar@example.com',
@@ -527,9 +480,8 @@ return array (
             'remember_token' => 'SxDKWqjGIi',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    48 =>
-        array (
+        ],
+    48 => [
             'id' => 49,
             'name' => 'Hailey Wehner',
             'email' => 'graciela45@example.com',
@@ -538,9 +490,8 @@ return array (
             'remember_token' => 'RV3eUvCjbn',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    49 =>
-        array (
+        ],
+    49 => [
             'id' => 50,
             'name' => 'Monserrate O\'Keefe IV',
             'email' => 'godfrey.yost@example.net',
@@ -549,9 +500,8 @@ return array (
             'remember_token' => 'F9yxgifMEh',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    50 =>
-        array (
+        ],
+    50 => [
             'id' => 51,
             'name' => 'Prof. Macy McKenzie DVM',
             'email' => 'denesik.ron@example.com',
@@ -560,9 +510,8 @@ return array (
             'remember_token' => '0eade8UUnQ',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    51 =>
-        array (
+        ],
+    51 => [
             'id' => 52,
             'name' => 'Roscoe Boehm DDS',
             'email' => 'alphonso.bogisich@example.org',
@@ -571,9 +520,8 @@ return array (
             'remember_token' => 'z5MVCc9JJt',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    52 =>
-        array (
+        ],
+    52 => [
             'id' => 53,
             'name' => 'Ricardo Hintz MD',
             'email' => 'connelly.reyna@example.net',
@@ -582,9 +530,8 @@ return array (
             'remember_token' => 'aGKDlcSACK',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    53 =>
-        array (
+        ],
+    53 => [
             'id' => 54,
             'name' => 'Heath Ebert III',
             'email' => 'asia.gulgowski@example.org',
@@ -593,9 +540,8 @@ return array (
             'remember_token' => 'FXlk12yfGK',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    54 =>
-        array (
+        ],
+    54 => [
             'id' => 55,
             'name' => 'Malcolm Zieme',
             'email' => 'moen.oceane@example.net',
@@ -604,9 +550,8 @@ return array (
             'remember_token' => 'cvMc5I1TDE',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    55 =>
-        array (
+        ],
+    55 => [
             'id' => 56,
             'name' => 'Gerald Padberg',
             'email' => 'jlangworth@example.net',
@@ -615,9 +560,8 @@ return array (
             'remember_token' => 'mwynYb4jo2',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    56 =>
-        array (
+        ],
+    56 => [
             'id' => 57,
             'name' => 'Abner Aufderhar DDS',
             'email' => 'mraz.doyle@example.net',
@@ -626,9 +570,8 @@ return array (
             'remember_token' => 'NgxxjubBLS',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    57 =>
-        array (
+        ],
+    57 => [
             'id' => 58,
             'name' => 'Presley Beatty',
             'email' => 'edgar.schultz@example.net',
@@ -637,9 +580,8 @@ return array (
             'remember_token' => 'EQPPQvvdn9',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    58 =>
-        array (
+        ],
+    58 => [
             'id' => 59,
             'name' => 'Gilberto Schumm',
             'email' => 'treilly@example.org',
@@ -648,9 +590,8 @@ return array (
             'remember_token' => 'NbzdlnPlmV',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-    59 =>
-        array (
+        ],
+    59 => [
             'id' => 60,
             'name' => 'Letha Fahey',
             'email' => 'donnell07@example.net',
@@ -659,5 +600,5 @@ return array (
             'remember_token' => 'RQu9Wz8T4g',
             'created_at' => '2019-10-19 00:37:22',
             'updated_at' => '2019-10-19 00:37:22',
-        ),
-);
+        ],
+];
