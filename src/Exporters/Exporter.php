@@ -3,17 +3,15 @@
 namespace Dcat\EasyExcel\Exporters;
 
 use Box\Spout\Common\Entity\Style\Style;
-use Box\Spout\Common\Exception\IOException;
+use Box\Spout\Writer\Common\Creator\WriterFactory as SpoutWriterFactory;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Contracts;
+use Dcat\EasyExcel\Spout\WriterFactory;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
-use Dcat\EasyExcel\Spout\WriterFactory;
-use Box\Spout\Writer\Common\Creator\WriterFactory as SpoutWriterFactory;
 
 /**
- * Class Importer
- * @package Dcat\EasyExcel\Importers
+ * Class Importer.
  *
  * @author jqh <841324345@qq.com>
  */
@@ -44,7 +42,7 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * 设置导出数据
+     * 设置导出数据.
      *
      * e.g:
      *
@@ -105,7 +103,7 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * 分批次导出数据
+     * 分批次导出数据.
      *
      * e.g:
      *
@@ -132,7 +130,7 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * 下载导出文件
+     * 下载导出文件.
      *
      * @param string|null $fileName
      * @return void
@@ -146,7 +144,6 @@ class Exporter implements Contracts\Exporter
             $writer->openToBrowser($this->prepareFileName($fileName));
 
             $this->writeSheets($writer)->close();
-
         } catch (\Throwable $e) {
             $this->removeHttpHeaders();
 
@@ -157,7 +154,7 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * 存储导出文件
+     * 存储导出文件.
      *
      * @param string $filePath
      * @param array $diskConfig
@@ -169,19 +166,19 @@ class Exporter implements Contracts\Exporter
     {
         try {
             $filePath = $this->prepareFileName($filePath);
-            if (!($filesystem = $this->filesystem())) {
+            if (! ($filesystem = $this->filesystem())) {
                 return $this->storeInLocal($filePath);
             }
             if (empty($this->type)) {
                 $this->type(pathinfo($filePath)['extension'] ?? null);
             }
+
             return $filesystem->put($filePath, $this->raw(), $diskConfig);
         } catch (\Throwable $e) {
             $this->releaseResources();
 
             throw $e;
         }
-
     }
 
     /**
@@ -265,5 +262,4 @@ class Exporter implements Contracts\Exporter
             header_remove();
         }
     }
-
 }

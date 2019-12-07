@@ -39,13 +39,13 @@ class SheetTest extends TestCase
      */
     public function testEach()
     {
-        $rows     = [];
-        $headers  = [];
+        $rows = [];
+        $headers = [];
         $lastLine = 0;
 
         $this->makeSheet()->each(function (array $row, int $lineNumber, array $originalHeaders) use (&$rows, &$headers, &$lastLine) {
-            $rows[]   = $row;
-            $headers  = $originalHeaders;
+            $rows[] = $row;
+            $headers = $originalHeaders;
             $lastLine = $lineNumber;
         });
 
@@ -67,7 +67,7 @@ class SheetTest extends TestCase
     public function testChunk()
     {
         $chunkSize = 20;
-        $chunks    = [];
+        $chunks = [];
 
         $this->makeSheet()->chunk($chunkSize, function (SheetCollection $collection) use (&$chunks) {
             $chunks[] = array_values($collection->toArray());
@@ -82,7 +82,6 @@ class SheetTest extends TestCase
             ->toArray();
 
         $this->assertEquals($chunks, $users);
-
     }
 
     /**

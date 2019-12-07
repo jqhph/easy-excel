@@ -15,7 +15,7 @@ class WithCallbackTest extends TestCase
      */
     public function testStore()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('xlsx');
 
@@ -26,7 +26,6 @@ class WithCallbackTest extends TestCase
 
         // 判断是否正确
         $this->assertSingleSheet($storePath, 'Sheet1', $users);
-
 
         /*
         |---------------------------------------------------------------
@@ -41,7 +40,6 @@ class WithCallbackTest extends TestCase
         // 保存
         Excel::export(function () use ($users1, $users2) {
             return ['sheet1' => $users1, 'sheet2' => $users2];
-
         })->store($storePath);
 
         $this->assertSheets($storePath, $users1, $users2);
@@ -82,7 +80,6 @@ class WithCallbackTest extends TestCase
         // 获取内容
         $contents = Excel::xlsx(function () use ($users1, $users2) {
             return ['sheet1' => $users1, 'sheet2' => $users2];
-
         })->raw();
 
         $this->assertIsString($contents);
@@ -93,6 +90,4 @@ class WithCallbackTest extends TestCase
         // 判断内容是否正确
         $this->assertSheets($storePath, $users1, $users2);
     }
-
-
 }

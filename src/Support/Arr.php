@@ -3,9 +3,9 @@
 namespace Dcat\EasyExcel\Support;
 
 use ArrayAccess;
+use Dcat\EasyExcel\Support\SheetCollection as Collection;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use InvalidArgumentException;
-use Dcat\EasyExcel\Support\SheetCollection as Collection;
 
 class Arr
 {

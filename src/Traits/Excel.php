@@ -7,8 +7,8 @@ use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader as CSVReader;
 use Box\Spout\Writer\CSV\Writer as CSVWriter;
 use Dcat\EasyExcel\Support\SheetCollection;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
+use Illuminate\Support\Facades\Storage;
 use League\Flysystem\FilesystemInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -82,7 +82,7 @@ trait Excel
 
             if (is_array($temp) && is_array(current($temp))) {
                 $headings = &$temp[0] ?? null;
-                $style   = $temp[1] ?? null;
+                $style = $temp[1] ?? null;
 
                 if ($style instanceof Style) {
                     $this->headingStyle = $style;
@@ -183,8 +183,7 @@ trait Excel
         string $enclosure = '"',
         string $encoding = 'UTF-8',
         bool $bom = false
-    )
-    {
+    ) {
         $this->csvConfiguration = compact('delimiter', 'enclosure', 'encoding', 'bom');
 
         return $this;
@@ -246,7 +245,6 @@ trait Excel
 
         return (array) $value;
     }
-
 
     /**
      * Generate a more truly "random" alpha-numeric string.

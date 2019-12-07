@@ -42,7 +42,6 @@ trait Exporter
         $this->assertEquals(array_values($sheetsArray['sheet2']), $users2);
     }
 
-
     protected function generateTempFilePath(string $type)
     {
         return $this->tempFiles[] = __DIR__.'/../resources/'

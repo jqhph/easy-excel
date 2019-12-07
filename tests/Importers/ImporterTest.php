@@ -2,9 +2,9 @@
 
 namespace Tests\Importers;
 
+use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Excel;
 use Tests\TestCase;
-use Dcat\EasyExcel\Contracts;
 
 class ImporterTest extends TestCase
 {
@@ -34,7 +34,7 @@ class ImporterTest extends TestCase
     public function testWithHeadings()
     {
         $xlsx = __DIR__.'/../resources/test.xlsx';
-        $csv  = __DIR__.'/../resources/test.csv';
+        $csv = __DIR__.'/../resources/test.csv';
 
         $headers = [
             'ID', 'NAME', 'EMAIL',
@@ -63,7 +63,7 @@ class ImporterTest extends TestCase
     public function testWithoutHeadings()
     {
         $xlsx = __DIR__.'/../resources/test.xlsx';
-        $csv  = __DIR__.'/../resources/test.csv';
+        $csv = __DIR__.'/../resources/test.csv';
 
         // xlsx
         $sheetArray = Excel::import($xlsx)
@@ -145,7 +145,7 @@ class ImporterTest extends TestCase
     public function testEach()
     {
         $xlsx = __DIR__.'/../resources/test.xlsx';
-        $csv  = __DIR__.'/../resources/test.csv';
+        $csv = __DIR__.'/../resources/test.csv';
 
         Excel::import($xlsx)->each(function (Contracts\Sheet $sheet) {
             $this->validateSheetArray($sheet->toArray());
@@ -178,7 +178,6 @@ class ImporterTest extends TestCase
 
         $this->validateSheetArray($sheetArray);
 
-
         // 闭包测试
         $sheetArray = Excel::import($xlsx)
             ->headingRow(function (int $line, array $row) {
@@ -198,7 +197,7 @@ class ImporterTest extends TestCase
     public function testFilter()
     {
         $xlsx = __DIR__.'/../resources/test.xlsx';
-        $csv  = __DIR__.'/../resources/test.csv';
+        $csv = __DIR__.'/../resources/test.csv';
 
         $sheetArray = Excel::import($xlsx)
             ->sheet('Sheet1')
@@ -212,7 +211,6 @@ class ImporterTest extends TestCase
         $users = include __DIR__.'/../resources/users.php';
 
         $this->assertEquals(array_values($sheetArray), array_values(array_slice($users, 10, 40)));
-
 
         // csv
         $sheetArray = Excel::import($csv)
@@ -247,5 +245,4 @@ class ImporterTest extends TestCase
 
         $this->assertEquals(array_values($sheetArray), array_slice($users, 0, 50));
     }
-
 }

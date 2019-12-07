@@ -7,10 +7,10 @@ use Box\Spout\Common\Entity\Style\Style;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\CSV\Writer as CsvWriter;
 use Box\Spout\Writer\WriterInterface;
-use Dcat\EasyExcel\Excel;
-use Generator;
-use Dcat\EasyExcel\Support\Arr;
 use Dcat\EasyExcel\Contracts;
+use Dcat\EasyExcel\Excel;
+use Dcat\EasyExcel\Support\Arr;
+use Generator;
 
 /**
  * @mixin Contracts\Exporter
@@ -30,8 +30,8 @@ trait WriteSheet
      */
     protected function writeSheets(WriterInterface $writer)
     {
-        $sheets  = $this->makeSheetsArray($this->data);
-        $keys    = array_keys($sheets);
+        $sheets = $this->makeSheetsArray($this->data);
+        $keys = array_keys($sheets);
         $lastKey = end($keys);
 
         foreach ($sheets as $index => $sheet) {
@@ -132,7 +132,7 @@ trait WriteSheet
      */
     protected function writeHeadings(WriterInterface $writer, Contracts\Exporters\Sheet $sheet, array $firstRow)
     {
-        $headings     = $sheet->getHeadings() ?: $this->headings;
+        $headings = $sheet->getHeadings() ?: $this->headings;
         $headingStyle = $sheet->getHeadingStyle() ?: $this->headingStyle;
 
         $writer->addRow(
@@ -289,6 +289,4 @@ trait WriteSheet
 
         return $newRow;
     }
-
-
 }

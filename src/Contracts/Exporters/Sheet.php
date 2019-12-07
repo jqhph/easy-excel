@@ -25,7 +25,7 @@ interface Sheet
     public function getData();
 
     /**
-     * 传false则禁用标题
+     * 传false则禁用标题.
      *
      * @param array|false $headings
      * @return $this
@@ -70,5 +70,4 @@ interface Sheet
      * @return array|Row
      */
     public function formatRow(array $row);
-
 }

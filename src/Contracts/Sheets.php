@@ -7,7 +7,7 @@ use Dcat\EasyExcel\Support\SheetCollection;
 interface Sheets
 {
     /**
-     * e.g:
+     * e.g:.
      *
      * $this->each(function (Sheet $sheet) {
      *
@@ -39,5 +39,4 @@ interface Sheets
      * @return SheetCollection
      */
     public function collect(): SheetCollection;
-
 }

@@ -62,7 +62,7 @@ class ChunkQuery implements Exporters\ChunkQuery
         $data = call_user_func($callback, $times);
 
         if (empty($data)) {
-            return null;
+            return;
         }
 
         if (is_object($data) && method_exists($data, 'toArray')) {
@@ -72,12 +72,9 @@ class ChunkQuery implements Exporters\ChunkQuery
         if (is_array($data)) {
             return $data;
         }
-
-        return null;
     }
 
     /**
-     *
      * @param callable $generator
      * @return callable
      */

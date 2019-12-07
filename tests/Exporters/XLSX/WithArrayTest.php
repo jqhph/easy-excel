@@ -15,7 +15,7 @@ class WithArrayTest extends TestCase
      */
     public function testStore()
     {
-        $users = include __DIR__ . '/../../resources/users.php';
+        $users = include __DIR__.'/../../resources/users.php';
 
         $storePath = $this->generateTempFilePath('xlsx');
 
@@ -82,5 +82,4 @@ class WithArrayTest extends TestCase
         // 判断内容是否正确
         $this->assertSheets($storePath, $users1, $users2);
     }
-
 }

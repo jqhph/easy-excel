@@ -3,8 +3,8 @@
 namespace Dcat\EasyExcel\Support;
 
 use Countable;
-use JsonSerializable;
 use IteratorAggregate;
+use JsonSerializable;
 
 interface Enumerable extends Countable, IteratorAggregate, JsonSerializable
 {

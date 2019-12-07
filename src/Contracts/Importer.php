@@ -31,7 +31,7 @@ interface Importer extends Excel
     public function sheets();
 
     /**
-     * 根据名称或序号获取sheet
+     * 根据名称或序号获取sheet.
      *
      * @param int|string $indexOrName
      * @return Sheet
@@ -51,7 +51,7 @@ interface Importer extends Excel
     public function each(callable $callback);
 
     /**
-     * 获取第一个sheet
+     * 获取第一个sheet.
      *
      * @return Sheet
      * @throws FileNotFoundException
@@ -61,7 +61,7 @@ interface Importer extends Excel
     public function first(): Sheet;
 
     /**
-     * 获取当前打开的sheet
+     * 获取当前打开的sheet.
      *
      * @return Sheet
      * @throws FileNotFoundException
@@ -85,5 +85,4 @@ interface Importer extends Excel
      * @throws UnsupportedTypeException
      */
     public function collect(): SheetCollection;
-
 }

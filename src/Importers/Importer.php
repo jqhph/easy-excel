@@ -7,16 +7,15 @@ use Box\Spout\Common\Exception\UnsupportedTypeException;
 use Box\Spout\Reader\Common\Creator\ReaderFactory;
 use Box\Spout\Reader\ReaderInterface;
 use Dcat\EasyExcel\Contracts;
+use Dcat\EasyExcel\Contracts\Sheet as SheetInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
 use League\Flysystem\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Dcat\EasyExcel\Contracts\Sheet as SheetInterface;
 
 /**
- * Class Importer
- * @package Dcat\EasyExcel\Importers
+ * Class Importer.
  *
  * @author jqh <841324345@qq.com>
  */
@@ -92,7 +91,7 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * 根据名称或序号获取sheet
+     * 根据名称或序号获取sheet.
      *
      * @param int|string $indexOrName
      * @return Contracts\Sheet
@@ -104,7 +103,6 @@ class Importer implements Contracts\Importer
     {
         return $this->sheets()->index($indexOrName) ?: $this->makeNullSheet();
     }
-
 
     /**
      * @return array
@@ -143,7 +141,7 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * 获取第一个sheet
+     * 获取第一个sheet.
      *
      * @return Contracts\Sheet
      * @throws FileNotFoundException
@@ -164,7 +162,7 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * 获取当前打开的sheet
+     * 获取当前打开的sheet.
      *
      * @return Contracts\Sheet
      * @throws FileNotFoundException
@@ -182,7 +180,6 @@ class Importer implements Contracts\Importer
 
                 return false;
             }
-
         });
 
         return $sheet ?: $this->makeNullSheet();
@@ -214,7 +211,7 @@ class Importer implements Contracts\Importer
         $extension = null;
         if ($path instanceof UploadedFile) {
             $extension = $path->guessClientExtension();
-            $path      = $path->getRealPath();
+            $path = $path->getRealPath();
         }
 
         /* @var \Box\Spout\Reader\ReaderInterface $reader */
@@ -250,5 +247,4 @@ class Importer implements Contracts\Importer
 
         $this->removeTempFile();
     }
-
 }
