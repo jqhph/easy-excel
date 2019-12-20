@@ -24,6 +24,7 @@ class WithSheetTest extends TestCase
         $storePath = $this->generateTempFilePath('xlsx');
 
         $sheet = Excel::createSheet($users)
+            ->name('test')
             ->headingStyle(
                 (new StyleBuilder)
                     ->setFontColor(Color::BLUE)
@@ -43,7 +44,7 @@ class WithSheetTest extends TestCase
         Excel::export($sheet)->store($storePath);
 
         // 读取
-        $this->assertSingleSheet($storePath, 'Sheet1', $users);
+        $this->assertSingleSheet($storePath, 'test', $users);
 
         /*
         |---------------------------------------------------------------

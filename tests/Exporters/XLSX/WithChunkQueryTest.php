@@ -32,7 +32,7 @@ class WithChunkQueryTest extends TestCase
             ->store($storePath);
 
         // 读取
-        $this->assertSingleSheet($storePath, 'Sheet1', $users);
+        $this->assertSingleSheet($storePath, '0', $users);
 
         /*
          |---------------------------------------------------------------
@@ -81,7 +81,7 @@ class WithChunkQueryTest extends TestCase
         file_put_contents($storePath, $contents);
 
         // 读取
-        $this->assertSingleSheet($storePath, 'Sheet1', $users);
+        $this->assertSingleSheet($storePath, '0', $users);
 
         /*
          |---------------------------------------------------------------

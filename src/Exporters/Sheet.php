@@ -120,7 +120,7 @@ class Sheet implements Contracts\Exporters\Sheet
      * @param string $name
      * @return $this
      */
-    public function name($name)
+    public function name(?string $name)
     {
         if (is_string($name)) {
             $this->name = $name;
