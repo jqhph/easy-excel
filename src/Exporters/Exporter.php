@@ -3,7 +3,6 @@
 namespace Dcat\EasyExcel\Exporters;
 
 use Box\Spout\Common\Entity\Style\Style;
-use Box\Spout\Writer\Common\Creator\WriterFactory as SpoutWriterFactory;
 use Box\Spout\Writer\WriterInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Spout\WriterFactory;
@@ -189,7 +188,7 @@ class Exporter implements Contracts\Exporter
     {
         try {
             /* @var \Box\Spout\Writer\WriterInterface $writer */
-            $writer = $this->makeWriter(null, WriterFactory::class);
+            $writer = $this->makeWriter();
 
             ob_start();
 
@@ -229,7 +228,7 @@ class Exporter implements Contracts\Exporter
      */
     protected function makeWriter(?string $path = null, string $factory = null)
     {
-        $factory = $factory ?: SpoutWriterFactory::class;
+        $factory = $factory ?: WriterFactory::class;
 
         /* @var WriterInterface $writer */
         if ($this->type) {

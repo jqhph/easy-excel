@@ -4,7 +4,6 @@ namespace Dcat\EasyExcel\Spout;
 
 use Box\Spout\Common\Creator\HelperFactory;
 use Box\Spout\Common\Exception\UnsupportedTypeException;
-use Box\Spout\Common\Helper\GlobalFunctionsHelper;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\InternalEntityFactory;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
