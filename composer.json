@@ -35,5 +35,14 @@
     "psr-4": {
       "Dcat\\EasyExcel\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Exporters\\": "tests/Exporters",
+      "Tests\\Importers\\": "tests/Importers"
+    },
+    "classmap": [
+      "tests/TestCase.php"
+    ]
   }
 }
