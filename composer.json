@@ -38,8 +38,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Exporters\\": "tests/Exporters",
-      "Tests\\Importers\\": "tests/Importers"
+      "Tests\\": "tests/"
     },
     "classmap": [
       "tests/TestCase.php"

@@ -13,9 +13,6 @@
             <directory>tests/</directory>
         </testsuite>
 
-    </testsuites>
-
-    <testsuites>
         <testsuite name="Importers">
             <directory suffix="Test.php">tests/Importers</directory>
         </testsuite>
@@ -23,6 +20,7 @@
         <testsuite name="Exporters">
             <directory suffix="Test.php">tests/Exporters</directory>
         </testsuite>
+
     </testsuites>
 
     <filter>
