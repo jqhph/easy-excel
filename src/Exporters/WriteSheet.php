@@ -255,9 +255,7 @@ trait WriteSheet
         $values = [];
 
         foreach ($this->filterAndSortByHeaders($row, $sheet) as $k => &$value) {
-            $value = is_int($value) || is_float($value) || is_null($value) ? (string) $value : $value;
-
-            if (is_string($value)) {
+            if (is_scalar($value) || is_null($value)) {
                 $values[$k] = $value;
             }
         }
