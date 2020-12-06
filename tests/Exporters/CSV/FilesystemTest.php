@@ -4,6 +4,7 @@ namespace Tests\Exporters\CSV;
 
 use Dcat\EasyExcel\Excel;
 use League\Flysystem\Adapter\Local;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\Filesystem;
 use Tests\TestCase;
 
@@ -19,7 +20,11 @@ class FilesystemTest extends TestCase
     {
         $users = include __DIR__.'/../../resources/users.php';
 
-        $adapter = new Local(__DIR__.'/../../resources');
+        if (class_exists(LocalFilesystemAdapter::class)) {
+            $adapter = new LocalFilesystemAdapter(__DIR__.'/../../resources');
+        } else {
+            $adapter = new Local(__DIR__.'/../../resources');
+        }
 
         $this->filesystem = new Filesystem($adapter);
         $this->filename = time().'.csv';
