@@ -15,7 +15,7 @@ class FilesystemTest extends ImporterTest
     public function test()
     {
         if (class_exists(LocalFilesystemAdapter::class)) {
-            $adapter = new LocalFilesystemAdapter(__DIR__.'/../resources');
+            $adapter = new LocalFilesystemAdapter(__DIR__.'/../resources/');
         } else {
             $adapter = new Local(__DIR__.'/../resources');
         }
