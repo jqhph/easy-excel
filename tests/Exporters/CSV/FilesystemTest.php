@@ -4,8 +4,8 @@ namespace Tests\Exporters\CSV;
 
 use Dcat\EasyExcel\Excel;
 use League\Flysystem\Adapter\Local;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use Tests\TestCase;
 
 class FilesystemTest extends TestCase
