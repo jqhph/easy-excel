@@ -4,8 +4,8 @@ namespace Tests\Importers;
 
 use Dcat\EasyExcel\Excel;
 use League\Flysystem\Adapter\Local;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 
 class FilesystemTest extends ImporterTest
 {

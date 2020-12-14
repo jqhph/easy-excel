@@ -98,18 +98,18 @@ class Sheet implements Contracts\Sheet
      */
     public function each(callable $callback)
     {
-        $headings        = [];
+        $headings = [];
         $originalHeaders = [];
-        $headingLine     = null;
+        $headingLine = null;
 
         foreach ($this->sheet->getRowIterator() as $line => $row) {
             $row = $row instanceof Row ? $row->toArray() : (is_array($row) ? $row : []);
 
-            if (!$this->withoutHeadings()) {
+            if (! $this->withoutHeadings()) {
                 if ($headingLine === null && $this->isHeadingRow($line, $row)) {
-                    $headingLine     = $line;
+                    $headingLine = $line;
                     $originalHeaders = $row;
-                    $headings        = $this->formatHeadings($row);
+                    $headings = $this->formatHeadings($row);
 
                     continue;
                 }
