@@ -22,7 +22,7 @@
 
 ## 文档
 
-[文档](https://jqhph.github.io/easyexcel/)
+[文档](https://jqhph.github.io/easy-excel/)
 
 ## 环境
 
