@@ -51,7 +51,7 @@ trait Excel
     ];
 
     /**
-     * @param string|null $type
+     * @param  string|null  $type
      * @return $this
      */
     public function type(?string $type)
@@ -62,7 +62,7 @@ trait Excel
     }
 
     /**
-     * @param \Closure $callback
+     * @param  \Closure  $callback
      * @return $this
      */
     public function option(\Closure $callback)
@@ -73,7 +73,7 @@ trait Excel
     }
 
     /**
-     * @param array|\Closure|false $headings
+     * @param  array|\Closure|false  $headings
      * @return $this
      */
     public function headings($headings)
@@ -143,7 +143,7 @@ trait Excel
     }
 
     /**
-     * @param FilesystemInterface|LaravelFilesystem|string $filesystem
+     * @param  FilesystemInterface|LaravelFilesystem|string  $filesystem
      * @return $this
      */
     public function disk($filesystem)
@@ -178,11 +178,10 @@ trait Excel
     }
 
     /**
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $encoding
-     * @param bool $bom
-     *
+     * @param  string  $delimiter
+     * @param  string  $enclosure
+     * @param  string  $encoding
+     * @param  bool  $bom
      * @return $this
      */
     public function configureCsv(
@@ -197,7 +196,7 @@ trait Excel
     }
 
     /**
-     * @param \Box\Spout\Reader\ReaderInterface|\Box\Spout\Writer\WriterInterface $readerOrWriter
+     * @param  \Box\Spout\Reader\ReaderInterface|\Box\Spout\Writer\WriterInterface  $readerOrWriter
      */
     protected function configure(&$readerOrWriter)
     {
@@ -220,7 +219,7 @@ trait Excel
     }
 
     /**
-     * @param string $fileName
+     * @param  string  $fileName
      * @return string|UploadedFile
      */
     protected function prepareFileName($fileName)
@@ -237,7 +236,7 @@ trait Excel
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed  $value
      * @return array
      */
     protected function convertToArray($value)

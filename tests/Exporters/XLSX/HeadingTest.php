@@ -131,7 +131,7 @@ class HeadingTest extends TestCase
 
     /**
      * @param $sheetArray
-     * @param array $headings
+     * @param  array  $headings
      */
     protected function assertSheetHeadings($sheetArray, array $headings)
     {

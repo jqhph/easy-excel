@@ -12,9 +12,10 @@ trait TempFile
     protected $tempFile;
 
     /**
-     * @param FilesystemInterface $filesystem
-     * @param string $filePath
+     * @param  FilesystemInterface  $filesystem
+     * @param  string  $filePath
      * @return string
+     *
      * @throws FileNotFoundException
      */
     public function moveFileToTemp($filesystem, string $filePath)
@@ -34,7 +35,7 @@ trait TempFile
     }
 
     /**
-     * @param string $filePath
+     * @param  string  $filePath
      * @return string
      */
     private function generateTempPath(string $filePath)

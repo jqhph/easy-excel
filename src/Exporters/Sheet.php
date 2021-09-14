@@ -54,7 +54,7 @@ class Sheet implements Contracts\Exporters\Sheet
     }
 
     /**
-     * @param callable $callback
+     * @param  callable  $callback
      * @return $this
      */
     public function chunk(callable $callback)
@@ -75,7 +75,7 @@ class Sheet implements Contracts\Exporters\Sheet
     /**
      *  传false则禁用标题.
      *
-     * @param array|false $headings
+     * @param  array|false  $headings
      * @return $this
      */
     public function headings($headings)
@@ -98,7 +98,7 @@ class Sheet implements Contracts\Exporters\Sheet
     }
 
     /**
-     * @param Style $style
+     * @param  Style  $style
      * @return $this
      */
     public function headingStyle($style)
@@ -117,7 +117,7 @@ class Sheet implements Contracts\Exporters\Sheet
     }
 
     /**
-     * @param string $name
+     * @param  string  $name
      * @return $this
      */
     public function name(?string $name)
@@ -138,7 +138,7 @@ class Sheet implements Contracts\Exporters\Sheet
     }
 
     /**
-     * @param \Closure $callback
+     * @param  \Closure  $callback
      * @return $this
      */
     public function row(\Closure $callback)
@@ -149,8 +149,8 @@ class Sheet implements Contracts\Exporters\Sheet
     }
 
     /**
-     * @param array $row
-     * @param int $line
+     * @param  array  $row
+     * @param  int  $line
      * @return array|Row
      */
     public function formatRow(array $row)

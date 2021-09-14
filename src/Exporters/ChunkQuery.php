@@ -12,7 +12,7 @@ class ChunkQuery implements Exporters\ChunkQuery
     protected $generators;
 
     /**
-     * @param callable|callable[] $generator
+     * @param  callable|callable[]  $generator
      */
     public function __construct($generator)
     {
@@ -36,7 +36,7 @@ class ChunkQuery implements Exporters\ChunkQuery
     }
 
     /**
-     * @param callable|object $callback
+     * @param  callable|object  $callback
      * @return \Generator
      */
     protected function makeGenerator($callback)
@@ -53,8 +53,8 @@ class ChunkQuery implements Exporters\ChunkQuery
     }
 
     /**
-     * @param callable $callback
-     * @param int $times
+     * @param  callable  $callback
+     * @param  int  $times
      * @return array|null
      */
     protected function fetchArray(callable $callback, int $times)
@@ -75,7 +75,7 @@ class ChunkQuery implements Exporters\ChunkQuery
     }
 
     /**
-     * @param callable $generator
+     * @param  callable  $generator
      * @return callable
      */
     protected function resolve(callable $generator)

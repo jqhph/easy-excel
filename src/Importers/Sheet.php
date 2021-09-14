@@ -80,8 +80,7 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * @param callable $callback
-     *
+     * @param  callable  $callback
      * @return $this
      */
     public function filter(callable $callback)
@@ -94,8 +93,7 @@ class Sheet implements Contracts\Sheet
     /**
      * 逐行读取.
      *
-     * @param callable|null $callback
-     *
+     * @param  callable|null  $callback
      * @return $this
      */
     public function each(callable $callback)
@@ -154,8 +152,8 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * @param int $line
-     * @param array $row
+     * @param  int  $line
+     * @param  array  $row
      * @return bool
      */
     protected function exclude($line, array $row)
@@ -170,8 +168,8 @@ class Sheet implements Contracts\Sheet
     /**
      * 分块读取.
      *
-     * @param int $size
-     * @param callable $callback
+     * @param  int  $size
+     * @param  callable  $callback
      * @return $this
      */
     public function chunk(int $size, callable $callback)
@@ -249,8 +247,8 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * @param array $row
-     * @param array $headings
+     * @param  array  $row
+     * @param  array  $headings
      * @return array
      */
     protected function formatRow(array &$row, array $headings)
@@ -273,7 +271,7 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * @param array $row
+     * @param  array  $row
      * @return array|false|mixed
      */
     protected function formatHeadings(array &$row)
@@ -286,7 +284,7 @@ class Sheet implements Contracts\Sheet
     }
 
     /**
-     * @param array $values
+     * @param  array  $values
      * @return array
      */
     protected function toStrings(array $values)

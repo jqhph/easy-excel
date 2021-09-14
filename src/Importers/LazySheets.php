@@ -31,7 +31,7 @@ class LazySheets implements Sheets
      *
      * });
      *
-     * @param callable $callback 返回false可中断循环
+     * @param  callable  $callback  返回false可中断循环
      * @return $this
      */
     public function each(callable $callback)
@@ -51,7 +51,7 @@ class LazySheets implements Sheets
     }
 
     /**
-     * @param int|string $indexOrName
+     * @param  int|string  $indexOrName
      * @return Sheet|null
      */
     public function index($indexOrName)
@@ -64,7 +64,7 @@ class LazySheets implements Sheets
     }
 
     /**
-     * @param int|string $indexOrName
+     * @param  int|string  $indexOrName
      * @return $this
      */
     public function reject($indexOrName)
@@ -102,7 +102,7 @@ class LazySheets implements Sheets
 
     /**
      * @param $indexOrName
-     * @param Sheet $sheet
+     * @param  Sheet  $sheet
      * @return bool
      */
     protected function is($indexOrName, Sheet $sheet): bool
@@ -119,7 +119,7 @@ class LazySheets implements Sheets
     }
 
     /**
-     * @param Sheet $sheet
+     * @param  Sheet  $sheet
      * @return bool
      */
     protected function skip(Sheet $sheet): bool

@@ -84,7 +84,7 @@ class SheetCollection implements ArrayAccess, Enumerable
     /**
      * Get the median of a given key.
      *
-     * @param  string|array|null $key
+     * @param  string|array|null  $key
      * @return mixed
      */
     public function median($key = null)
@@ -246,7 +246,7 @@ class SheetCollection implements ArrayAccess, Enumerable
     /**
      * Get the items in the collection whose keys are not present in the given items.
      *
-     * @param  mixed   $items
+     * @param  mixed  $items
      * @param  callable  $callback
      * @return static
      */
@@ -1118,7 +1118,7 @@ class SheetCollection implements ArrayAccess, Enumerable
     /**
      * Sort the collection keys in descending order.
      *
-     * @param  int $options
+     * @param  int  $options
      * @return static
      */
     public function sortKeysDesc($options = SORT_REGULAR)
@@ -1187,7 +1187,7 @@ class SheetCollection implements ArrayAccess, Enumerable
      * e.g. new Collection([1, 2, 3])->zip([4, 5, 6]);
      *      => [[1, 4], [2, 5], [3, 6]]
      *
-     * @param  mixed ...$items
+     * @param  mixed  ...$items
      * @return static
      */
     public function zip($items)
