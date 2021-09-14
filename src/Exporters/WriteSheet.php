@@ -70,7 +70,7 @@ trait WriteSheet
     {
         // Add heading row.
         if ($this->canWriteHeadings($writer, $index, $sheet)) {
-            $this->writeHeadings($writer, $sheet, current($rows));
+            $this->writeHeadings($writer, $sheet, $rows ? current($rows) : []);
         }
 
         foreach ($rows as &$row) {
@@ -242,7 +242,7 @@ trait WriteSheet
             return $sheets;
         }
 
-        return [];
+        return [Excel::createSheet([])];
     }
 
     /**
