@@ -25,6 +25,13 @@ interface Sheet
     public function getName();
 
     /**
+     * 获取原始标题.
+     *
+     * @return array
+     */
+    public function getOriginalHeadings();
+
+    /**
      * @return bool
      */
     public function isActive();

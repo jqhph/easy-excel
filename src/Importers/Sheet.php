@@ -81,7 +81,8 @@ class Sheet implements Contracts\Sheet
 
     /**
      * @param callable $callback
-     * @return \Dcat\EasyExcel\Contracts\Sheet
+     *
+     * @return $this
      */
     public function filter(callable $callback)
     {
@@ -94,6 +95,7 @@ class Sheet implements Contracts\Sheet
      * 逐行读取.
      *
      * @param callable|null $callback
+     *
      * @return $this
      */
     public function each(callable $callback)
@@ -129,6 +131,26 @@ class Sheet implements Contracts\Sheet
                 break;
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * 获取原始标题.
+     *
+     * @return array
+     */
+    public function getOriginalHeadings()
+    {
+        $headings = [];
+
+        $this->each(function ($row, $k, $h) use (&$headings) {
+            $headings = $h;
+
+            return false;
+        });
+
+        return $headings;
     }
 
     /**
