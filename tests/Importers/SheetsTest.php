@@ -81,7 +81,7 @@ class SheetsTest extends TestCase
     /**
      * 验证内容是否正确.
      *
-     * @param array $sheetsArray
+     * @param  array  $sheetsArray
      */
     protected function validateArray(array $sheetsArray)
     {

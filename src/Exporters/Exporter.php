@@ -65,7 +65,7 @@ class Exporter implements Contracts\Exporter
      *    ];
      * });
      *
-     * @param array|\Closure|\Generator|Contracts\Exporters\ChunkQuery $data
+     * @param  array|\Closure|\Generator|Contracts\Exporters\ChunkQuery  $data
      * @return $this
      */
     public function data($data)
@@ -80,7 +80,7 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * @param callable $callback
+     * @param  callable  $callback
      * @return $this
      */
     public function row(callable $callback)
@@ -91,7 +91,7 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * @param Style $style
+     * @param  Style  $style
      * @return $this
      */
     public function headingStyle($style)
@@ -120,7 +120,7 @@ class Exporter implements Contracts\Exporter
      *     }
      * ]);
      *
-     * @param callable|callable[] $callbacks
+     * @param  callable|callable[]  $callbacks
      * @return $this
      */
     public function chunk($callbacks)
@@ -131,7 +131,7 @@ class Exporter implements Contracts\Exporter
     /**
      * 下载导出文件.
      *
-     * @param string|null $fileName
+     * @param  string|null  $fileName
      * @return void
      */
     public function download(string $fileName)
@@ -155,8 +155,8 @@ class Exporter implements Contracts\Exporter
     /**
      * 存储导出文件.
      *
-     * @param string $filePath
-     * @param array $diskConfig
+     * @param  string  $filePath
+     * @param  array  $diskConfig
      * @return bool
      *
      * @throws \Box\Spout\Common\Exception\IOException
@@ -186,6 +186,7 @@ class Exporter implements Contracts\Exporter
 
     /**
      * @return string
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      */
     public function raw()
@@ -209,8 +210,9 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * @param string $filePath
+     * @param  string  $filePath
      * @return bool
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      */
     protected function storeInLocal(string $filePath)
@@ -226,8 +228,8 @@ class Exporter implements Contracts\Exporter
     }
 
     /**
-     * @param string $path
-     * @param string $factory
+     * @param  string  $path
+     * @param  string  $factory
      * @return WriterInterface
      */
     protected function makeWriter(?string $path = null, string $factory = null)

@@ -54,7 +54,7 @@ class NullSheet implements Contracts\Sheet
     }
 
     /**
-     * @param callable $callback
+     * @param  callable  $callback
      * @return \Dcat\EasyExcel\Contracts\Sheet
      */
     public function filter(callable $callback)
@@ -65,7 +65,7 @@ class NullSheet implements Contracts\Sheet
     /**
      * 逐行读取.
      *
-     * @param callable|null $callback
+     * @param  callable|null  $callback
      * @return $this
      */
     public function each(callable $callback)

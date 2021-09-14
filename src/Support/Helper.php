@@ -9,9 +9,9 @@ class Helper
     /**
      * Get an item from an array or object using "dot" notation.
      *
-     * @param  mixed   $target
+     * @param  mixed  $target
      * @param  string|array|int  $key
-     * @param  mixed   $default
+     * @param  mixed  $default
      * @return mixed
      */
     public static function dataGet($target, $key, $default = null)

@@ -44,7 +44,7 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * @param string|UploadedFile $filePath
+     * @param  string|UploadedFile  $filePath
      * @return $this
      */
     public function file($filePath)
@@ -55,7 +55,7 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * @param int|\Closure $lineNumberOrCallback
+     * @param  int|\Closure  $lineNumberOrCallback
      * @return mixed
      */
     public function headingRow($lineNumberOrCallback)
@@ -67,6 +67,7 @@ class Importer implements Contracts\Importer
 
     /**
      * @return Contracts\Sheets
+     *
      * @throws FileNotFoundException
      * @throws IOException
      * @throws UnsupportedTypeException
@@ -93,8 +94,9 @@ class Importer implements Contracts\Importer
     /**
      * 根据名称或序号获取sheet.
      *
-     * @param int|string $indexOrName
+     * @param  int|string  $indexOrName
      * @return Contracts\Sheet
+     *
      * @throws FileNotFoundException
      * @throws IOException
      * @throws UnsupportedTypeException
@@ -106,6 +108,7 @@ class Importer implements Contracts\Importer
 
     /**
      * @return array
+     *
      * @throws FileNotFoundException
      * @throws IOException
      * @throws UnsupportedTypeException
@@ -117,6 +120,7 @@ class Importer implements Contracts\Importer
 
     /**
      * @return SheetCollection
+     *
      * @throws FileNotFoundException
      * @throws IOException
      * @throws UnsupportedTypeException
@@ -127,8 +131,9 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * @param callable $callback
+     * @param  callable  $callback
      * @return $this
+     *
      * @throws FileNotFoundException
      * @throws IOException
      * @throws UnsupportedTypeException
@@ -144,6 +149,7 @@ class Importer implements Contracts\Importer
      * 获取第一个sheet.
      *
      * @return Contracts\Sheet
+     *
      * @throws FileNotFoundException
      * @throws IOException
      * @throws UnsupportedTypeException
@@ -165,6 +171,7 @@ class Importer implements Contracts\Importer
      * 获取当前打开的sheet.
      *
      * @return Contracts\Sheet
+     *
      * @throws FileNotFoundException
      * @throws IOException
      * @throws UnsupportedTypeException
@@ -186,8 +193,9 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * @param \Box\Spout\Reader\ReaderInterface $reader
+     * @param  \Box\Spout\Reader\ReaderInterface  $reader
      * @return \Generator
+     *
      * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
      */
     protected function readSheets(ReaderInterface $reader)
@@ -200,9 +208,9 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * @param string|UploadedFile $path
-     *
+     * @param  string|UploadedFile  $path
      * @return \Box\Spout\Reader\ReaderInterface
+     *
      * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
      * @throws \Box\Spout\Common\Exception\IOException
      */

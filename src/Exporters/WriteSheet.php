@@ -23,8 +23,9 @@ trait WriteSheet
     protected $writedHeadings = [];
 
     /**
-     * @param WriterInterface $writer
+     * @param  WriterInterface  $writer
      * @return WriterInterface
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
@@ -59,10 +60,11 @@ trait WriteSheet
     }
 
     /**
-     * @param WriterInterface $writer
-     * @param int|string $index
-     * @param array $rows
-     * @param Contracts\Exporters\Sheet $sheet
+     * @param  WriterInterface  $writer
+     * @param  int|string  $index
+     * @param  array  $rows
+     * @param  Contracts\Exporters\Sheet  $sheet
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
@@ -79,10 +81,11 @@ trait WriteSheet
     }
 
     /**
-     * @param WriterInterface $writer
-     * @param int $index
-     * @param Generator $generator
-     * @param Contracts\Exporters\Sheet $sheet
+     * @param  WriterInterface  $writer
+     * @param  int  $index
+     * @param  Generator  $generator
+     * @param  Contracts\Exporters\Sheet  $sheet
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
@@ -100,9 +103,10 @@ trait WriteSheet
     }
 
     /**
-     * @param WriterInterface $writer
-     * @param array $item
-     * @param Contracts\Exporters\Sheet $sheet
+     * @param  WriterInterface  $writer
+     * @param  array  $item
+     * @param  Contracts\Exporters\Sheet  $sheet
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
@@ -124,9 +128,10 @@ trait WriteSheet
     }
 
     /**
-     * @param WriterInterface $writer
-     * @param Contracts\Exporters\Sheet $sheet
-     * @param array $firstRow
+     * @param  WriterInterface  $writer
+     * @param  Contracts\Exporters\Sheet  $sheet
+     * @param  array  $firstRow
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
@@ -144,8 +149,8 @@ trait WriteSheet
     }
 
     /**
-     * @param array $item
-     * @param Style|null $style
+     * @param  array  $item
+     * @param  Style|null  $style
      * @return Row
      */
     protected function makeDefaultRow(array $item, ?Style $style = null)
@@ -158,9 +163,9 @@ trait WriteSheet
     }
 
     /**
-     * @param WriterInterface $writer
-     * @param int|string $index
-     * @param Contracts\Exporters\Sheet $sheet
+     * @param  WriterInterface  $writer
+     * @param  int|string  $index
+     * @param  Contracts\Exporters\Sheet  $sheet
      * @return bool
      */
     protected function canWriteHeadings(WriterInterface $writer, $index, Contracts\Exporters\Sheet $sheet): bool
@@ -182,7 +187,7 @@ trait WriteSheet
     }
 
     /**
-     * @param Contracts\Exporters\ChunkQuery|\Closure|Contracts\Exporters\Sheet[]|array|Generator|Generator[] $data
+     * @param  Contracts\Exporters\ChunkQuery|\Closure|Contracts\Exporters\Sheet[]|array|Generator|Generator[]  $data
      * @return Contracts\Exporters\Sheet[]
      */
     protected function makeSheetsArray($data): array
@@ -246,8 +251,8 @@ trait WriteSheet
     }
 
     /**
-     * @param array $row
-     * @param Contracts\Exporters\Sheet $sheet
+     * @param  array  $row
+     * @param  Contracts\Exporters\Sheet  $sheet
      * @return array
      */
     protected function formatRow(array &$row, Contracts\Exporters\Sheet $sheet)
@@ -264,8 +269,8 @@ trait WriteSheet
     }
 
     /**
-     * @param array $row
-     * @param Contracts\Exporters\Sheet $sheet
+     * @param  array  $row
+     * @param  Contracts\Exporters\Sheet  $sheet
      * @return array
      */
     public function filterAndSortByHeaders(array &$row, Contracts\Exporters\Sheet $sheet)

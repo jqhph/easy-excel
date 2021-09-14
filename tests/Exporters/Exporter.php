@@ -21,9 +21,10 @@ trait Exporter
     }
 
     /**
-     * @param string $storePath
-     * @param array $users1
-     * @param array $users2
+     * @param  string  $storePath
+     * @param  array  $users1
+     * @param  array  $users2
+     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
      * @throws \League\Flysystem\FileNotFoundException
