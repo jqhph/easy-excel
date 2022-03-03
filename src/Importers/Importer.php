@@ -12,7 +12,7 @@ use Dcat\EasyExcel\Support\SheetCollection;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
 use League\Flysystem\FileNotFoundException;
-use \League\Flysystem\FilesystemException;
+use League\Flysystem\FilesystemException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
