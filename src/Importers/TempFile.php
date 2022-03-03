@@ -3,9 +3,9 @@
 namespace Dcat\EasyExcel\Importers;
 
 use League\Flysystem\FileNotFoundException;
-use \League\Flysystem\FilesystemException;
+use League\Flysystem\FilesystemException;
 use League\Flysystem\FilesystemInterface;
-use \League\Flysystem\FilesystemOperator;
+use League\Flysystem\FilesystemOperator;
 
 trait TempFile
 {
