@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     protected function convertDatetimeObjectToString(array $values)
     {
         foreach ($values as &$value) {
-            if ($value instanceof \Datetime) {
+            if ($value instanceof \DateTime) {
                 $value = $value->format('Y-m-d H:i:s');
             }
         }
