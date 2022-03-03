@@ -36,7 +36,7 @@ trait Excel
     protected $headingStyle;
 
     /**
-     * @var FilesystemInterface
+     * @var FilesystemInterface|FilesystemOperator
      */
     protected $filesystem;
 
@@ -143,7 +143,7 @@ trait Excel
     }
 
     /**
-     * @param  FilesystemInterface|LaravelFilesystem|string  $filesystem
+     * @param  FilesystemInterface|FilesystemOperator|LaravelFilesystem|string  $filesystem
      * @return $this
      */
     public function disk($filesystem)

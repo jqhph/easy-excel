@@ -12,6 +12,7 @@ use Dcat\EasyExcel\Support\SheetCollection;
 use Dcat\EasyExcel\Support\Traits\Macroable;
 use Dcat\EasyExcel\Traits\Excel;
 use League\Flysystem\FileNotFoundException;
+use \League\Flysystem\FilesystemException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -68,7 +69,7 @@ class Importer implements Contracts\Importer
     /**
      * @return Contracts\Sheets
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException|FilesystemException
      * @throws IOException
      * @throws UnsupportedTypeException
      */
