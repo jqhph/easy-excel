@@ -2,10 +2,10 @@
 
 namespace Dcat\EasyExcel\Traits;
 
-use Box\Spout\Common\Entity\Style\Style;
-use Box\Spout\Common\Type;
-use Box\Spout\Reader\CSV\Reader as CSVReader;
-use Box\Spout\Writer\CSV\Writer as CSVWriter;
+use OpenSpout\Common\Entity\Style\Style;
+use OpenSpout\Common\Type;
+use OpenSpout\Reader\CSV\Reader as CSVReader;
+use OpenSpout\Writer\CSV\Writer as CSVWriter;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Illuminate\Contracts\Filesystem\Filesystem as LaravelFilesystem;
 use Illuminate\Support\Facades\Storage;
@@ -196,7 +196,7 @@ trait Excel
     }
 
     /**
-     * @param  \Box\Spout\Reader\ReaderInterface|\Box\Spout\Writer\WriterInterface  $readerOrWriter
+     * @param  \OpenSpout\Reader\ReaderInterface|\OpenSpout\Writer\WriterInterface  $readerOrWriter
      */
     protected function configure(&$readerOrWriter)
     {

@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Spout;
 
-use Box\Spout\Common\Helper\GlobalFunctionsHelper as Helper;
+use OpenSpout\Common\Helper\GlobalFunctionsHelper as Helper;
 
 class GlobalFunctionsHelper extends Helper
 {

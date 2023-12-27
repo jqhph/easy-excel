@@ -2,8 +2,8 @@
 
 namespace Dcat\EasyExcel\Contracts\Exporters;
 
-use Box\Spout\Common\Entity\Row;
-use Box\Spout\Common\Entity\Style\Style;
+use OpenSpout\Common\Entity\Row;
+use OpenSpout\Common\Entity\Style\Style;
 
 interface Sheet
 {

@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel;
 
-use Box\Spout\Common\Type;
+use OpenSpout\Common\Type;
 use Dcat\EasyExcel\Exporters\Exporter;
 use Dcat\EasyExcel\Exporters\Sheet;
 use Dcat\EasyExcel\Importers\Importer;

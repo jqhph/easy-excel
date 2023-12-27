@@ -2,8 +2,8 @@
 
 namespace Dcat\EasyExcel\Exporters;
 
-use Box\Spout\Common\Entity\Style\Style;
-use Box\Spout\Writer\WriterInterface;
+use OpenSpout\Common\Entity\Style\Style;
+use OpenSpout\Writer\WriterInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Spout\WriterFactory;
 use Dcat\EasyExcel\Support\Traits\Macroable;
@@ -137,7 +137,7 @@ class Exporter implements Contracts\Exporter
     public function download(string $fileName)
     {
         try {
-            /* @var \Box\Spout\Writer\WriterInterface $writer */
+            /* @var \OpenSpout\Writer\WriterInterface $writer */
             $writer = $this->makeWriter($fileName);
 
             $writer->openToBrowser($this->prepareFileName($fileName));
@@ -159,7 +159,7 @@ class Exporter implements Contracts\Exporter
      * @param  array  $diskConfig
      * @return bool
      *
-     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \OpenSpout\Common\Exception\IOException
      */
     public function store(string $filePath, array $diskConfig = [])
     {
@@ -187,12 +187,12 @@ class Exporter implements Contracts\Exporter
     /**
      * @return string
      *
-     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \OpenSpout\Common\Exception\IOException
      */
     public function raw()
     {
         try {
-            /* @var \Box\Spout\Writer\WriterInterface $writer */
+            /* @var \OpenSpout\Writer\WriterInterface $writer */
             $writer = $this->makeWriter();
 
             ob_start();
@@ -213,11 +213,11 @@ class Exporter implements Contracts\Exporter
      * @param  string  $filePath
      * @return bool
      *
-     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \OpenSpout\Common\Exception\IOException
      */
     protected function storeInLocal(string $filePath)
     {
-        /* @var \Box\Spout\Writer\WriterInterface $writer */
+        /* @var \OpenSpout\Writer\WriterInterface $writer */
         $writer = $this->makeWriter($filePath);
 
         $writer->openToFile($filePath);

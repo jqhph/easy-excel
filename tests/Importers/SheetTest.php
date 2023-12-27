@@ -2,7 +2,7 @@
 
 namespace Tests\Importers;
 
-use Box\Spout\Reader\SheetInterface;
+use OpenSpout\Reader\SheetInterface;
 use Dcat\EasyExcel\Contracts\Sheet;
 use Dcat\EasyExcel\Excel;
 use Dcat\EasyExcel\Support\SheetCollection;
