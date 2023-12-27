@@ -2,19 +2,19 @@
 
 namespace Dcat\EasyExcel\Spout;
 
-use Box\Spout\Common\Creator\HelperFactory;
-use Box\Spout\Common\Exception\UnsupportedTypeException;
-use Box\Spout\Common\Type;
-use Box\Spout\Writer\Common\Creator\InternalEntityFactory;
-use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
-use Box\Spout\Writer\CSV\Manager\OptionsManager as CSVOptionsManager;
-use Box\Spout\Writer\ODS\Creator\HelperFactory as ODSHelperFactory;
-use Box\Spout\Writer\ODS\Creator\ManagerFactory as ODSManagerFactory;
-use Box\Spout\Writer\ODS\Manager\OptionsManager as ODSOptionsManager;
-use Box\Spout\Writer\WriterInterface;
-use Box\Spout\Writer\XLSX\Creator\HelperFactory as XLSXHelperFactory;
-use Box\Spout\Writer\XLSX\Creator\ManagerFactory as XLSXManagerFactory;
-use Box\Spout\Writer\XLSX\Manager\OptionsManager as XLSXOptionsManager;
+use OpenSpout\Common\Creator\HelperFactory;
+use OpenSpout\Common\Exception\UnsupportedTypeException;
+use OpenSpout\Common\Type;
+use OpenSpout\Writer\Common\Creator\InternalEntityFactory;
+use OpenSpout\Writer\Common\Creator\Style\StyleBuilder;
+use OpenSpout\Writer\CSV\Manager\OptionsManager as CSVOptionsManager;
+use OpenSpout\Writer\ODS\Creator\HelperFactory as ODSHelperFactory;
+use OpenSpout\Writer\ODS\Creator\ManagerFactory as ODSManagerFactory;
+use OpenSpout\Writer\ODS\Manager\OptionsManager as ODSOptionsManager;
+use OpenSpout\Writer\WriterInterface;
+use OpenSpout\Writer\XLSX\Creator\HelperFactory as XLSXHelperFactory;
+use OpenSpout\Writer\XLSX\Creator\ManagerFactory as XLSXManagerFactory;
+use OpenSpout\Writer\XLSX\Manager\OptionsManager as XLSXOptionsManager;
 use Dcat\EasyExcel\Spout\Writers\CSVWriter;
 use Dcat\EasyExcel\Spout\Writers\ODSWriter;
 use Dcat\EasyExcel\Spout\Writers\XLSXWriter;
@@ -27,7 +27,7 @@ class WriterFactory
      * @param  string  $path  The path to the spreadsheet file. Supported extensions are .csv,.ods and .xlsx
      * @return WriterInterface
      *
-     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \OpenSpout\Common\Exception\UnsupportedTypeException
      */
     public static function createFromFile(string $path)
     {
@@ -42,7 +42,7 @@ class WriterFactory
      * @param  string  $writerType  Type of the writer to instantiate
      * @return WriterInterface
      *
-     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \OpenSpout\Common\Exception\UnsupportedTypeException
      */
     public static function createFromType($writerType)
     {

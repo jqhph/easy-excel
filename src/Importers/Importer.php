@@ -2,10 +2,10 @@
 
 namespace Dcat\EasyExcel\Importers;
 
-use Box\Spout\Common\Exception\IOException;
-use Box\Spout\Common\Exception\UnsupportedTypeException;
-use Box\Spout\Reader\Common\Creator\ReaderFactory;
-use Box\Spout\Reader\ReaderInterface;
+use OpenSpout\Common\Exception\IOException;
+use OpenSpout\Common\Exception\UnsupportedTypeException;
+use OpenSpout\Reader\Common\Creator\ReaderFactory;
+use OpenSpout\Reader\ReaderInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Contracts\Sheet as SheetInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
@@ -194,10 +194,10 @@ class Importer implements Contracts\Importer
     }
 
     /**
-     * @param  \Box\Spout\Reader\ReaderInterface  $reader
+     * @param  \OpenSpout\Reader\ReaderInterface  $reader
      * @return \Generator
      *
-     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
+     * @throws \OpenSpout\Reader\Exception\ReaderNotOpenedException
      */
     protected function readSheets(ReaderInterface $reader)
     {
@@ -210,10 +210,10 @@ class Importer implements Contracts\Importer
 
     /**
      * @param  string|UploadedFile  $path
-     * @return \Box\Spout\Reader\ReaderInterface
+     * @return \OpenSpout\Reader\ReaderInterface
      *
-     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
-     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \OpenSpout\Common\Exception\UnsupportedTypeException
+     * @throws \OpenSpout\Common\Exception\IOException
      */
     protected function makeReader($path)
     {
@@ -223,7 +223,7 @@ class Importer implements Contracts\Importer
             $path = $path->getRealPath();
         }
 
-        /* @var \Box\Spout\Reader\ReaderInterface $reader */
+        /* @var \OpenSpout\Reader\ReaderInterface $reader */
         if ($this->type || $extension) {
             $reader = ReaderFactory::createFromType($this->type ?: $extension);
         } else {

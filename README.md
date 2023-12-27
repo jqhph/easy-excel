@@ -17,6 +17,9 @@
 `Easy Excel`是一个基于 <a href="https://github.com/box/spout" target="_blank">box/spout</a> 封装的Excel读写工具，可以帮助开发者更快速更轻松地读写Excel文件，
 并且无论读取多大的文件只需占用极少的内存。
 
+
+由于box/spout 已经更新为 /openspout/openspout 所以再次更新
+
 > 由于`box/spout`只支持读写`xlsx`、`csv`、`ods`等类型文件，所以本项目目前也仅支持读写这三种类型的文件。
 
 

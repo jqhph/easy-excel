@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Spout\Writers;
 
-use Box\Spout\Writer\ODS\Writer;
+use OpenSpout\Writer\ODS\Writer;
 
 class ODSWriter extends Writer
 {

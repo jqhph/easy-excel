@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Contracts;
 
-use Box\Spout\Common\Entity\Style\Style;
+use OpenSpout\Common\Entity\Style\Style;
 
 interface Exporter extends Excel
 {
@@ -54,7 +54,7 @@ interface Exporter extends Excel
     /**
      * @return string
      *
-     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \OpenSpout\Common\Exception\IOException
      */
     public function raw();
 }

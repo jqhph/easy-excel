@@ -2,8 +2,8 @@
 
 namespace Dcat\EasyExcel\Importers;
 
-use Box\Spout\Common\Entity\Row;
-use Box\Spout\Reader\SheetInterface;
+use OpenSpout\Common\Entity\Row;
+use OpenSpout\Reader\SheetInterface;
 use Dcat\EasyExcel\Contracts;
 use Dcat\EasyExcel\Support\Arr;
 use Dcat\EasyExcel\Support\SheetCollection;

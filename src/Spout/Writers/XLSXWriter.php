@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Spout\Writers;
 
-use Box\Spout\Writer\XLSX\Writer;
+use OpenSpout\Writer\XLSX\Writer;
 
 class XLSXWriter extends Writer
 {

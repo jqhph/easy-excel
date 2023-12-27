@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Contracts;
 
-use Box\Spout\Reader\SheetInterface;
+use OpenSpout\Reader\SheetInterface;
 use Dcat\EasyExcel\Support\SheetCollection;
 
 interface Sheet

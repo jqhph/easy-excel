@@ -2,7 +2,7 @@
 
 namespace Dcat\EasyExcel\Spout\Writers;
 
-use Box\Spout\Writer\CSV\Writer;
+use OpenSpout\Writer\CSV\Writer;
 
 class CSVWriter extends Writer
 {

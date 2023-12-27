@@ -2,9 +2,9 @@
 
 namespace Tests\Exporters\XLSX;
 
-use Box\Spout\Common\Entity\Style\Color;
-use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
-use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use OpenSpout\Common\Entity\Style\Color;
+use OpenSpout\Writer\Common\Creator\Style\StyleBuilder;
+use OpenSpout\Writer\Common\Creator\WriterEntityFactory;
 use Dcat\EasyExcel\Excel;
 use Dcat\EasyExcel\Support\SheetCollection;
 use Tests\Exporters\Exporter;
